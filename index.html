@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.tailwindcss.com https://unpkg.com https://*.tile.openstreetmap.org https://lh3.googleusercontent.com data: blob:;">
   <title>PlotShare — Bangladesh Agricultural Land & Farming Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -239,6 +240,27 @@
 
 <!-- APPLICATION CORE ENGINE (Self-Contained & Universal Browser Compatible) -->
 <script>
+  // Security & Sanitization Utilities (XSS Prevention & Safe Storage)
+  function escapeHTML(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function safeJSONParse(key, fallback) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) {
+      console.warn('Storage parsing error for ' + key, e);
+      return fallback;
+    }
+  }
+
   // Normalized Area Units & Math Engine
   const AREA_CONVERTER = {
     toSquareMeters(value, unit) {
@@ -523,9 +545,9 @@
   window.PlotShareApp = {
     lang: localStorage.getItem('plotshare_lang') || 'bn',
     currentRoute: 'home',
-    plots: JSON.parse(localStorage.getItem('plotshare_plots')) || INITIAL_PLOTS,
-    farmData: JSON.parse(localStorage.getItem('plotshare_farm')) || CURRENT_FARM_DATA,
-    savedFavorites: JSON.parse(localStorage.getItem('plotshare_favs')) || ['plot-101'],
+    plots: safeJSONParse('plotshare_plots', INITIAL_PLOTS),
+    farmData: safeJSONParse('plotshare_farm', CURRENT_FARM_DATA),
+    savedFavorites: safeJSONParse('plotshare_favs', ['plot-101']),
     selectedPlot: null,
     converter: AREA_CONVERTER,
     seasons: SEASONS,
@@ -1620,7 +1642,7 @@
           ${messages.map(msg => `
             <div class="flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}">
               <div class="max-w-[85%] p-3.5 rounded-hz text-xs leading-relaxed shadow-hz-sm ${msg.sender === 'user' ? 'bg-primary text-white rounded-br-none font-medium' : 'bg-hz-card text-hz-navy border border-hz-border rounded-bl-none font-medium'}">
-                ${msg.sender === 'ai' ? (isBn ? msg.text_bn : msg.text_en) : msg.text}
+                ${msg.sender === 'ai' ? (isBn ? msg.text_bn : msg.text_en) : escapeHTML(msg.text)}
               </div>
             </div>
           `).join('')}
