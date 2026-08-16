@@ -3,10 +3,13 @@
 > **"জমি খুঁজুন, চাষ করুন, ফলন বাড়ান।"**  
 > *PlotShare — A smart platform connecting farmers with available agricultural land for easier, smarter, and more productive farming.*
 
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-GitHub%20Pages-A43700?style=for-the-badge&logo=githubpages&logoColor=white)](https://asnayem1122.github.io/PlotShare/)
 [![Bangladesh Agriculture](https://img.shields.io/badge/Focus-Bangladesh%20Agriculture-2D5A27?style=for-the-badge&logo=leaf&logoColor=white)](https://github.com/asnayem1122/PlotShare)
 [![Language](https://img.shields.io/badge/Language-বাংলা%20%7C%20English-E65100?style=for-the-badge)](https://github.com/asnayem1122/PlotShare)
 [![Design System](https://img.shields.io/badge/Theme-Golden%20Harvest-FFB300?style=for-the-badge)](https://github.com/asnayem1122/PlotShare)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+
+👉 **Live Demo**: [https://asnayem1122.github.io/PlotShare/](https://asnayem1122.github.io/PlotShare/)
 
 ---
 
