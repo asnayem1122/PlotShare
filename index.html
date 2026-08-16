@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.tailwindcss.com https://unpkg.com https://*.tile.openstreetmap.org https://lh3.googleusercontent.com data: blob:;">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.tailwindcss.com https://unpkg.com https://*.tile.openstreetmap.org https://*.google.com https://*.googleapis.com https://*.gstatic.com https://mt0.google.com https://mt1.google.com https://mt2.google.com https://mt3.google.com https://khms0.google.com https://khms1.google.com https://lh3.googleusercontent.com data: blob:;">
   <title>PlotShare — Bangladesh Agricultural Land & Farming Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1053,7 +1053,7 @@
     showToast(window.PlotShareApp.lang === 'bn' ? 'ফিল্টার প্রয়োগ করা হয়েছে' : 'Filter applied', 'info');
   };
 
-  // Initialize Leaflet Map
+  // Initialize Leaflet Map with Customized Google Maps BD Farmland Layers
   function initLeafletMap() {
     const mapEl = document.getElementById('leaflet-map');
     if (!mapEl || typeof L === 'undefined') return;
@@ -1062,18 +1062,62 @@
       window.PlotShareApp.leafletMap.remove();
     }
 
-    const map = L.map('leaflet-map').setView([24.8, 89.2], 7);
+    const isBn = window.PlotShareApp.lang === 'bn';
+
+    // Google Maps Satellite & Hybrid Layers for Bangladesh Farmlands
+    const googleHybrid = L.tileLayer('https://mt{s}.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+      maxZoom: 21,
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps Farmland Satellite'
+    });
+
+    const googleSatellite = L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+      maxZoom: 21,
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps Satellite'
+    });
+
+    const googleTerrain = L.tileLayer('https://mt{s}.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps Terrain'
+    });
+
+    const googleStreets = L.tileLayer('https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+      maxZoom: 20,
+      subdomains: ['0', '1', '2', '3'],
+      attribution: '&copy; Google Maps Roads'
+    });
+
+    // Default map centered on Bangladesh Farmlands (Dinajpur / Bogura / Rajshahi hub)
+    const map = L.map('leaflet-map', {
+      center: [24.8, 89.2],
+      zoom: 7.5,
+      layers: [googleHybrid] // Default to Google Satellite Hybrid view
+    });
     window.PlotShareApp.leafletMap = map;
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
+    // Layer Switcher Control in Horizon Card Style
+    const baseMaps = {};
+    baseMaps[isBn ? "🌾 গুগল স্যাটেলাইট (হাইব্রিড)" : "🌾 Google Hybrid (Satellite)"] = googleHybrid;
+    baseMaps[isBn ? "🛰️ গুগল বিশুদ্ধ স্যাটেলাইট" : "🛰️ Google Pure Satellite"] = googleSatellite;
+    baseMaps[isBn ? "🏞️ গুগল ভূসংস্থান ও কৃষি" : "🏞️ Google Terrain"] = googleTerrain;
+    baseMaps[isBn ? "🗺️ গুগল সাধারণ মানচিত্র" : "🗺️ Google Streets"] = googleStreets;
 
-    const isBn = window.PlotShareApp.lang === 'bn';
+    L.control.layers(baseMaps, null, { position: 'topright', collapsed: true }).addTo(map);
+
     const plots = window.PlotShareApp.plots;
+
+    // Defined agricultural plot boundaries across BD districts
+    const plotBoundaries = {
+      'plot-101': [[25.8580, 88.6635], [25.8582, 88.6680], [25.8545, 88.6682], [25.8543, 88.6637]],
+      'plot-102': [[24.9840, 89.3115], [24.9842, 89.3170], [24.9800, 89.3172], [24.9798, 89.3117]],
+      'plot-103': [[24.6880, 88.1600], [24.6885, 88.1665], [24.6820, 88.1668], [24.6815, 88.1603]]
+    };
 
     plots.forEach(plot => {
       if (plot.lat && plot.lng) {
+        // Agricultural Farmland Pin
         const pinIcon = L.divIcon({
           className: 'custom-map-pin',
           html: `🌾 ৳${isBn ? AREA_CONVERTER.toBanglaNum(plot.price_bdt.toLocaleString()) : plot.price_bdt.toLocaleString()}`,
@@ -1085,11 +1129,24 @@
         marker.bindPopup(`
           <div class="text-xs p-1">
             <strong class="text-primary text-sm">${isBn ? plot.title_bn : plot.title_en}</strong><br>
-            📍 ${isBn ? plot.location_label_bn : plot.location_label_en}<br>
-            📐 ${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_shotok) : plot.area_shotok} ${isBn ? 'শতক' : 'Shotok'}<br>
+            <span class="text-gray-600">📍 ${isBn ? plot.location_label_bn : plot.location_label_en}</span><br>
+            <span class="font-bold text-success-leaf">📐 ${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_shotok) : plot.area_shotok} ${isBn ? 'শতক' : 'Shotok'}</span><br>
             <a href="#plot-details/${plot.id}" class="inline-block mt-2 px-3 py-1 bg-primary text-white rounded font-bold text-center">জমি দেখুন</a>
           </div>
         `);
+
+        // Farmland boundary polygon overlay
+        if (plotBoundaries[plot.id]) {
+          const poly = L.polygon(plotBoundaries[plot.id], {
+            color: '#05CD99',
+            weight: 2,
+            dashArray: '4, 4',
+            fillColor: '#2D5A27',
+            fillOpacity: 0.3
+          }).addTo(map);
+
+          poly.bindTooltip(`🌾 ${isBn ? plot.title_bn : plot.title_en}`, { permanent: false, direction: 'center' });
+        }
       }
     });
   }
