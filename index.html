@@ -1807,8 +1807,113 @@
     setTimeout(() => { window.location.hash = '#explore'; }, 1000);
   };
 
+  window.exportPlanToMyFarm = function() {
+    showToast(window.PlotShareApp.lang === 'bn' ? 'পরিকল্পনার সকল কাজের তালিকা ও বাজেট "আমার খামারে" সফলভাবে যুক্ত হয়েছে!' : 'Farm plan tasks & budget exported to My Farm!', 'success');
+    setTimeout(() => { window.location.hash = '#my-farm'; }, 1000);
+  };
+
   window.openAddExpenseModal = function(cropId) {
-    showToast(window.PlotShareApp.lang === 'bn' ? 'খরচ ভাউচার সংরক্ষিত হয়েছে' : 'Expense voucher logged', 'success');
+    const isBn = window.PlotShareApp.lang === 'bn';
+    const modal = document.getElementById('modal-container');
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.innerHTML = `
+      <div class="bg-hz-card p-6 rounded-hz-lg max-w-sm w-full shadow-hz-lg border border-hz-border flex flex-col gap-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-extrabold text-base text-hz-navy">${isBn ? 'খামারের খরচ যুক্ত করুন' : 'Log Farm Expense'}</h3>
+          <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-hz-input flex items-center justify-center text-hz-navy font-bold">✕</button>
+        </div>
+        <form onsubmit="saveExpense(event, '${cropId}')" class="flex flex-col gap-3 text-xs">
+          <div>
+            <label class="block font-bold text-hz-navy mb-1">${isBn ? 'খরচের খাত:' : 'Category:'}</label>
+            <select id="exp-cat" class="w-full bg-hz-input h-11 px-3 rounded-hz border border-hz-border font-bold text-hz-navy">
+              <option>সার ও পুষ্টি (Fertilizer)</option>
+              <option>সেচ ও বিদ্যুৎ (Irrigation)</option>
+              <option>বীজ ও চারা (Seeds)</option>
+              <option>শ্রমিক মজুরি (Labor)</option>
+              <option>কীটনাশক ও স্প্রে (Pesticide)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-hz-navy mb-1">${isBn ? 'খরচের বিবরণ:' : 'Description:'}</label>
+            <input id="exp-title" type="text" placeholder="যেমন: ইউরিয়া ও পটাশ সার" class="w-full bg-hz-input h-11 px-3 rounded-hz border border-hz-border font-semibold text-hz-navy" required>
+          </div>
+          <div>
+            <label class="block font-bold text-hz-navy mb-1">${isBn ? 'টাকার পরিমাণ (৳):' : 'Amount (BDT):'}</label>
+            <input id="exp-amount" type="number" placeholder="যেমন: ১৫০০" class="w-full bg-hz-input h-11 px-3 rounded-hz border border-hz-border font-extrabold text-hz-navy" required>
+          </div>
+          <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-hz font-extrabold mt-2 shadow-primary-btn hover:bg-primary-hover transition-all">
+            ${isBn ? 'খরচ সংরক্ষণ করুন' : 'Save Expense'}
+          </button>
+        </form>
+      </div>
+    `;
+  };
+
+  window.saveExpense = function(e, cropId) {
+    e.preventDefault();
+    const amount = parseInt(document.getElementById('exp-amount').value) || 0;
+    const title = document.getElementById('exp-title').value;
+    const cat = document.getElementById('exp-cat').value;
+
+    const crop = window.PlotShareApp.farmData.active_crops.find(c => c.id === cropId) || window.PlotShareApp.farmData.active_crops[0];
+    crop.expenses_bdt = (crop.expenses_bdt || 0) + amount;
+    crop.expenses_log = crop.expenses_log || [];
+    crop.expenses_log.push({ id: 'exp-' + Date.now(), category: cat, title: title, amount: amount, date: '2026-02-16' });
+
+    localStorage.setItem('plotshare_farm', JSON.stringify(window.PlotShareApp.farmData));
+    closeModal();
+    renderCurrentRoute();
+    showToast(window.PlotShareApp.lang === 'bn' ? `৳${amount} খরচ সফলভাবে সংরক্ষিত হয়েছে!` : `Expense of ৳${amount} logged!`, 'success');
+  };
+
+  window.openLogHarvestModal = function() {
+    const isBn = window.PlotShareApp.lang === 'bn';
+    const modal = document.getElementById('modal-container');
+    if (!modal) return;
+    modal.classList.remove('hidden');
+    modal.innerHTML = `
+      <div class="bg-hz-card p-6 rounded-hz-lg max-w-sm w-full shadow-hz-lg border border-hz-border flex flex-col gap-4">
+        <div class="flex justify-between items-center">
+          <h3 class="font-extrabold text-base text-hz-navy">${isBn ? 'উত্তোলিত ফসলের ফলন রেকর্ড করুন' : 'Log Harvested Crop'}</h3>
+          <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-hz-input flex items-center justify-center text-hz-navy font-bold">✕</button>
+        </div>
+        <form onsubmit="saveHarvest(event)" class="flex flex-col gap-3 text-xs">
+          <div>
+            <label class="block font-bold text-hz-navy mb-1">${isBn ? 'ফসল:' : 'Crop:'}</label>
+            <select class="w-full bg-hz-input h-11 px-3 rounded-hz border border-hz-border font-bold text-hz-navy">
+              <option>বোরো ধান (ব্রি-২৮)</option>
+              <option>ডায়মন্ড আলু</option>
+              <option>সরিষা (বারি-১৪)</option>
+            </select>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block font-bold text-hz-navy mb-1">${isBn ? 'ফলনের পরিমাণ (মণ):' : 'Yield (Maund):'}</label>
+              <input type="number" placeholder="যেমন: ৪০" class="w-full bg-hz-input h-11 px-3 rounded-hz border border-hz-border font-bold text-hz-navy" required>
+            </div>
+            <div>
+              <label class="block font-bold text-hz-navy mb-1">${isBn ? 'বিক্রয় দর (৳/মণ):' : 'Rate (BDT/Maund):'}</label>
+              <input type="number" placeholder="যেমন: ১২০০" class="w-full bg-hz-input h-11 px-3 rounded-hz border border-hz-border font-bold text-hz-navy" required>
+            </div>
+          </div>
+          <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-hz font-extrabold mt-2 shadow-primary-btn hover:bg-primary-hover transition-all">
+            ${isBn ? 'ফলন ও বিক্রয় রেকর্ড সংরক্ষণ' : 'Save Harvest Record'}
+          </button>
+        </form>
+      </div>
+    `;
+  };
+
+  window.saveHarvest = function(e) {
+    e.preventDefault();
+    closeModal();
+    showToast(window.PlotShareApp.lang === 'bn' ? 'ফলন ও বিক্রির হিসাব সফলভাবে সংরক্ষিত হয়েছে!' : 'Harvest record saved successfully!', 'success');
+  };
+
+  window.closeModal = function() {
+    const modal = document.getElementById('modal-container');
+    if (modal) modal.classList.add('hidden');
   };
 
   window.askAIQuery = function(q) {
