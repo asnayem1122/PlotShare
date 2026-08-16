@@ -2294,8 +2294,30 @@
     renderCurrentRoute();
 
     setTimeout(() => {
-      let respBn = 'আপনার প্রশ্নের জন্য ধন্যবাদ। মাটির আর্দ্রতা পরীক্ষা করে প্রতি শতকে ১.২ কেজি ইউরিয়া ও ০.৬ কেজি টিএসপি সার প্রয়োগের পরামর্শ দেওয়া হচ্ছে।';
-      let respEn = 'Thank you for your question. Based on current soil conditions, recommend applying 1.2 kg Urea and 0.6 kg TSP per shotok.';
+      const q = userText.toLowerCase();
+      let respBn = '';
+      let respEn = '';
+
+      if (q.includes('সার') || q.includes('urea') || q.includes('tsp') || q.includes('fertilizer') || q.includes('বোরো')) {
+        respBn = 'বোরো ধানের জন্য প্রতি শতকে ১.২ কেজি ইউরিয়া, ০.৬ কেজি টিএসপি এবং ০.৪ কেজি এমপি সার প্রয়োগ করলে সবচেয়ে ভালো ফলন পাবেন। ইউরিয়া জমি তৈরি, কুশি গজানো ও থোড় আসার সময় ৩ কিস্তিতে দিন।';
+        respEn = 'For Boro rice, applying 1.2 kg Urea, 0.6 kg TSP, and 0.4 kg MOP per shotok yields optimal growth. Split Urea into 3 applications (land prep, tillering, panicle initiation) for maximum absorption!';
+      } else if (q.includes('হলুদ') || q.includes('টমেটো') || q.includes('পাত') || q.includes('yellow') || q.includes('disease') || q.includes('রোগ')) {
+        respBn = 'টমেটোর পাতা হলুদ হওয়া সাধারণত নাইট্রোজেনের ঘাটতি বা অতিরিক্ত আর্দ্রতায় গোড়ার ছত্রাকজনিত কারণে হয়। নিচের আক্রান্ত পাতাগুলো ছেঁটে ফেলুন, সুষম পানি নিষ্কাশন নিশ্চিত করুন এবং প্রয়োজনবোধে জৈব স্প্রে প্রয়োগ করুন।';
+        respEn = 'Yellow tomato leaves usually indicate nitrogen deficiency or root-dampening fungi. Trim off lower yellow leaves, ensure proper soil drainage, and consider applying a mild organic Trichoderma spray if spots persist.';
+      } else if (q.includes('বৃষ্টি') || q.includes('সেচ') || q.includes('পানি') || q.includes('rain') || q.includes('water') || q.includes('weather')) {
+        respBn = 'আগামী ২ দিনে হালকা বৃষ্টির পূর্বাভাস রয়েছে, তাই এখনই ভারী সেচ দেবেন না। বৃষ্টির পর মাটির আর্দ্রতা দেখে সেচের প্রয়োজন নির্ধারণ করুন।';
+        respEn = 'With rain expected over the next 48 hours, hold off on deep irrigation for now! Check the topsoil dampness after the rain before giving extra water.';
+      } else if (q.includes('জমি') || q.includes('প্লট') || q.includes('লিজ') || q.includes('plot') || q.includes('lease') || q.includes('land')) {
+        respBn = 'প্লটশেয়ারে জমি যুক্ত করতে বা লিজ দিতে ড্যাশবোর্ডের "জমি লিস্ট করুন" বিভাগে যান। সেখানে আপনার জমির মাটির ধরন, পানি সুবিধা ও বর্গা শেয়ারিং শর্ত সহজে নির্ধারণ করতে পারবেন।';
+        respEn = 'To list or rent out a plot on PlotShare, navigate to the "List Plot" tab. You can set soil properties, water access, and custom sharecropping terms directly from there!';
+      } else if (q.includes('সালাম') || q.includes('hello') || q.includes('hi') || q.includes('কেমন')) {
+        respBn = 'ওয়ালাইকুম আসসালাম! আজ আপনার ফসল, মাটি বা সার প্রয়োগ নিয়ে কীভাবে সাহায্য করতে পারি?';
+        respEn = 'Hello! How can I help you with your crops, fertilizer requirements, or farm planning today?';
+      } else {
+        respBn = `"${userText}" — এই বিষয়ে আমার পরামর্শ: জমিতে প্রয়োজন অনুযায়ী জৈব সার ব্যবহার করুন, নিয়মিত পাতার স্বাস্থ্য পরীক্ষা করুন এবং ভালো পানি নিষ্কাশন বজায় রাখুন। নির্দিষ্ট কোনো সারের মাত্রা জানতে চান?`;
+        respEn = `Regarding "${userText}": I recommend maintaining healthy soil organic matter, checking plant leaves weekly for pests, and ensuring good field drainage. Let me know if you need specific crop application doses!`;
+      }
+
       window.PlotShareApp.chatMessages.push({ sender: 'ai', text_bn: respBn, text_en: respEn });
       renderCurrentRoute();
     }, 500);
