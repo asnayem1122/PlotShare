@@ -536,6 +536,34 @@
     ]
   };
 
+  const TOOL_INVENTORY = [
+    { id: 'tool-1', name_bn: 'ব্যাটারি চালিত স্প্রেয়ার ও নোজল সেট', name_en: 'Battery Backpack Sprayer Set', type: 'tool', owner_bn: 'দিনাজপুর এগ্রি হাব', owner_en: 'Dinajpur Agri Hub', status: 'Available', status_bn: 'উপলব্ধ', deposit_bdt: 500, fee_bdt: 50, fee_unit_bn: '/ দিন', fee_unit_en: '/ Day' },
+    { id: 'tool-2', name_bn: 'ডিজিটাল মৃত্তিকা পিএইচ ও আর্দ্রতা মিটার', name_en: 'Digital Soil pH & Moisture Tester', type: 'tool', owner_bn: 'কৃষি সম্প্রসারণ ক্লাব', owner_en: 'DAE Farmer Club', status: 'Borrowed', status_bn: 'ধার নেওয়া হয়েছে', return_date: '2026-02-22', deposit_bdt: 1000, fee_bdt: 40, fee_unit_bn: '/ দিন', fee_unit_en: '/ Day' },
+    { id: 'tool-3', name_bn: 'ব্রি ধান-২৮ প্রত্যায়িত বীজ প্যাকেট (১০ কেজি)', name_en: 'BRRI dhan-28 Certified Seeds (10kg)', type: 'seed', owner_bn: 'বীরগঞ্জ বীজ সমবায়', owner_en: 'Birganj Seed Co-op', status: 'Available', status_bn: 'উপলব্ধ', deposit_bdt: 0, fee_bdt: 450, fee_unit_bn: '/ প্যাকেট', fee_unit_en: '/ Pack' },
+    { id: 'tool-4', name_bn: 'বারি সরিষা-১৪ উন্নত বীজ প্যাকেট (২ কেজি)', name_en: 'BARI Mustard-14 High Yield Seed (2kg)', type: 'seed', owner_bn: 'শিবগঞ্জ বীজ ব্যাংক', owner_en: 'Shibganj Seed Bank', status: 'Reserved', status_bn: 'সংরক্ষিত', deposit_bdt: 0, fee_bdt: 280, fee_unit_bn: '/ প্যাকেট', fee_unit_en: '/ Pack' }
+  ];
+
+  const MENTOR_NETWORK = [
+    { id: 'mentor-1', name_bn: 'ড. মো: তারিকুল হাসান', name_en: 'Dr. Md. Tariqul Hasan', title_bn: 'প্রবীণ কৃষিবিদ ও ধান গবেষক', title_en: 'Senior Agronomist (Rice Specialist)', exp_bn: '১৮ বছরের অভিজ্ঞতা', exp_en: '18 Years Experience', location_bn: 'দিনাজপুর', location_en: 'Dinajpur', rating: '4.9/5' },
+    { id: 'mentor-2', name_bn: 'সালমা বেগম', name_en: 'Salma Begum', title_bn: 'বাণিজ্যিক সবজি ও জৈব চাষ বিশেষজ্ঞ', title_en: 'Commercial Vegetable & Organic Specialist', exp_bn: '১২ বছরের অভিজ্ঞতা', exp_en: '12 Years Experience', location_bn: 'বগুড়া', location_en: 'Bogura', rating: '5.0/5' }
+  ];
+
+  const MUNICIPAL_GREENING_DATA = {
+    total_green_sqft: 145200,
+    total_green_acres: 3.33,
+    total_green_bigha: 10.1,
+    carbon_offset_tons_yr: 18.4,
+    active_plots_count: 48,
+    total_harvest_kg: 16800,
+    participating_growers: 124,
+    compliance_status: 'Audit Approved (100% Verified)',
+    regions: [
+      { name: 'Dinajpur Agri Zone', sqft: 65340, plots: 22, offset_tons: 8.3 },
+      { name: 'Bogura Vegetable Belt', sqft: 52272, plots: 18, offset_tons: 6.6 },
+      { name: 'Chapainawabganj Fruit Orchards', sqft: 27588, plots: 8, offset_tons: 3.5 }
+    ]
+  };
+
   const DICTIONARY = {
     bn: { app_name: 'প্লটশেয়ার', switch_lang: 'English', home: 'হোম', explore: 'জমি খুঁজুন', list_plot: 'জমি দিন', my_farm: 'আমার খামার', ai_assistant: 'কৃষি সহায়ক' },
     en: { app_name: 'PlotShare', switch_lang: 'বাংলা', home: 'Home', explore: 'Explore Land', list_plot: 'List Land', my_farm: 'My Farm', ai_assistant: 'AI Assistant' }
@@ -545,9 +573,13 @@
   window.PlotShareApp = {
     lang: localStorage.getItem('plotshare_lang') || 'bn',
     currentRoute: 'home',
+    currentRole: localStorage.getItem('plotshare_role') || 'gardener', // 'gardener' | 'landowner' | 'municipal_admin' | 'unauthenticated'
     plots: safeJSONParse('plotshare_plots', INITIAL_PLOTS),
     farmData: safeJSONParse('plotshare_farm', CURRENT_FARM_DATA),
     savedFavorites: safeJSONParse('plotshare_favs', ['plot-101']),
+    toolInventory: safeJSONParse('plotshare_tools', TOOL_INVENTORY),
+    mentors: MENTOR_NETWORK,
+    municipalData: MUNICIPAL_GREENING_DATA,
     selectedPlot: null,
     converter: AREA_CONVERTER,
     seasons: SEASONS,
@@ -559,6 +591,20 @@
     chatMessages: [
       { sender: 'ai', text_bn: 'আসসালামু আলাইকুম! আমি প্লটশেয়ার এআই কৃষি সহায়ক। আপনার জমি, সার প্রয়োগ, ফসলের রোগ বা আবহাওয়া সংক্রান্ত যেকোনো প্রশ্ন করতে পারেন।', text_en: 'Greetings! I am the PlotShare AI Farm Assistant. Ask me anything about crop planning, fertilizer, pest control, or weather guidance!' }
     ]
+  };
+
+  // Role Switcher for RBAC
+  window.switchRole = function(role) {
+    window.PlotShareApp.currentRole = role;
+    localStorage.setItem('plotshare_role', role);
+    renderCurrentRoute();
+    const roleLabels = {
+      gardener: window.PlotShareApp.lang === 'bn' ? 'চাষী / কৃষক মোড সক্রিয়' : 'Urban Gardener / Farmer Role Active',
+      landowner: window.PlotShareApp.lang === 'bn' ? 'জমির মালিক মোড সক্রিয়' : 'Landowner Role Active',
+      municipal_admin: window.PlotShareApp.lang === 'bn' ? 'সিটি গ্রিনিং এডমিন মোড সক্রিয়' : 'City Greening Admin Role Active',
+      unauthenticated: window.PlotShareApp.lang === 'bn' ? 'অতিথি মোড (প্রাইভেসি মাস্কিং সক্রিয়)' : 'Guest Mode (Privacy Masking ~200m Active)'
+    };
+    showToast(roleLabels[role] || 'Role updated', 'info');
   };
 
   // Language Switcher
@@ -695,6 +741,15 @@
         break;
       case 'marketplace':
         container.innerHTML = renderMarketplaceScreen(isBn);
+        break;
+      case 'tool-library':
+        container.innerHTML = renderToolLibraryScreen(isBn);
+        break;
+      case 'city-greening':
+        container.innerHTML = renderCityGreeningScreen(isBn);
+        break;
+      case 'mentorship':
+        container.innerHTML = renderMentorshipScreen(isBn);
         break;
       case 'notifications':
         container.innerHTML = renderNotificationsScreen(isBn);
@@ -1803,6 +1858,163 @@
     `;
   }
 
+  // 12. TOOL LIBRARY & SEED SWAP SCREEN
+  function renderToolLibraryScreen(isBn) {
+    const tools = window.PlotShareApp.toolInventory;
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-extrabold text-hz-navy">${isBn ? 'কৃষি সরঞ্জাম ব্যাংক ও বীজ বিনিময়' : 'Tool Library & Seed-Swap Coordination'}</h2>
+            <p class="text-xs text-hz-slate font-medium">${isBn ? 'সম্প্রদায়ের যন্ত্রপাতি ও প্রত্যায়িত বীজ ধার নিন' : 'Borrow shared community tools & certified seed packs'}</p>
+          </div>
+          <span class="text-xs font-extrabold text-primary bg-primary-light px-3 py-1 rounded-hz-pill border border-primary/20">
+            ${tools.length} ${isBn ? 'টি আইটেম' : 'Items'}
+          </span>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          ${tools.map(item => `
+            <div class="bg-hz-card p-4 rounded-hz-lg border border-hz-border shadow-hz flex flex-col gap-3">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-11 h-11 rounded-full ${item.type === 'seed' ? 'bg-success-light text-success-leaf' : 'bg-primary-light text-primary'} flex items-center justify-center font-bold text-lg">
+                    <span class="material-symbols-outlined">${item.type === 'seed' ? 'psychiatry' : 'home_repair_service'}</span>
+                  </div>
+                  <div>
+                    <h3 class="font-extrabold text-sm text-hz-navy">${isBn ? item.name_bn : item.name_en}</h3>
+                    <p class="text-[11px] text-hz-slate font-medium">📍 ${isBn ? item.owner_bn : item.owner_en}</p>
+                  </div>
+                </div>
+                <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-hz-pill ${item.status === 'Available' ? 'bg-success-light text-success-leaf border border-success-mint/30' : item.status === 'Borrowed' ? 'bg-hz-input text-hz-slate border border-hz-border' : 'bg-secondary-light text-secondary-dark border border-secondary/30'}">
+                  ${isBn ? item.status_bn : item.status}
+                </span>
+              </div>
+
+              <div class="flex items-center justify-between pt-2 border-t border-hz-border text-xs">
+                <div>
+                  <span class="font-extrabold text-primary">৳${isBn ? AREA_CONVERTER.toBanglaNum(item.fee_bdt) : item.fee_bdt} ${isBn ? item.fee_unit_bn : item.fee_unit_en}</span>
+                  ${item.deposit_bdt ? `<span class="text-[10px] text-hz-slate ml-1 font-medium">(জামানত: ৳${isBn ? AREA_CONVERTER.toBanglaNum(item.deposit_bdt) : item.deposit_bdt})</span>` : ''}
+                </div>
+                <button onclick="requestToolCheckout('${item.id}')" ${item.status === 'Borrowed' ? 'disabled' : ''} class="px-3.5 py-1.5 rounded-hz text-xs font-extrabold ${item.status === 'Borrowed' ? 'bg-hz-input text-hz-slate cursor-not-allowed' : 'bg-primary text-white hover:bg-primary-hover shadow-sm'}">
+                  ${item.status === 'Available' ? (isBn ? 'ধার নিন' : 'Borrow / Request') : item.status === 'Reserved' ? (isBn ? 'রিজার্ভ করুন' : 'Join Waitlist') : (isBn ? 'ফেরত প্রত্যাশিত' : 'Due: Feb 22')}
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 13. CITY GREENING & MUNICIPAL ORGANIZER DASHBOARD
+  function renderCityGreeningScreen(isBn) {
+    const data = window.PlotShareApp.municipalData;
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-extrabold text-hz-navy">${isBn ? 'সিটি গ্রিনিং ও মিউনিসিপ্যাল অডিট ড্যাশবোর্ড' : 'City Greening & Municipal Audit Dashboard'}</h2>
+            <p class="text-xs text-hz-slate font-medium">${isBn ? 'সক্রিয় সবুজায়ন, কার্বন অফসেট ও জিও-স্প্যাশিয়াল অডিট রিপোর্ট' : 'Aggregated urban green cover, carbon offset & audit data'}</p>
+          </div>
+        </div>
+
+        <!-- 3 Stat Metrics -->
+        <div class="grid grid-cols-3 gap-2.5">
+          <div class="bg-hz-card p-3 rounded-hz border border-hz-border shadow-hz flex flex-col">
+            <span class="text-[10px] text-hz-slate font-bold uppercase">${isBn ? 'মোট সবুজায়ন' : 'Green Cover'}</span>
+            <span class="text-sm font-extrabold text-success-leaf mt-1">${isBn ? AREA_CONVERTER.toBanglaNum('145,200') : '145,200'} <span class="text-[10px] font-medium text-hz-slate">sq ft</span></span>
+            <span class="text-[10px] text-hz-slate font-medium">(${data.total_green_acres} Acres)</span>
+          </div>
+
+          <div class="bg-hz-card p-3 rounded-hz border border-hz-border shadow-hz flex flex-col">
+            <span class="text-[10px] text-hz-slate font-bold uppercase">${isBn ? 'কার্বন অফসেট' : 'Carbon Offset'}</span>
+            <span class="text-sm font-extrabold text-primary mt-1">${isBn ? AREA_CONVERTER.toBanglaNum(data.carbon_offset_tons_yr) : data.carbon_offset_tons_yr} <span class="text-[10px] font-medium text-hz-slate">t CO₂e/yr</span></span>
+            <span class="text-[10px] text-hz-slate font-medium">${data.active_plots_count} Plots</span>
+          </div>
+
+          <div class="bg-hz-card p-3 rounded-hz border border-hz-border shadow-hz flex flex-col">
+            <span class="text-[10px] text-hz-slate font-bold uppercase">${isBn ? 'মোট ফলন' : 'Total Produce'}</span>
+            <span class="text-sm font-extrabold text-secondary-dark mt-1">${isBn ? AREA_CONVERTER.toBanglaNum('16,800') : '16,800'} <span class="text-[10px] font-medium text-hz-slate">kg</span></span>
+            <span class="text-[10px] text-hz-slate font-medium">420 Maunds</span>
+          </div>
+        </div>
+
+        <!-- Regional Green Zones Breakdown -->
+        <div class="bg-hz-card p-4 rounded-hz-lg border border-hz-border shadow-hz flex flex-col gap-2.5">
+          <h3 class="font-extrabold text-xs text-hz-navy uppercase tracking-wider">${isBn ? 'অঞ্চলভিত্তিক সবুজায়ন বিশ্লেষণ:' : 'Zonal Greening Breakdown:'}</h3>
+          ${data.regions.map(r => `
+            <div class="flex items-center justify-between py-2 border-b border-hz-border/60 last:border-none text-xs">
+              <div>
+                <span class="font-extrabold text-hz-navy">${r.name}</span>
+                <p class="text-[10px] text-hz-slate">${r.plots} active farmlands</p>
+              </div>
+              <div class="text-right">
+                <span class="font-extrabold text-success-leaf">${r.sqft.toLocaleString()} sq ft</span>
+                <p class="text-[10px] text-hz-slate">${r.offset_tons} tons CO₂e</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Municipal Data Exporters -->
+        <div class="bg-hz-card p-4 rounded-hz-lg border border-hz-border shadow-hz flex flex-col gap-3">
+          <h3 class="font-extrabold text-xs text-hz-navy uppercase tracking-wider">${isBn ? 'সরকারি অডিট ও তথ্য রপ্তানি:' : 'Municipal Audit Data Export:'}</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <button onclick="exportGreeningData('geojson')" class="py-2.5 bg-hz-input border border-hz-border rounded-hz text-xs font-extrabold text-hz-navy hover:border-primary flex items-center justify-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-base text-primary">public</span>
+              <span>${isBn ? 'GeoJSON ডাউনলোড' : 'Export GeoJSON'}</span>
+            </button>
+            <button onclick="exportGreeningData('csv')" class="py-2.5 bg-hz-input border border-hz-border rounded-hz text-xs font-extrabold text-hz-navy hover:border-primary flex items-center justify-center gap-1.5 shadow-sm">
+              <span class="material-symbols-outlined text-base text-primary">table_chart</span>
+              <span>${isBn ? 'CSV অডিট রিপোর্ট' : 'Export CSV Report'}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 14. MENTORSHIP SCREEN
+  function renderMentorshipScreen(isBn) {
+    const mentors = window.PlotShareApp.mentors;
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-base font-extrabold text-hz-navy">${isBn ? 'কৃষি পরামর্শক ও মেন্টরশিপ হাব' : 'Agricultural Mentorship & Advisory'}</h2>
+            <p class="text-xs text-hz-slate font-medium">${isBn ? 'প্রবীণ কৃষিবিদ ও সফল চাষীদের কাছ থেকে সরাসরি পরামর্শ নিন' : 'Connect 1-on-1 with master growers & agronomists'}</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          ${mentors.map(m => `
+            <div class="bg-hz-card p-4 rounded-hz-lg border border-hz-border shadow-hz flex flex-col gap-3">
+              <div class="flex items-start justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-full bg-secondary-light text-secondary-dark flex items-center justify-center font-extrabold text-xl">👨‍🌾</div>
+                  <div>
+                    <h3 class="font-extrabold text-sm text-hz-navy">${isBn ? m.name_bn : m.name_en}</h3>
+                    <p class="text-xs text-primary font-bold">${isBn ? m.title_bn : m.title_en}</p>
+                    <p class="text-[11px] text-hz-slate font-medium">📍 ${isBn ? m.location_bn : m.location_en} • ${isBn ? m.exp_bn : m.exp_en}</p>
+                  </div>
+                </div>
+                <span class="text-xs font-extrabold text-secondary-dark bg-secondary-light px-2.5 py-0.5 rounded-hz-pill border border-secondary/30">★ ${m.rating}</span>
+              </div>
+
+              <div class="flex items-center justify-between pt-2 border-t border-hz-border">
+                <span class="text-[11px] text-success-leaf font-bold">${isBn ? '✓ বিনামূল্যে প্রাথমিক পরামর্শ' : '✓ Free Initial Session'}</span>
+                <button onclick="requestMentorConnect('${m.id}')" class="px-4 py-2 bg-primary text-white rounded-hz text-xs font-extrabold hover:bg-primary-hover shadow-sm">
+                  ${isBn ? 'পরামর্শ চান' : 'Request Mentorship'}
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   function renderMarketplaceScreen(isBn) {
     return `
       <div class="px-4 py-4 flex flex-col gap-4 pb-20">
@@ -1821,7 +2033,7 @@
     `;
   }
 
-  // 14. NOTIFICATIONS & PROFILE
+  // 15. NOTIFICATIONS & PROFILE
   function renderNotificationsScreen(isBn) {
     return `
       <div class="px-4 py-4 flex flex-col gap-3 pb-20">
@@ -1884,6 +2096,75 @@
     e.preventDefault();
     showToast(window.PlotShareApp.lang === 'bn' ? 'আপনার কৃষি জমি সফলভাবে তালিকাভুক্ত হয়েছে!' : 'Farmland published successfully!', 'success');
     setTimeout(() => { window.location.hash = '#explore'; }, 1000);
+  };
+
+  window.requestToolCheckout = function(toolId) {
+    const isBn = window.PlotShareApp.lang === 'bn';
+    const tool = window.PlotShareApp.toolInventory.find(t => t.id === toolId);
+    if (!tool) return;
+
+    if (tool.status === 'Available') {
+      tool.status = 'Reserved';
+      tool.status_bn = 'সংরক্ষিত';
+      localStorage.setItem('plotshare_tools', JSON.stringify(window.PlotShareApp.toolInventory));
+      renderCurrentRoute();
+      showToast(isBn ? `"${tool.name_bn}" ধার নেওয়ার প্রস্তাব সফলভাবে পাঠানো হয়েছে!` : `Borrow request for "${tool.name_en}" submitted!`, 'success');
+    } else if (tool.status === 'Reserved') {
+      showToast(isBn ? 'আপনি অপেক্ষমান তালিকায় যুক্ত হয়েছেন।' : 'Added to item waitlist.', 'info');
+    }
+  };
+
+  window.requestMentorConnect = function(mentorId) {
+    const isBn = window.PlotShareApp.lang === 'bn';
+    const mentor = window.PlotShareApp.mentors.find(m => m.id === mentorId);
+    showToast(isBn ? `${mentor ? mentor.name_bn : 'কৃষিবিদ'}-এর সাথে পরামর্শের জন্য বার্তা পাঠানো হয়েছে!` : 'Mentorship request sent successfully!', 'success');
+  };
+
+  window.exportGreeningData = function(format) {
+    const isBn = window.PlotShareApp.lang === 'bn';
+    const data = window.PlotShareApp.municipalData;
+
+    let content = '';
+    let filename = '';
+    let mime = '';
+
+    if (format === 'geojson') {
+      const geojson = {
+        type: "FeatureCollection",
+        metadata: {
+          audit_compliance: data.compliance_status,
+          total_green_acres: data.total_green_acres,
+          carbon_offset_tons_yr: data.carbon_offset_tons_yr,
+          timestamp: "2026-02-16T18:00:00Z"
+        },
+        features: [
+          { type: "Feature", properties: { name: "Dinajpur Agri Zone", plots: 22, sqft: 65340, offset_tons: 8.3 }, geometry: { type: "Polygon", coordinates: [[[88.6635, 25.8580], [88.6680, 25.8582], [88.6682, 25.8545], [88.6637, 25.8543], [88.6635, 25.8580]]] } },
+          { type: "Feature", properties: { name: "Bogura Vegetable Belt", plots: 18, sqft: 52272, offset_tons: 6.6 }, geometry: { type: "Polygon", coordinates: [[[89.3115, 24.9840], [89.3170, 24.9842], [89.3172, 24.9800], [89.3117, 24.9798], [89.3115, 24.9840]]] } }
+        ]
+      };
+      content = JSON.stringify(geojson, null, 2);
+      filename = "plotshare_municipal_greening.geojson";
+      mime = "application/geo+json";
+    } else {
+      content = "Region,Active_Plots,Green_SqFt,Green_Acres,Carbon_Offset_Tons_CO2e,Audit_Status\n";
+      content += "Dinajpur Agri Zone,22,65340,1.50,8.3,Verified\n";
+      content += "Bogura Vegetable Belt,18,52272,1.20,6.6,Verified\n";
+      content += "Chapainawabganj Fruit Orchards,8,27588,0.63,3.5,Verified\n";
+      filename = "plotshare_municipal_audit_report.csv";
+      mime = "text/csv";
+    }
+
+    const blob = new Blob([content], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    showToast(isBn ? `${filename} ফাইল সফলভাবে ডাউনলোড হয়েছে!` : `Exported ${filename}!`, 'success');
   };
 
   window.exportPlanToMyFarm = function() {
