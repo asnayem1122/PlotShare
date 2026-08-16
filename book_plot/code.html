@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a4138",
+          "outline": "#8f7066",
+          "surface-container": "#f1ede8",
+          "on-surface": "#1c1c19",
+          "surface-container-high": "#ebe8e3",
+          "primary": "#a43700",
+          "primary-container": "#cd4700",
+          "secondary": "#7e5700",
+          "surface": "#fdf9f4",
+          "surface-container-lowest": "#ffffff"
+        },
+        fontFamily: {
+          sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; font-family: 'Hind Siliguri', sans-serif; } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } .pt-safe { padding-top: env(safe-area-inset-top); } }</style>
+</head><body class="bg-surface font-sans text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../plot_details/code.html" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface"><span class="material-symbols-outlined text-lg">arrow_back</span></a>
+      <h1 class="font-bold text-base text-primary">চুক্তির আবেদন ও বর্গা প্রস্তাব</h1>
+    </div>
+  </div>
+</header>
+<main class="pt-16 pb-20 bg-surface min-h-screen">
+  <div class="p-4 flex flex-col gap-4">
+    <!-- Selected Land Summary -->
+    <div class="bg-surface-container p-3.5 rounded-2xl flex items-center gap-3">
+      <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMsBPFIE6sgdlb09X4ttUptcHKOhTZTTFPJWpqPChq5BbJ1LRB-GZISGWUB42jKVdb-F3V_w77Wxgon0UyDKFw5Vz054rNz6nPnyx7hF_TyF9KJPcdzGhJ0PfCKh1DaIXcos7PtOrO67QHPb20x_kFgcgdAuApa1-X9DazYvdb5tRnmIzsDp-jd1jXeGm2IjRbatU2oYninWH7IL3nq8VAdyoGMig7QRbmcDi7NX1gMOeSirsn5YgPHg" class="w-16 h-16 rounded-xl object-cover">
+      <div>
+        <h3 class="font-bold text-sm text-on-surface">৫০ শতক ধানি জমি</h3>
+        <p class="text-xs text-on-surface-variant">বীরগঞ্জ, দিনাজপুর • গভীর নলকূপ সেচ</p>
+        <p class="text-xs font-bold text-primary mt-0.5">মালিক: আলহাজ্ব রফিকুল ইসলাম</p>
+      </div>
+    </div>
+
+    <!-- Agreement Form -->
+    <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+      <div>
+        <label class="block text-xs font-bold text-on-surface mb-2">১. চুক্তির ধরন নির্বাচন করুন:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <label class="border-2 border-primary bg-primary/5 p-3 rounded-xl flex flex-col cursor-pointer">
+            <span class="font-bold text-xs text-primary">বর্গা চাষ (৫০:৫০)</span>
+            <span class="text-[10px] text-on-surface-variant">ফসল ও খরচের সমান ভাগ</span>
+          </label>
+          <label class="border border-outline-variant/50 p-3 rounded-xl flex flex-col cursor-pointer">
+            <span class="font-bold text-xs text-on-surface">মৌসুমি লিজ (নগদ)</span>
+            <span class="text-[10px] text-on-surface-variant">এককালীন ৳২৮,০০০</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">মৌসুম:</label>
+          <select class="w-full bg-surface-container h-10 px-2 rounded-xl text-xs font-medium">
+            <option>রবি মৌসুম (বোরো ধান)</option>
+            <option>খরিপ-১ (আউশ)</option>
+            <option>খরিপ-২ (আমন)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">উদ্দিষ্ট ফসল:</label>
+          <select class="w-full bg-surface-container h-10 px-2 rounded-xl text-xs font-medium">
+            <option>বোরো ধান (ব্রি-২৮)</option>
+            <option>আলু (ডায়মন্ড)</option>
+            <option>সরিষা (বারি-১৪)</option>
+          </select>
+        </div>
+      </div>
+
+      <a href="../my_plots_dashboard/code.html" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-xs text-center shadow-md hover:bg-primary-container">
+        চুক্তির প্রস্তাব জমা দিন ও খামারে যুক্ত করুন →
+      </a>
+    </div>
+  </div>
+</main>
+</body></html>

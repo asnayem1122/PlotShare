@@ -1,0 +1,180 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a4138",
+          "on-secondary-container": "#6a4800",
+          "outline": "#8f7066",
+          "surface-container": "#f1ede8",
+          "tertiary-fixed-dim": "#ffb596",
+          "error": "#ba1a1a",
+          "secondary-fixed-dim": "#ffba38",
+          "on-surface": "#1c1c19",
+          "surface-container-high": "#ebe8e3",
+          "tertiary": "#914723",
+          "surface-container-highest": "#e6e2dd",
+          "primary-fixed-dim": "#ffb59a",
+          "secondary-container": "#feb300",
+          "success-leaf": "#2D5A27",
+          "golden-amber": "#FFB300",
+          "surface-bright": "#fdf9f4",
+          "surface-container-low": "#f7f3ee",
+          "primary": "#a43700",
+          "outline-variant": "#e3bfb2",
+          "deep-earth": "#2C1B12",
+          "rice-cream": "#F9F5F0",
+          "surface": "#fdf9f4",
+          "surface-variant": "#e6e2dd",
+          "terracotta": "#A0522D",
+          "harvest-orange": "#E65100",
+          "primary-container": "#cd4700",
+          "secondary": "#7e5700",
+          "surface-dim": "#ddd9d5",
+          "surface-container-lowest": "#ffffff"
+        },
+        fontFamily: {
+          sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; font-family: 'Hind Siliguri', sans-serif; } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } .pt-safe { padding-top: env(safe-area-inset-top); } } .nav-active { color: #a43700 !important; } .nav-active span.dot { display: block !important; } </style>
+</head><body class="bg-surface font-sans text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30 shadow-[0_1px_8px_rgba(0,0,0,0.03)]">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <a href="../index.html" class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white text-lg shadow-sm">🌾</a>
+      <div>
+        <h1 class="font-bold text-base text-primary leading-tight">প্লটশেয়ার <span class="text-[10px] bg-secondary-container text-on-secondary-container px-1.5 py-0.2 rounded-full font-bold">BD</span></h1>
+        <p class="text-[11px] text-on-surface-variant leading-none">বাংলাদেশ কৃষি জমি প্ল্যাটফর্ম</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="../index.html" class="px-2.5 py-1 rounded-full bg-primary text-white font-bold text-xs shadow-sm">ইন্টারেক্টিভ অ্যাপ →</a>
+      <a href="../notifications_center/code.html" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant relative"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary"></span></a>
+      <a href="../user_profile/code.html"><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-primary" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9lGu5aTZJ71H5DeOOwM8te1cour7NZIEOJhrBkzYAHvjPbGHOkHq_p3WDrKmM653Iu0sAkzUA8Yzk_Hapagtai0V3Z8C-nxJHj3ZkJpr9H7BwQWFLzPy8b-2GyaSehMqHSR8R1ATyUnEczokjJVMiAMRiNHYxtmHz71UIgaHbxrIAZ6-UCH0R2yyB0ar9332OK4yNkaPHJn8tH40tob3DCQmSG4cEC1q6VfaUcqbf6IOIZ35AqWZhvg"></a>
+    </div>
+  </div>
+</header>
+<main class="pt-16 pb-32 bg-surface min-h-screen">
+  <div class="flex flex-col w-full gap-5 p-4">
+    <!-- Welcome & Search -->
+    <section class="flex flex-col gap-3">
+      <div>
+        <h2 class="text-xl font-bold text-on-surface">আসসালামু আলাইকুম, রহিম উদ্দিন 👋</h2>
+        <p class="text-xs text-on-surface-variant mt-0.5">চাষের জন্য প্রস্তুত উর্বর কৃষি জমি খুঁজুন</p>
+      </div>
+      <div class="relative w-full">
+        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+        <input class="w-full h-12 pl-12 pr-12 bg-surface-container-high text-on-surface text-xs rounded-xl focus:outline-none focus:ring-2 focus:ring-primary shadow-inner border border-outline-variant/40" placeholder="জেলা, উপজেলা (দিনাজপুর, বগুড়া) বা ফসল লিখে খুঁজুন..." type="text">
+        <a href="../explore_map/code.html" class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-primary text-white rounded-lg flex items-center justify-center shadow-sm"><span class="material-symbols-outlined text-sm">tune</span></a>
+      </div>
+    </section>
+
+    <!-- AI Grow Assistant Weather Alert -->
+    <section class="w-full">
+      <div class="bg-secondary-container/20 border border-secondary/30 rounded-2xl p-4 relative overflow-hidden flex flex-col gap-2">
+        <div class="flex items-center justify-between text-on-secondary-container">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-secondary">psychology</span>
+            <h3 class="font-bold text-xs uppercase tracking-wider text-secondary">প্লটশেয়ার এআই কৃষি সহায়ক বার্তা</h3>
+          </div>
+          <span class="text-[11px] font-bold text-secondary bg-secondary/20 px-2 py-0.5 rounded-full">দিনাজপুর • ২৬°C</span>
+        </div>
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+          <strong>জরুরি বার্তা:</strong> আগামীকাল বিকেলে দিনাজপুরে হালকা বৃষ্টির পূর্বাভাস রয়েছে। অতএব বীরগঞ্জ খেতের বোরো ধানে আজকের সেচ স্থগিত রাখুন।
+        </p>
+        <a href="../grow_assistant/code.html" class="self-start mt-1 px-3 py-1.5 bg-secondary text-white text-xs font-bold rounded-lg shadow-sm flex items-center gap-1">এআই সহায়কের সাথে কথা বলুন →</a>
+      </div>
+    </section>
+
+    <!-- Available Farmlands (চাষযোগ্য কৃষি জমি) -->
+    <section class="flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <div>
+          <h3 class="font-bold text-base text-on-surface">আশেপাশের চাষযোগ্য কৃষি জমি</h3>
+          <p class="text-[11px] text-on-surface-variant">লিজ ও বর্গা চাষের জন্য প্রস্তুত জমি</p>
+        </div>
+        <a href="../explore_map/code.html" class="text-xs font-bold text-primary">সব দেখুন →</a>
+      </div>
+      <div class="flex gap-4 overflow-x-auto pb-2 snap-x hide-scrollbar">
+        <!-- Card 1 -->
+        <div class="flex-shrink-0 w-[270px] snap-start bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden flex flex-col">
+          <div class="h-36 w-full bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMsBPFIE6sgdlb09X4ttUptcHKOhTZTTFPJWpqPChq5BbJ1LRB-GZISGWUB42jKVdb-F3V_w77Wxgon0UyDKFw5Vz054rNz6nPnyx7hF_TyF9KJPcdzGhJ0PfCKh1DaIXcos7PtOrO67QHPb20x_kFgcgdAuApa1-X9DazYvdb5tRnmIzsDp-jd1jXeGm2IjRbatU2oYninWH7IL3nq8VAdyoGMig7QRbmcDi7NX1gMOeSirsn5YgPHg');">
+            <span class="absolute top-2.5 left-2.5 bg-surface/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-xs font-bold text-primary">৫০ শতক (১.৫ বিঘা)</span>
+            <div class="absolute bottom-2 left-2.5 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-white text-[11px]">📍 বীরগঞ্জ, দিনাজপুর</div>
+          </div>
+          <div class="p-3.5 flex flex-col gap-2">
+            <h4 class="font-bold text-sm text-on-surface truncate">৫০ শতক ধানি জমি (গভীর নলকূপ সেচসহ)</h4>
+            <div class="flex gap-1 text-[10px] text-on-surface-variant">
+              <span class="px-2 py-0.5 bg-surface-container rounded">💧 গভীর নলকূপ</span>
+              <span class="px-2 py-0.5 bg-surface-container rounded">🌱 দোআঁশ মাটি</span>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/30">
+              <div class="font-bold text-sm text-primary">৳২৮,০০০ <span class="text-[10px] text-on-surface-variant">/মৌসুম</span></div>
+              <a href="../plot_details/code.html" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-bold">বিস্তারিত</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flex-shrink-0 w-[270px] snap-start bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden flex flex-col">
+          <div class="h-36 w-full bg-cover bg-center relative" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKFBT09x9RLaPGc6X-0HI6k6kbkjsnEjWMCR4M-4Rv0__hj8RwFMQT4yLJapBZ963TsfEhHd7IaXnabl9QPbn17V5BtxR68SS99oi7Z6-b0lFPuLagNnzPvO4Z0PY_N-xUnFgX31EI1bAFu7h8rMxGYNBiUJR0nzKKYp5zEmnAm3XzyZuSPgTofIsrWOLrABSAMWA5MbUN4oON3HKGbkOYGHSFpAS8OpDeEVy4ihSxZFOqdKYjBk_nEQ');">
+            <span class="absolute top-2.5 left-2.5 bg-surface/90 backdrop-blur-sm px-2.5 py-0.5 rounded-full text-xs font-bold text-primary">২ বিঘা (৬৬ শতক)</span>
+            <div class="absolute bottom-2 left-2.5 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-white text-[11px]">📍 শিবগঞ্জ, বগুড়া</div>
+          </div>
+          <div class="p-3.5 flex flex-col gap-2">
+            <h4 class="font-bold text-sm text-on-surface truncate">২ বিঘা সবজি ও আলু চাষের জমি</h4>
+            <div class="flex gap-1 text-[10px] text-on-surface-variant">
+              <span class="px-2 py-0.5 bg-surface-container rounded">💧 খাল পাম্প</span>
+              <span class="px-2 py-0.5 bg-surface-container rounded">🌱 বেলে দোআঁশ</span>
+            </div>
+            <div class="flex items-center justify-between pt-2 border-t border-outline-variant/30">
+              <div class="font-bold text-sm text-primary">৳৪৫,০০০ <span class="text-[10px] text-on-surface-variant">/বছর</span></div>
+              <a href="../plot_details/code.html" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-bold">বিস্তারিত</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Growing Activity (আমার খামার) -->
+    <section class="flex flex-col gap-3">
+      <div class="flex items-center justify-between">
+        <h3 class="font-bold text-base text-on-surface">আপনার চলমান ফসল (আমার খামার)</h3>
+        <a href="../my_plots_dashboard/code.html" class="text-xs font-bold text-primary">বিস্তারিত →</a>
+      </div>
+      <div class="bg-surface-container-high rounded-2xl p-4 shadow-sm flex items-center gap-4 border border-outline-variant/30">
+        <div class="w-14 h-14 rounded-full bg-primary-container flex items-center justify-center text-white text-xl shrink-0 font-bold">
+          🌾
+        </div>
+        <div class="flex-1">
+          <div class="flex justify-between items-center">
+            <h4 class="font-bold text-sm text-on-surface">বোরো ধান (ব্রি-২৮)</h4>
+            <span class="text-xs font-bold text-primary">৪২% সম্পন্ন</span>
+          </div>
+          <p class="text-xs text-on-surface-variant mt-0.5">বীরগঞ্জ মোহনপুর • ৩৮তম দিন (কুশি গজানোর পর্যায়)</p>
+          <div class="w-full h-2 bg-surface-container-highest rounded-full mt-2 overflow-hidden">
+            <div class="h-full bg-primary rounded-full" style="width: 42%"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<nav class="fixed bottom-0 w-full z-50 bg-surface/95 backdrop-blur-xl pb-safe border-t border-outline-variant/30 shadow-[0_-2px_12px_rgba(0,0,0,0.06)]">
+  <div class="flex justify-around items-center h-16 px-4">
+    <a class="flex flex-col items-center text-primary font-bold text-xs" href="../home_dashboard/code.html"><span class="material-symbols-outlined text-2xl">home</span><span>হোম</span></a>
+    <a class="flex flex-col items-center text-on-surface-variant text-xs hover:text-primary" href="../explore_map/code.html"><span class="material-symbols-outlined text-2xl">travel_explore</span><span>জমি খুঁজুন</span></a>
+    <div class="flex flex-col items-center -translate-y-4">
+      <a class="w-13 h-13 p-3 bg-primary text-white rounded-full flex items-center justify-center shadow-lg" href="../list_your_plot/code.html"><span class="material-symbols-outlined text-2xl">add_location_alt</span></a>
+      <span class="text-[11px] font-bold text-primary mt-1">জমি দিন</span>
+    </div>
+    <a class="flex flex-col items-center text-on-surface-variant text-xs hover:text-primary" href="../my_plots_dashboard/code.html"><span class="material-symbols-outlined text-2xl">agriculture</span><span>আমার খামার</span></a>
+    <a class="flex flex-col items-center text-on-surface-variant text-xs hover:text-primary" href="../grow_assistant/code.html"><span class="material-symbols-outlined text-2xl text-secondary">psychology</span><span>সহায়ক</span></a>
+  </div>
+</nav>
+</body></html>

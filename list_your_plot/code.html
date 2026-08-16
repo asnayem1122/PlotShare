@@ -1,0 +1,93 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a4138",
+          "outline": "#8f7066",
+          "surface-container": "#f1ede8",
+          "on-surface": "#1c1c19",
+          "surface-container-high": "#ebe8e3",
+          "primary": "#a43700",
+          "primary-container": "#cd4700",
+          "secondary": "#7e5700",
+          "surface": "#fdf9f4",
+          "surface-container-lowest": "#ffffff"
+        },
+        fontFamily: {
+          sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; font-family: 'Hind Siliguri', sans-serif; } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } .pt-safe { padding-top: env(safe-area-inset-top); } }</style>
+</head><body class="bg-surface font-sans text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../home_dashboard/code.html" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface"><span class="material-symbols-outlined text-lg">arrow_back</span></a>
+      <h1 class="font-bold text-base text-primary">কৃষি জমি তালিকাভুক্ত করুন</h1>
+    </div>
+  </div>
+</header>
+<main class="pt-16 pb-20 bg-surface min-h-screen">
+  <div class="p-4 flex flex-col gap-4">
+    <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+      <div>
+        <label class="block text-xs font-bold text-on-surface mb-1">📍 জমির অবস্থান (জেলা ও উপজেলা):</label>
+        <div class="grid grid-cols-2 gap-2">
+          <select class="bg-surface-container h-10 px-2 rounded-xl text-xs font-medium">
+            <option>দিনাজপুর</option>
+            <option>বগুড়া</option>
+            <option>চাঁপাইনবাবগঞ্জ</option>
+            <option>ময়মনসিংহ</option>
+          </select>
+          <input type="text" placeholder="উপজেলা ও মৌজার নাম..." class="bg-surface-container h-10 px-3 rounded-xl text-xs">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-on-surface mb-1">📐 জমির পরিমাণ ও একক:</label>
+        <div class="grid grid-cols-2 gap-2">
+          <input type="number" placeholder="যেমন: ৫০" class="bg-surface-container h-10 px-3 rounded-xl text-xs">
+          <select class="bg-surface-container h-10 px-2 rounded-xl text-xs font-bold text-primary">
+            <option>শতক (Shotok)</option>
+            <option>বিঘা (Bigha)</option>
+            <option>একর (Acre)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">💧 সেচ ব্যবস্থা:</label>
+          <select class="w-full bg-surface-container h-10 px-2 rounded-xl text-xs">
+            <option>গভীর নলকূপ (ডিপ)</option>
+            <option>শ্যালো নলকূপ</option>
+            <option>খাল/পুকুর পাম্প</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-on-surface mb-1">🌱 মাটির ধরন:</label>
+          <select class="w-full bg-surface-container h-10 px-2 rounded-xl text-xs">
+            <option>দোআঁশ মাটি</option>
+            <option>বেলে দোআঁশ</option>
+            <option>এঁটেল মাটি</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-on-surface mb-1">৳ প্রত্যাশিত লিজ ফি / বর্গা শর্ত:</label>
+        <input type="text" placeholder="যেমন: ৳২৮,০০০ প্রতি মৌসুম অথবা বর্গা ৫০:৫০" class="w-full bg-surface-container h-10 px-3 rounded-xl text-xs">
+      </div>
+
+      <a href="../explore_map/code.html" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-xs text-center shadow-md hover:bg-primary-container">
+        জমি প্রকাশ করুন →
+      </a>
+    </div>
+  </div>
+</main>
+</body></html>

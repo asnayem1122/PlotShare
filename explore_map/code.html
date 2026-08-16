@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a4138",
+          "outline": "#8f7066",
+          "surface-container": "#f1ede8",
+          "on-surface": "#1c1c19",
+          "surface-container-high": "#ebe8e3",
+          "primary": "#a43700",
+          "primary-container": "#cd4700",
+          "secondary": "#7e5700",
+          "secondary-container": "#feb300",
+          "surface": "#fdf9f4",
+          "surface-container-lowest": "#ffffff"
+        },
+        fontFamily: {
+          sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; overscroll-behavior-y: none; font-family: 'Hind Siliguri', sans-serif; } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } .pt-safe { padding-top: env(safe-area-inset-top); } } .hide-scrollbar::-webkit-scrollbar { display: none; } .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }</style>
+</head><body class="bg-surface font-sans text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <a href="../home_dashboard/code.html" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface"><span class="material-symbols-outlined text-lg">arrow_back</span></a>
+      <h1 class="font-bold text-base text-primary">চাষযোগ্য জমি খুঁজুন</h1>
+    </div>
+    <a href="../index.html#explore" class="px-2.5 py-1 rounded-full bg-primary text-white font-bold text-xs">ম্যাপ ভিউ →</a>
+  </div>
+</header>
+<main class="pt-16 pb-32 bg-surface min-h-screen">
+  <div class="p-4 flex flex-col gap-4">
+    <!-- Filter Chips -->
+    <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+      <button class="px-3 py-1.5 bg-primary text-white rounded-full text-xs font-bold shrink-0">সব জমি</button>
+      <button class="px-3 py-1.5 bg-surface-container-high rounded-full text-xs font-medium shrink-0">💧 সেচ সুবিধাযুক্ত</button>
+      <button class="px-3 py-1.5 bg-surface-container-high rounded-full text-xs font-medium shrink-0">🤝 বর্গা চাষ (৫০:৫০)</button>
+      <button class="px-3 py-1.5 bg-surface-container-high rounded-full text-xs font-medium shrink-0">🌾 ধানি জমি</button>
+      <button class="px-3 py-1.5 bg-surface-container-high rounded-full text-xs font-medium shrink-0">🥔 সবজি খেত</button>
+    </div>
+
+    <!-- Map Preview -->
+    <div class="w-full h-44 rounded-2xl overflow-hidden relative shadow-sm border border-outline-variant/40 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5F355FQrILK5lt0Zb1SbZqbRlO2N_cYW1MZx2s68X1BHzCjHqxD9L1vw_er3IyzbbmSHv-TVwkdnPqhpwqpi194GOIX8nE___bRLdETVGpJ9cGf5yVusP0mJl_iGMMyTMp18qq0IgB7xVAZnnuEdDYukSEK-kUZ7ea6sfmuW-v0yzaXFMOXVY126xH1mLSv1GzntqatC5Ou172GgisTK6AzEBjy3eoD6rIiu7wFZXaFu5z49hqcLYbA');">
+      <div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px]"></div>
+      <div class="absolute top-4 left-6 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">🌾 দিনাজপুর (৫০ শতক)</div>
+      <div class="absolute bottom-6 right-8 bg-secondary text-white text-xs font-bold px-3 py-1 rounded-full shadow-md">🥔 বগুড়া (২ বিঘা)</div>
+    </div>
+
+    <!-- Land Cards -->
+    <div class="flex flex-col gap-3">
+      <!-- Card 1 -->
+      <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden flex flex-col">
+        <div class="h-40 w-full relative bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMsBPFIE6sgdlb09X4ttUptcHKOhTZTTFPJWpqPChq5BbJ1LRB-GZISGWUB42jKVdb-F3V_w77Wxgon0UyDKFw5Vz054rNz6nPnyx7hF_TyF9KJPcdzGhJ0PfCKh1DaIXcos7PtOrO67QHPb20x_kFgcgdAuApa1-X9DazYvdb5tRnmIzsDp-jd1jXeGm2IjRbatU2oYninWH7IL3nq8VAdyoGMig7QRbmcDi7NX1gMOeSirsn5YgPHg');">
+          <span class="absolute top-3 left-3 bg-surface/90 px-2.5 py-0.5 rounded-full text-xs font-bold text-primary">৫০ শতক ধানি জমি</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 px-2 py-0.5 rounded text-white text-xs">📍 বীরগঞ্জ, দিনাজপুর</div>
+        </div>
+        <div class="p-4 flex flex-col gap-2">
+          <h3 class="font-bold text-base text-on-surface">৫০ শতক সেচ সুবিধাযুক্ত উর্বর জমি</h3>
+          <p class="text-xs text-on-surface-variant">গভীর নলকূপ • দোআঁশ মাটি • ধান, আলু ও ভুট্টার জন্য সেরা</p>
+          <div class="flex items-center justify-between pt-2 border-t border-outline-variant/30 mt-1">
+            <div class="font-bold text-base text-primary">৳২৮,০০০ <span class="text-xs text-on-surface-variant font-normal">/মৌসুম</span></div>
+            <a href="../plot_details/code.html" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold shadow-sm">জমি দেখুন</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden flex flex-col">
+        <div class="h-40 w-full relative bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCKFBT09x9RLaPGc6X-0HI6k6kbkjsnEjWMCR4M-4Rv0__hj8RwFMQT4yLJapBZ963TsfEhHd7IaXnabl9QPbn17V5BtxR68SS99oi7Z6-b0lFPuLagNnzPvO4Z0PY_N-xUnFgX31EI1bAFu7h8rMxGYNBiUJR0nzKKYp5zEmnAm3XzyZuSPgTofIsrWOLrABSAMWA5MbUN4oON3HKGbkOYGHSFpAS8OpDeEVy4ihSxZFOqdKYjBk_nEQ');">
+          <span class="absolute top-3 left-3 bg-surface/90 px-2.5 py-0.5 rounded-full text-xs font-bold text-primary">২ বিঘা (৬৬ শতক)</span>
+          <div class="absolute bottom-2 left-3 bg-black/60 px-2 py-0.5 rounded text-white text-xs">📍 শিবগঞ্জ, বগুড়া</div>
+        </div>
+        <div class="p-4 flex flex-col gap-2">
+          <h3 class="font-bold text-base text-on-surface">২ বিঘা বেলে-দোআঁশ সবজি জমি</h3>
+          <p class="text-xs text-on-surface-variant">খাল পাম্প • উঁচু জমি • আলু, ফুলকপি ও মরিচের জন্য উপযুক্ত</p>
+          <div class="flex items-center justify-between pt-2 border-t border-outline-variant/30 mt-1">
+            <div class="font-bold text-base text-primary">৳৪৫,০০০ <span class="text-xs text-on-surface-variant font-normal">/বছর</span></div>
+            <a href="../plot_details/code.html" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold shadow-sm">জমি দেখুন</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<nav class="fixed bottom-0 w-full z-50 bg-surface/95 backdrop-blur-xl pb-safe border-t border-outline-variant/30">
+  <div class="flex justify-around items-center h-16 px-4">
+    <a class="flex flex-col items-center text-on-surface-variant text-xs hover:text-primary" href="../home_dashboard/code.html"><span class="material-symbols-outlined text-2xl">home</span><span>হোম</span></a>
+    <a class="flex flex-col items-center text-primary font-bold text-xs" href="../explore_map/code.html"><span class="material-symbols-outlined text-2xl">travel_explore</span><span>জমি খুঁজুন</span></a>
+    <div class="flex flex-col items-center -translate-y-4">
+      <a class="w-13 h-13 p-3 bg-primary text-white rounded-full flex items-center justify-center shadow-lg" href="../list_your_plot/code.html"><span class="material-symbols-outlined text-2xl">add_location_alt</span></a>
+      <span class="text-[11px] font-bold text-primary mt-1">জমি দিন</span>
+    </div>
+    <a class="flex flex-col items-center text-on-surface-variant text-xs hover:text-primary" href="../my_plots_dashboard/code.html"><span class="material-symbols-outlined text-2xl">agriculture</span><span>আমার খামার</span></a>
+    <a class="flex flex-col items-center text-on-surface-variant text-xs hover:text-primary" href="../grow_assistant/code.html"><span class="material-symbols-outlined text-2xl text-secondary">psychology</span><span>সহায়ক</span></a>
+  </div>
+</nav>
+</body></html>

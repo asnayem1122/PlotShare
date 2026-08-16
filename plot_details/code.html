@@ -1,0 +1,122 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a4138",
+          "outline": "#8f7066",
+          "surface-container": "#f1ede8",
+          "on-surface": "#1c1c19",
+          "surface-container-high": "#ebe8e3",
+          "primary": "#a43700",
+          "primary-container": "#cd4700",
+          "secondary": "#7e5700",
+          "secondary-container": "#feb300",
+          "surface": "#fdf9f4",
+          "surface-container-lowest": "#ffffff"
+        },
+        fontFamily: {
+          sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; font-family: 'Hind Siliguri', sans-serif; } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } .pt-safe { padding-top: env(safe-area-inset-top); } }</style>
+</head><body class="bg-surface font-sans text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../explore_map/code.html" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface"><span class="material-symbols-outlined text-lg">arrow_back</span></a>
+      <h1 class="font-bold text-base text-primary">জমির বিবরণ</h1>
+    </div>
+    <a href="../index.html" class="text-xs font-bold text-primary">হোম</a>
+  </div>
+</header>
+<main class="pt-16 pb-28 bg-surface min-h-screen">
+  <div class="flex flex-col w-full">
+    <!-- Image Hero -->
+    <div class="relative w-full h-[260px] bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAMsBPFIE6sgdlb09X4ttUptcHKOhTZTTFPJWpqPChq5BbJ1LRB-GZISGWUB42jKVdb-F3V_w77Wxgon0UyDKFw5Vz054rNz6nPnyx7hF_TyF9KJPcdzGhJ0PfCKh1DaIXcos7PtOrO67QHPb20x_kFgcgdAuApa1-X9DazYvdb5tRnmIzsDp-jd1jXeGm2IjRbatU2oYninWH7IL3nq8VAdyoGMig7QRbmcDi7NX1gMOeSirsn5YgPHg');">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
+      <div class="absolute bottom-4 left-4 right-4 text-white">
+        <span class="bg-primary px-2.5 py-0.5 rounded-full text-xs font-bold">৫০ শতক (১.৫১ বিঘা)</span>
+        <h2 class="text-xl font-bold mt-1">৫০ শতক উর্বর ধানি জমি (গভীর নলকূপ সেচসহ)</h2>
+        <p class="text-xs text-white/90">📍 মোহনপুর, বীরগঞ্জ, দিনাজপুর</p>
+      </div>
+    </div>
+
+    <!-- Details Body -->
+    <div class="p-4 flex flex-col gap-4">
+      <!-- Grid Stats -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <div class="p-3 bg-surface-container rounded-xl flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-primary text-xl">water_drop</span>
+          <div>
+            <p class="text-[11px] text-on-surface-variant">সেচ ব্যবস্থা</p>
+            <p class="text-xs font-bold">গভীর নলকূপ (ডিপ)</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container rounded-xl flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-primary text-xl">grass</span>
+          <div>
+            <p class="text-[11px] text-on-surface-variant">মাটির ধরন</p>
+            <p class="text-xs font-bold">উর্বর দোআঁশ মাটি</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container rounded-xl flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-primary text-xl">terrain</span>
+          <div>
+            <p class="text-[11px] text-on-surface-variant">জমির উচ্চতা</p>
+            <p class="text-xs font-bold">মাঝারি উঁচু (বন্যামুক্ত)</p>
+          </div>
+        </div>
+        <div class="p-3 bg-surface-container rounded-xl flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-primary text-xl">local_shipping</span>
+          <div>
+            <p class="text-[11px] text-on-surface-variant">রাস্তা সংযোগ</p>
+            <p class="text-xs font-bold">পাকা রাস্তা সংলগ্ন</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <h3 class="font-bold text-sm text-on-surface mb-1">জমির বিস্তারিত বিবরণ:</h3>
+        <p class="text-xs text-on-surface-variant leading-relaxed">
+          দিনাজপুরের বীরগঞ্জে অবস্থিত এই জমিটিতে নিজস্ব বিদ্যুৎ সংযোগযুক্ত গভীর নলকূপের মাধ্যমে নিরবচ্ছিন্ন সেচ নিশ্চিত করা যায়। বর্তমান রবি মৌসুমে বোরো ধান বা আলু চাষের জন্য পুরোপুরি প্রস্তুত।
+        </p>
+      </div>
+
+      <!-- Suitable Crops -->
+      <div>
+        <h3 class="font-bold text-sm text-on-surface mb-1.5">উপযুক্ত ফসলসমূহ:</h3>
+        <div class="flex gap-2">
+          <span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-xs font-bold">🌾 বোরো ধান</span>
+          <span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-xs font-bold">🥔 আলু</span>
+          <span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-xs font-bold">🌱 সরিষা</span>
+        </div>
+      </div>
+
+      <!-- Landowner Card -->
+      <div class="bg-surface-container p-4 rounded-2xl flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADqkEMmuCMfXI2UfVnf8ee82dhRgbSPU1VWy4cQtfif-kuqQDD1meM6Id9oUv9haklLjD2PNhnaUmeLP1vh9aZ4_WW4_7M8E32mA_zilyf11LTcbDSIcfKje06-3Yg0hGyfcWOCtdUIzyUlp3NSYNQZh91BXdIdSEQaqdplbEI2XceBOB2n5PiXbNwfyFwrN_30i4TK04T41hQ9e41Cz2uMCubtEyXdtq8pTf6ATJlfhYQGVqp-fmZ_w" class="w-12 h-12 rounded-full object-cover border border-primary">
+          <div>
+            <h4 class="font-bold text-sm text-on-surface">আলহাজ্ব রফিকুল ইসলাম</h4>
+            <p class="text-[11px] text-on-surface-variant">যাচাইকৃত জমির মালিক • বীরগঞ্জ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!-- Fixed Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 p-4 flex items-center justify-between z-40">
+  <div>
+    <span class="text-[11px] text-on-surface-variant">লিজ / বর্গা ফি</span>
+    <div class="text-lg font-bold text-primary">৳২৮,০০০ <span class="text-xs text-on-surface-variant font-normal">/মৌসুম</span></div>
+  </div>
+  <a href="../book_plot/code.html" class="px-6 py-3.5 bg-primary text-white rounded-xl text-sm font-bold shadow-md hover:bg-primary-container">এই জমি চাষের জন্য চান →</a>
+</div>
+</body></html>

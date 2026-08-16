@@ -1,0 +1,1618 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PlotShare — Bangladesh Agricultural Land & Farming Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fdf9f4",
+            "surface-container": "#f1ede8",
+            "surface-container-high": "#ebe8e3",
+            "surface-container-highest": "#e6e2dd",
+            "surface-container-low": "#f7f3ee",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#1c1c19",
+            "on-surface-variant": "#5a4138",
+            "primary": "#a43700",
+            "on-primary": "#ffffff",
+            "primary-container": "#cd4700",
+            "on-primary-container": "#fffbff",
+            "secondary": "#7e5700",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#feb300",
+            "on-secondary-container": "#6a4800",
+            "tertiary": "#914723",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#b05e38",
+            "on-tertiary-container": "#fffbff",
+            "outline": "#8f7066",
+            "outline-variant": "#e3bfb2",
+            "success-leaf": "#2D5A27",
+            "golden-amber": "#FFB300",
+            "harvest-orange": "#E65100",
+            "terracotta": "#A0522D",
+            "deep-earth": "#2C1B12",
+            "rice-cream": "#F9F5F0"
+          },
+          fontFamily: {
+            sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+          },
+          borderRadius: {
+            "xl": "1rem",
+            "2xl": "1.5rem",
+            "3xl": "2rem"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #fdf9f4;
+      color: #1c1c19;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior-y: none;
+      font-family: 'Hind Siliguri', 'Hanken Grotesk', sans-serif;
+    }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom, 20px); }
+    .pt-safe { padding-top: env(safe-area-inset-top, 20px); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Device Frame Toggle */
+    .device-preview-wrapper {
+      max-width: 440px;
+      margin: 0 auto;
+      min-height: 100vh;
+      box-shadow: 0 0 40px rgba(44, 27, 18, 0.12);
+      position: relative;
+      background: #fdf9f4;
+    }
+    .fullscreen-mode .device-preview-wrapper {
+      max-width: 100%;
+      box-shadow: none;
+    }
+    
+    .nav-tab-active {
+      color: #a43700 !important;
+      font-weight: 700;
+    }
+    .nav-tab-active .tab-dot {
+      display: block !important;
+    }
+    
+    /* Subtle animations */
+    .page-fade-in {
+      animation: fadeIn 0.22s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Pulse badge */
+    .pulse-dot {
+      box-shadow: 0 0 0 0 rgba(45, 90, 39, 0.7);
+      animation: pulseGreen 2s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(45, 90, 39, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(45, 90, 39, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(45, 90, 39, 0); }
+    }
+  </style>
+</head>
+<body class="bg-surface-container-high/40 text-on-surface antialiased select-none">
+
+<div class="device-preview-wrapper flex flex-col relative min-h-screen" id="app-root">
+
+  <!-- TOP HEADER (Bilingual + Global Actions) -->
+  <header class="sticky top-0 z-40 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 pt-safe px-4 py-3 flex items-center justify-between shadow-[0_1px_8px_rgba(0,0,0,0.03)]" id="global-header">
+    <div class="flex items-center gap-2.5">
+      <a href="#home" class="flex items-center gap-2" id="header-brand-link">
+        <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-white shadow-sm font-bold text-lg">🌾</div>
+        <div>
+          <h1 class="font-bold text-lg leading-tight text-primary flex items-center gap-1.5">
+            <span id="brand-title">প্লটশেয়ার</span>
+            <span class="text-[10px] bg-secondary-container text-on-secondary-container px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider">BD</span>
+          </h1>
+          <p class="text-[11px] text-on-surface-variant leading-none" id="brand-subtitle">কৃষি জমি ও চাষাবাদ প্ল্যাটফর্ম</p>
+        </div>
+      </a>
+    </div>
+
+    <!-- Right Controls: Language Switcher + Notifications + View Mode -->
+    <div class="flex items-center gap-2">
+      <!-- Language Switcher Button -->
+      <button id="btn-lang-toggle" onclick="toggleLanguage()" class="px-2.5 py-1 rounded-full bg-surface-container-highest text-primary font-bold text-xs border border-outline-variant/40 flex items-center gap-1 hover:bg-primary hover:text-white transition-all shadow-sm">
+        <span class="material-symbols-outlined text-[15px]">language</span>
+        <span id="lang-btn-label">English</span>
+      </button>
+
+      <!-- View Mode (Mobile Frame vs Wide) -->
+      <button onclick="toggleDeviceView()" class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors" title="Toggle Layout View">
+        <span class="material-symbols-outlined text-[18px]">devices</span>
+      </button>
+
+      <!-- Notifications -->
+      <a href="#notifications" class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant relative hover:text-primary transition-colors">
+        <span class="material-symbols-outlined text-[20px]">notifications</span>
+        <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-primary ring-2 ring-surface"></span>
+      </a>
+    </div>
+  </header>
+
+  <!-- SCREEN VIEWPORT CONTAINER -->
+  <main class="flex-1 w-full pb-24 overflow-x-hidden relative" id="screen-container">
+    <!-- Dynamically loaded screen content will be injected here -->
+  </main>
+
+  <!-- BOTTOM NAVIGATION BAR -->
+  <nav class="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-xl border-t border-outline-variant/30 pb-safe shadow-[0_-2px_12px_rgba(0,0,0,0.06)]" id="global-bottom-nav">
+    <div class="max-w-[440px] mx-auto flex items-center justify-around h-16 px-2 relative" id="bottom-nav-inner">
+      
+      <!-- 1. Home -->
+      <a href="#home" class="nav-tab flex flex-col items-center justify-center w-14 h-full text-on-surface-variant transition-all" data-target="home">
+        <span class="material-symbols-outlined text-2xl">home</span>
+        <span class="text-[11px] font-medium mt-0.5" data-i18n="home">হোম</span>
+        <span class="tab-dot hidden w-1.5 h-1.5 bg-primary rounded-full mt-0.5"></span>
+      </a>
+
+      <!-- 2. Explore Farmlands -->
+      <a href="#explore" class="nav-tab flex flex-col items-center justify-center w-14 h-full text-on-surface-variant transition-all" data-target="explore">
+        <span class="material-symbols-outlined text-2xl">travel_explore</span>
+        <span class="text-[11px] font-medium mt-0.5" data-i18n="explore">জমি খুঁজুন</span>
+        <span class="tab-dot hidden w-1.5 h-1.5 bg-primary rounded-full mt-0.5"></span>
+      </a>
+
+      <!-- Center Floating Action: List Land (+ জমি দিন) -->
+      <div class="flex flex-col items-center justify-center -translate-y-4">
+        <a href="#list-plot" class="w-13 h-13 p-3 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 hover:scale-105 active:scale-95 transition-transform" title="List Farmland">
+          <span class="material-symbols-outlined text-3xl font-bold">add_location_alt</span>
+        </a>
+        <span class="text-[11px] font-bold text-primary mt-1" data-i18n="list_plot">জমি দিন</span>
+      </div>
+
+      <!-- 3. My Farm -->
+      <a href="#my-farm" class="nav-tab flex flex-col items-center justify-center w-14 h-full text-on-surface-variant transition-all" data-target="my-farm">
+        <span class="material-symbols-outlined text-2xl">agriculture</span>
+        <span class="text-[11px] font-medium mt-0.5" data-i18n="my_farm">আমার খামার</span>
+        <span class="tab-dot hidden w-1.5 h-1.5 bg-primary rounded-full mt-0.5"></span>
+      </a>
+
+      <!-- 4. AI Assistant -->
+      <a href="#grow-assistant" class="nav-tab flex flex-col items-center justify-center w-14 h-full text-on-surface-variant transition-all" data-target="grow-assistant">
+        <span class="material-symbols-outlined text-2xl text-secondary">psychology</span>
+        <span class="text-[11px] font-medium mt-0.5" data-i18n="ai_assistant">কৃষি সহায়ক</span>
+        <span class="tab-dot hidden w-1.5 h-1.5 bg-primary rounded-full mt-0.5"></span>
+      </a>
+
+    </div>
+  </nav>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 pointer-events-none flex flex-col gap-2 w-[90%] max-w-[380px]"></div>
+
+</div>
+
+<!-- APPLICATION CORE SCRIPTS -->
+<script type="module">
+  import { BANGLADESH_LOCATIONS, AREA_CONVERTER, SEASONS, CROPS, INITIAL_PLOTS, CURRENT_FARM_DATA, DICTIONARY } from './src/data/bangladeshData.js';
+
+  // Global State Store
+  window.PlotShareApp = {
+    lang: localStorage.getItem('plotshare_lang') || 'bn',
+    currentRoute: 'home',
+    plots: JSON.parse(localStorage.getItem('plotshare_plots')) || INITIAL_PLOTS,
+    farmData: JSON.parse(localStorage.getItem('plotshare_farm')) || CURRENT_FARM_DATA,
+    savedFavorites: JSON.parse(localStorage.getItem('plotshare_favs')) || ['plot-101'],
+    selectedPlot: null,
+    locations: BANGLADESH_LOCATIONS,
+    converter: AREA_CONVERTER,
+    crops: CROPS,
+    seasons: SEASONS,
+    dict: DICTIONARY,
+    chatMessages: [
+      { sender: 'ai', text_bn: 'আসসালামু আলাইকুম! আমি প্লটশেয়ার এআই কৃষি সহায়ক। আপনার জমি, সার প্রয়োগ, ফসলের রোগ বা আবহাওয়া সংক্রান্ত যেকোনো প্রশ্ন করতে পারেন।', text_en: 'Greetings! I am the PlotShare AI Farm Assistant. Ask me anything about crop planning, fertilizer, pest control, or weather guidance!' }
+    ]
+  };
+
+  // Language Toggle
+  window.toggleLanguage = function() {
+    window.PlotShareApp.lang = window.PlotShareApp.lang === 'bn' ? 'en' : 'bn';
+    localStorage.setItem('plotshare_lang', window.PlotShareApp.lang);
+    updateGlobalUI();
+    renderCurrentRoute();
+    showToast(window.PlotShareApp.lang === 'bn' ? 'ভাষা পরিবর্তন করা হয়েছে: বাংলা' : 'Language switched to English', 'info');
+  };
+
+  // Device Frame Toggle
+  window.toggleDeviceView = function() {
+    document.body.classList.toggle('fullscreen-mode');
+    const isFull = document.body.classList.contains('fullscreen-mode');
+    showToast(isFull ? (window.PlotShareApp.lang === 'bn' ? 'ফুলস্ক্রিন ভিউ মোড' : 'Fullscreen View Mode') : (window.PlotShareApp.lang === 'bn' ? 'মোবাইল ফ্রেম ভিউ মোড' : 'Mobile Frame Preview Mode'), 'info');
+  };
+
+  // Toast Function
+  window.showToast = function(msg, type = 'success') {
+    const container = document.getElementById('toast-container');
+    const toast = document.createElement('div');
+    const colors = type === 'success' ? 'bg-success-leaf text-white' : type === 'info' ? 'bg-secondary text-white' : 'bg-primary text-white';
+    toast.className = `${colors} px-4 py-2.5 rounded-xl shadow-lg text-sm font-medium flex items-center gap-2 transform transition-all duration-300 translate-y-[-10px] opacity-0 pointer-events-auto`;
+    toast.innerHTML = `<span class="material-symbols-outlined text-lg">${type === 'success' ? 'check_circle' : 'info'}</span><span>${msg}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => { toast.classList.remove('translate-y-[-10px]', 'opacity-0'); }, 10);
+    setTimeout(() => {
+      toast.classList.add('opacity-0', 'translate-y-[-10px]');
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  };
+
+  // Global UI Update
+  function updateGlobalUI() {
+    const lang = window.PlotShareApp.lang;
+    const d = DICTIONARY[lang];
+    document.documentElement.lang = lang;
+
+    // Header labels
+    document.getElementById('brand-title').textContent = d.app_name;
+    document.getElementById('brand-subtitle').textContent = lang === 'bn' ? 'কৃষি জমি ও চাষাবাদ প্ল্যাটফর্ম' : 'Agricultural Land & Farm Platform';
+    document.getElementById('lang-btn-label').textContent = d.switch_lang;
+
+    // Bottom Navigation Labels
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (d[key]) el.textContent = d[key];
+    });
+  }
+
+  // ROUTER
+  function handleRoute() {
+    const hash = window.location.hash.slice(1) || 'home';
+    const parts = hash.split('/');
+    const mainRoute = parts[0];
+    const param = parts[1];
+
+    window.PlotShareApp.currentRoute = mainRoute;
+    if (mainRoute === 'plot-details' && param) {
+      window.PlotShareApp.selectedPlot = window.PlotShareApp.plots.find(p => p.id === param) || window.PlotShareApp.plots[0];
+    }
+
+    // Update active nav tab
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      const target = tab.getAttribute('data-target');
+      if (target === mainRoute) {
+        tab.classList.add('nav-tab-active');
+      } else {
+        tab.classList.remove('nav-tab-active');
+      }
+    });
+
+    renderCurrentRoute();
+    window.scrollTo(0, 0);
+  }
+
+  window.addEventListener('hashchange', handleRoute);
+
+  // RENDER ENGINE
+  function renderCurrentRoute() {
+    const container = document.getElementById('screen-container');
+    const route = window.PlotShareApp.currentRoute;
+    const lang = window.PlotShareApp.lang;
+    const isBn = lang === 'bn';
+
+    container.className = 'flex-1 w-full pb-24 overflow-x-hidden relative page-fade-in';
+
+    switch (route) {
+      case 'splash':
+        container.innerHTML = renderSplashScreen(isBn);
+        break;
+      case 'home':
+        container.innerHTML = renderHomeScreen(isBn);
+        break;
+      case 'explore':
+        container.innerHTML = renderExploreScreen(isBn);
+        break;
+      case 'plot-details':
+        container.innerHTML = renderPlotDetailsScreen(isBn);
+        break;
+      case 'book-plot':
+        container.innerHTML = renderBookPlotScreen(isBn);
+        break;
+      case 'list-plot':
+        container.innerHTML = renderListPlotScreen(isBn);
+        break;
+      case 'my-farm':
+        container.innerHTML = renderMyFarmScreen(isBn);
+        break;
+      case 'grow-assistant':
+        container.innerHTML = renderGrowAssistantScreen(isBn);
+        break;
+      case 'farm-planner':
+        container.innerHTML = renderFarmPlannerScreen(isBn);
+        break;
+      case 'crop-planner':
+        container.innerHTML = renderCropPlannerScreen(isBn);
+        break;
+      case 'harvest-tracker':
+        container.innerHTML = renderHarvestTrackerScreen(isBn);
+        break;
+      case 'community':
+        container.innerHTML = renderCommunityScreen(isBn);
+        break;
+      case 'marketplace':
+        container.innerHTML = renderMarketplaceScreen(isBn);
+        break;
+      case 'notifications':
+        container.innerHTML = renderNotificationsScreen(isBn);
+        break;
+      case 'profile':
+        container.innerHTML = renderProfileScreen(isBn);
+        break;
+      default:
+        container.innerHTML = renderHomeScreen(isBn);
+        break;
+    }
+
+    attachScreenEventHandlers();
+  }
+
+  // 1. HOME SCREEN
+  function renderHomeScreen(isBn) {
+    const farm = window.PlotShareApp.farmData;
+    const plots = window.PlotShareApp.plots;
+    const activeCrop = farm.active_crops[0];
+
+    return `
+      <div class="px-4 py-4 flex flex-col gap-5">
+        
+        <!-- Welcome Hero & Location Search -->
+        <div class="bg-gradient-to-br from-surface-container-high via-surface-container to-surface-container-lowest p-4 rounded-2xl shadow-sm border border-outline-variant/40">
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <span class="text-xs font-semibold text-primary uppercase tracking-wider">${isBn ? 'স্বাগতম' : 'Welcome'}</span>
+              <h2 class="text-xl font-bold text-on-surface">${isBn ? farm.farmer_name_bn : farm.farmer_name_en} 👋</h2>
+            </div>
+            <div class="flex items-center gap-1 bg-success-leaf/10 text-success-leaf px-2.5 py-1 rounded-full text-xs font-bold">
+              <span class="material-symbols-outlined text-[15px]">verified</span>
+              <span>${isBn ? 'যাচাইকৃত কৃষক' : 'Verified Farmer'}</span>
+            </div>
+          </div>
+
+          <!-- District / Upazila Search Box -->
+          <div class="relative mt-2">
+            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline">search</span>
+            <input id="home-search-input" type="text" placeholder="${isBn ? 'জেলা, উপজেলা (যেমন: দিনাজপুর, বগুড়া) বা ফসল লিখে খুঁজুন...' : 'Search by District, Upazila (e.g. Dinajpur, Bogura) or crop...'}" class="w-full bg-surface-container-lowest h-12 pl-11 pr-24 rounded-xl border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary text-sm shadow-inner">
+            <button onclick="executeSearch()" class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary text-white px-3 py-2 rounded-lg text-xs font-bold flex items-center gap-1 shadow-sm">
+              <span class="material-symbols-outlined text-sm">filter_alt</span>
+              <span>${isBn ? 'খুঁজুন' : 'Search'}</span>
+            </button>
+          </div>
+
+          <!-- Quick District Chips -->
+          <div class="flex gap-2 mt-3 overflow-x-auto hide-scrollbar pb-1">
+            <button onclick="quickFilterDistrict('dinajpur')" class="flex-shrink-0 px-3 py-1 bg-surface-container-highest rounded-full text-xs font-medium hover:bg-primary hover:text-white transition-colors">🌾 ${isBn ? 'দিনাজপুর' : 'Dinajpur'}</button>
+            <button onclick="quickFilterDistrict('bogura')" class="flex-shrink-0 px-3 py-1 bg-surface-container-highest rounded-full text-xs font-medium hover:bg-primary hover:text-white transition-colors">🥔 ${isBn ? 'বগুড়া' : 'Bogura'}</button>
+            <button onclick="quickFilterDistrict('chapainawabganj')" class="flex-shrink-0 px-3 py-1 bg-surface-container-highest rounded-full text-xs font-medium hover:bg-primary hover:text-white transition-colors">🥭 ${isBn ? 'চাঁপাইনবাবগঞ্জ' : 'Chapainawabganj'}</button>
+            <button onclick="quickFilterDistrict('mymensingh')" class="flex-shrink-0 px-3 py-1 bg-surface-container-highest rounded-full text-xs font-medium hover:bg-primary hover:text-white transition-colors">🌱 ${isBn ? 'ময়মনসিংহ' : 'Mymensingh'}</button>
+          </div>
+        </div>
+
+        <!-- Weather & Irrigation AI Advisory Alert -->
+        <div class="bg-secondary-container/20 border border-secondary/30 rounded-2xl p-4 relative overflow-hidden shadow-sm">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-white shrink-0 shadow-md">
+              <span class="material-symbols-outlined text-xl">cloudy_snowing</span>
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-sm text-on-secondary-container flex items-center gap-1.5">
+                  <span>${isBn ? 'আবহাওয়া ও সেচ বার্তা (দিনাজপুর)' : 'Weather & Irrigation Alert (Dinajpur)'}</span>
+                </h3>
+                <span class="text-[11px] font-bold text-secondary bg-secondary/15 px-2 py-0.5 rounded-full">২৬°C • ৬৫% আর্দ্রতা</span>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1.5 leading-relaxed">
+                <strong>${isBn ? 'জরুরি পরামর্শ:' : 'AI Advisory:'}</strong> ${isBn ? 'আগামীকাল বিকেলে দিনাজপুরে হালকা থেকে মাঝারি বৃষ্টির সম্ভাবনা রয়েছে। অতএব বোরো ধানের জমিতে আজকের বাড়তি সেচ স্থগিত রাখুন এবং বৃষ্টির পানি ধরে রাখতে আইল মেরামত করুন।' : 'Moderate rain expected tomorrow afternoon in Dinajpur. Please suspend extra irrigation for your Boro rice field and prepare boundary bunds to conserve rainwater.'}
+              </p>
+              <div class="mt-2.5 flex items-center gap-3">
+                <a href="#grow-assistant" class="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline">
+                  <span>${isBn ? 'এআই সহায়ককে আরও জিজ্ঞাসা করুন' : 'Ask AI Assistant'}</span>
+                  <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- My Active Crop Progress (আমার খামার) -->
+        <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-xl">psychiatry</span>
+              <h3 class="font-bold text-sm text-on-surface">${isBn ? 'আপনার সক্রিয় ফসল (আমার খামার)' : 'Your Active Crop (My Farm)'}</h3>
+            </div>
+            <a href="#my-farm" class="text-xs font-bold text-primary hover:underline">${isBn ? 'সকল খামার →' : 'View Farm →'}</a>
+          </div>
+
+          <div class="flex items-center gap-4 bg-surface-container-low p-3.5 rounded-xl border border-outline-variant/30">
+            <!-- Progress Ring -->
+            <div class="relative w-16 h-16 shrink-0 flex items-center justify-center">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 36 36">
+                <path class="text-surface-container-high" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+                <path class="text-primary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="${activeCrop.progress_pct}, 100" stroke-linecap="round" stroke-width="3.5"></path>
+              </svg>
+              <div class="absolute text-center">
+                <span class="text-xs font-bold text-primary">${isBn ? AREA_CONVERTER.toBanglaNum(activeCrop.progress_pct) : activeCrop.progress_pct}%</span>
+              </div>
+            </div>
+
+            <!-- Details -->
+            <div class="flex-1 min-w-0">
+              <div class="flex justify-between items-start">
+                <h4 class="font-bold text-sm text-on-surface truncate">${isBn ? activeCrop.crop_name_bn : activeCrop.crop_name_en}</h4>
+                <span class="text-[11px] bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-md shrink-0">${isBn ? AREA_CONVERTER.toBanglaNum(activeCrop.area_shotok) : activeCrop.area_shotok} ${isBn ? 'শতক' : 'Shotok'}</span>
+              </div>
+              <p class="text-[11px] text-on-surface-variant mt-0.5 truncate">📍 ${isBn ? activeCrop.plot_name_bn : activeCrop.plot_name_en}</p>
+              <p class="text-xs text-secondary font-semibold mt-1 flex items-center gap-1">
+                <span class="material-symbols-outlined text-sm">schedule</span>
+                <span>${isBn ? 'পরবর্তী কাজ: ২য় কিস্তির ইউরিয়া প্রয়োগ' : 'Next Task: 2nd Urea application'}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Available Agricultural Lands (আশেপাশের কৃষি জমি) -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <div>
+              <h3 class="font-bold text-base text-on-surface">${isBn ? 'চাষের জন্য প্রস্তুত কৃষি জমি' : 'Agricultural Lands Ready for Farming'}</h3>
+              <p class="text-xs text-on-surface-variant">${isBn ? 'লিজ বা বর্গা চাষের জন্য উপলব্ধ জমি' : 'Available for seasonal lease or sharecropping'}</p>
+            </div>
+            <a href="#explore" class="text-xs font-bold text-primary hover:underline">${isBn ? 'সব দেখুন →' : 'View all →'}</a>
+          </div>
+
+          <!-- Horizontal Land Cards Carousel -->
+          <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x">
+            ${plots.map(plot => `
+              <div class="flex-shrink-0 w-[270px] snap-start bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden flex flex-col hover:shadow-md transition-shadow">
+                <div class="h-36 w-full relative bg-cover bg-center" style="background-image: url('${plot.images[0]}')">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+                  <span class="absolute top-2.5 left-2.5 bg-surface/90 backdrop-blur-md px-2 py-0.5 rounded-full text-[11px] font-bold text-primary flex items-center gap-1 shadow-sm">
+                    <span class="material-symbols-outlined text-[13px]">landscape</span>
+                    ${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_shotok) : plot.area_shotok} ${isBn ? 'শতক' : 'Shotok'} (${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_bigha) : plot.area_bigha} ${isBn ? 'বিঘা' : 'Bigha'})
+                  </span>
+                  <button onclick="toggleFav('${plot.id}')" class="absolute top-2.5 right-2.5 w-7 h-7 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                    <span class="material-symbols-outlined text-sm">${window.PlotShareApp.savedFavorites.includes(plot.id) ? 'favorite' : 'favorite_border'}</span>
+                  </button>
+                  <div class="absolute bottom-2 left-2.5 text-white text-xs flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[14px]">location_on</span>
+                    <span class="font-medium">${isBn ? plot.location_label_bn : plot.location_label_en}</span>
+                  </div>
+                </div>
+
+                <div class="p-3.5 flex flex-col flex-1 justify-between gap-2">
+                  <div>
+                    <h4 class="font-bold text-sm text-on-surface line-clamp-1">${isBn ? plot.title_bn : plot.title_en}</h4>
+                    <div class="flex flex-wrap gap-1 mt-1.5">
+                      <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant font-medium">💧 ${isBn ? plot.irrigation_bn.split('(')[0] : plot.irrigation_en.split('(')[0]}</span>
+                      <span class="bg-surface-container px-2 py-0.5 rounded text-[10px] text-on-surface-variant font-medium">🌱 ${isBn ? plot.soil_type_bn.split('(')[0] : plot.soil_type_en.split('(')[0]}</span>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-between pt-2 border-t border-outline-variant/30 mt-1">
+                    <div>
+                      <span class="text-[10px] text-on-surface-variant">${isBn ? plot.terms_type_bn : plot.terms_type_en}</span>
+                      <div class="text-sm font-bold text-primary leading-none">
+                        ৳${isBn ? AREA_CONVERTER.toBanglaNum(plot.price_bdt.toLocaleString('en-IN')) : plot.price_bdt.toLocaleString('en-IN')}
+                        <span class="text-[10px] text-on-surface-variant font-normal">${isBn ? plot.price_unit_bn : plot.price_unit_en}</span>
+                      </div>
+                    </div>
+                    <a href="#plot-details/${plot.id}" class="px-3 py-1.5 bg-primary text-white rounded-xl text-xs font-bold hover:bg-primary-container transition-colors shadow-sm">
+                      ${isBn ? 'বিস্তারিত' : 'Details'}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <!-- Quick Access Ecosystem Cards -->
+        <div class="grid grid-cols-2 gap-3">
+          <a href="#farm-planner" class="bg-surface-container-high/60 p-3.5 rounded-2xl border border-outline-variant/40 flex flex-col gap-2 hover:bg-surface-container-high transition-colors">
+            <div class="w-9 h-9 rounded-xl bg-primary-container text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-xl">calculate</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-xs text-on-surface">${isBn ? 'এআই খামার পরিকল্পনা' : 'AI Farm Planner'}</h4>
+              <p class="text-[11px] text-on-surface-variant mt-0.5">${isBn ? 'খরচ, সার ও ফলন হিসাব' : 'Cost & yield estimation'}</p>
+            </div>
+          </a>
+
+          <a href="#crop-planner" class="bg-surface-container-high/60 p-3.5 rounded-2xl border border-outline-variant/40 flex flex-col gap-2 hover:bg-surface-container-high transition-colors">
+            <div class="w-9 h-9 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-xl">calendar_month</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-xs text-on-surface">${isBn ? 'কৃষি ক্যালেন্ডার' : 'Crop Calendar'}</h4>
+              <p class="text-[11px] text-on-surface-variant mt-0.5">${isBn ? 'মৌসুম ও রোপণ সূচি' : 'Seasons & planting schedule'}</p>
+            </div>
+          </a>
+
+          <a href="#marketplace" class="bg-surface-container-high/60 p-3.5 rounded-2xl border border-outline-variant/40 flex flex-col gap-2 hover:bg-surface-container-high transition-colors">
+            <div class="w-9 h-9 rounded-xl bg-tertiary-container text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-xl">storefront</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-xs text-on-surface">${isBn ? 'ফসল বাজারদর' : 'Produce Market'}</h4>
+              <p class="text-[11px] text-on-surface-variant mt-0.5">${isBn ? 'পাইকারি বেচাকেনা' : 'Direct crop trading'}</p>
+            </div>
+          </a>
+
+          <a href="#community" class="bg-surface-container-high/60 p-3.5 rounded-2xl border border-outline-variant/40 flex flex-col gap-2 hover:bg-surface-container-high transition-colors">
+            <div class="w-9 h-9 rounded-xl bg-success-leaf text-white flex items-center justify-center shadow-sm">
+              <span class="material-symbols-outlined text-xl">groups</span>
+            </div>
+            <div>
+              <h4 class="font-bold text-xs text-on-surface">${isBn ? 'কৃষক কমিউনিটি' : 'Farmer Network'}</h4>
+              <p class="text-[11px] text-on-surface-variant mt-0.5">${isBn ? 'অভিজ্ঞ চাষী ও পরামর্শ' : 'Tips, tractors & mentors'}</p>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    `;
+  }
+
+  // 2. EXPLORE SCREEN
+  function renderExploreScreen(isBn) {
+    const plots = window.PlotShareApp.plots;
+    return `
+      <div class="px-4 py-3 flex flex-col gap-4">
+        
+        <!-- Header & Search -->
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-on-surface">${isBn ? 'চাষযোগ্য কৃষি জমি খুঁজুন' : 'Explore Agricultural Farmlands'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'বাংলাদেশজুড়ে উপলব্ধ ধানি জমি, সবজি খেত ও বাগান' : 'Available farmlands, paddy fields & orchards across Bangladesh'}</p>
+          </div>
+          <div class="flex bg-surface-container rounded-lg p-1 text-xs">
+            <button class="px-3 py-1 bg-surface rounded-md font-bold text-primary shadow-sm">${isBn ? 'তালিকা' : 'List'}</button>
+            <button class="px-3 py-1 text-on-surface-variant hover:text-primary font-medium">${isBn ? 'ম্যাপ' : 'Map'}</button>
+          </div>
+        </div>
+
+        <!-- Filter Chips -->
+        <div class="flex gap-2 overflow-x-auto hide-scrollbar pb-1">
+          <button class="flex-shrink-0 px-3 py-1.5 bg-primary text-white rounded-full text-xs font-bold shadow-sm flex items-center gap-1">
+            <span>${isBn ? 'সব জমি' : 'All Lands'}</span>
+          </button>
+          <button class="flex-shrink-0 px-3 py-1.5 bg-surface-container-highest rounded-full text-xs font-medium text-on-surface hover:bg-surface-container-high flex items-center gap-1">
+            <span>💧 ${isBn ? 'সেচ সুবিধাযুক্ত' : 'With Irrigation'}</span>
+          </button>
+          <button class="flex-shrink-0 px-3 py-1.5 bg-surface-container-highest rounded-full text-xs font-medium text-on-surface hover:bg-surface-container-high flex items-center gap-1">
+            <span>🤝 ${isBn ? 'বর্গা চাষ (৫০:৫০)' : 'Sharecropping'}</span>
+          </button>
+          <button class="flex-shrink-0 px-3 py-1.5 bg-surface-container-highest rounded-full text-xs font-medium text-on-surface hover:bg-surface-container-high flex items-center gap-1">
+            <span>🌾 ${isBn ? 'ধানি জমি' : 'Paddy Fields'}</span>
+          </button>
+        </div>
+
+        <!-- Simulated Map Preview Card -->
+        <div class="w-full h-36 bg-surface-container-highest rounded-2xl border border-outline-variant/40 relative overflow-hidden flex items-center justify-center shadow-sm" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5F355FQrILK5lt0Zb1SbZqbRlO2N_cYW1MZx2s68X1BHzCjHqxD9L1vw_er3IyzbbmSHv-TVwkdnPqhpwqpi194GOIX8nE___bRLdETVGpJ9cGf5yVusP0mJl_iGMMyTMp18qq0IgB7xVAZnnuEdDYukSEK-kUZ7ea6sfmuW-v0yzaXFMOXVY126xH1mLSv1GzntqatC5Ou172GgisTK6AzEBjy3eoD6rIiu7wFZXaFu5z49hqcLYbA'); background-size: cover;">
+          <div class="absolute inset-0 bg-primary/20 backdrop-blur-[1px]"></div>
+          
+          <!-- Map Marker 1 (Dinajpur) -->
+          <div class="absolute top-6 left-12 bg-primary text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
+            <span>🌾 ৫০ শতক • ৳২৮হাজার</span>
+          </div>
+
+          <!-- Map Marker 2 (Bogura) -->
+          <div class="absolute bottom-8 right-12 bg-secondary text-white text-[11px] font-bold px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1">
+            <span>🥔 ২ বিঘা • বগুড়া</span>
+          </div>
+          
+          <div class="absolute bottom-2 left-2 bg-surface/90 backdrop-blur-md px-2.5 py-1 rounded-lg text-[10px] text-primary font-bold">
+            🗺️ ${isBn ? 'দিনাজপুর • বগুড়া • চাঁপাইনবাবগঞ্জ • ময়মনসিংহ' : 'Dinajpur • Bogura • Chapainawabganj • Mymensingh'}
+          </div>
+        </div>
+
+        <!-- Land Listings List -->
+        <div class="flex flex-col gap-3.5">
+          ${plots.map(plot => `
+            <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden flex flex-col hover:border-primary/50 transition-colors">
+              <div class="h-44 w-full relative bg-cover bg-center" style="background-image: url('${plot.images[0]}')">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20"></div>
+                <div class="absolute top-3 left-3 flex gap-2">
+                  <span class="bg-surface/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-primary">
+                    ${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_shotok) : plot.area_shotok} ${isBn ? 'শতক' : 'Shotok'} (${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_bigha) : plot.area_bigha} ${isBn ? 'বিঘা' : 'Bigha'})
+                  </span>
+                  <span class="bg-secondary-container/90 text-on-secondary-container px-2 py-1 rounded-full text-[11px] font-bold">
+                    ${isBn ? plot.terms_type_bn : plot.terms_type_en}
+                  </span>
+                </div>
+                <button onclick="toggleFav('${plot.id}')" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center text-primary shadow-sm">
+                  <span class="material-symbols-outlined text-base">${window.PlotShareApp.savedFavorites.includes(plot.id) ? 'favorite' : 'favorite_border'}</span>
+                </button>
+                <div class="absolute bottom-3 left-3 text-white">
+                  <p class="text-xs font-medium opacity-90">📍 ${isBn ? plot.village_bn : plot.village_en}</p>
+                  <h3 class="text-base font-bold">${isBn ? plot.title_bn : plot.title_en}</h3>
+                </div>
+              </div>
+
+              <div class="p-4 flex flex-col gap-3">
+                <div class="grid grid-cols-2 gap-2 text-xs text-on-surface-variant">
+                  <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-primary">water_drop</span>
+                    <span>${isBn ? plot.irrigation_bn.split('(')[0] : plot.irrigation_en.split('(')[0]}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-primary">grass</span>
+                    <span>${isBn ? plot.soil_type_bn.split('(')[0] : plot.soil_type_en.split('(')[0]}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-primary">alt_route</span>
+                    <span>${isBn ? plot.road_access_bn.split('(')[0] : plot.road_access_en.split('(')[0]}</span>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-primary">nutrition</span>
+                    <span>${isBn ? plot.suitable_crops_bn.slice(0, 2).join(', ') : plot.suitable_crops_en.slice(0, 2).join(', ')}</span>
+                  </div>
+                </div>
+
+                <div class="flex items-center justify-between pt-3 border-t border-outline-variant/30">
+                  <div>
+                    <span class="text-[11px] text-on-surface-variant">${isBn ? 'চুক্তি ফি / মূল্য' : 'Agreement Fee / Price'}</span>
+                    <div class="text-base font-bold text-primary">
+                      ৳${isBn ? AREA_CONVERTER.toBanglaNum(plot.price_bdt.toLocaleString('en-IN')) : plot.price_bdt.toLocaleString('en-IN')}
+                      <span class="text-xs text-on-surface-variant font-normal">${isBn ? plot.price_unit_bn : plot.price_unit_en}</span>
+                    </div>
+                  </div>
+
+                  <div class="flex gap-2">
+                    <a href="#book-plot/${plot.id}" class="px-3 py-2 bg-secondary text-white rounded-xl text-xs font-bold hover:bg-secondary/90 transition-colors shadow-sm flex items-center gap-1">
+                      <span>${isBn ? 'বর্গা প্রস্তাব' : 'Request Barga'}</span>
+                    </a>
+                    <a href="#plot-details/${plot.id}" class="px-4 py-2 bg-primary text-white rounded-xl text-xs font-bold hover:bg-primary-container transition-colors shadow-sm">
+                      ${isBn ? 'জমি দেখুন' : 'View Land'}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+      </div>
+    `;
+  }
+
+  // 3. PLOT DETAILS SCREEN
+  function renderPlotDetailsScreen(isBn) {
+    const plot = window.PlotShareApp.selectedPlot || window.PlotShareApp.plots[0];
+    return `
+      <div class="flex flex-col w-full pb-20">
+        
+        <!-- Image Header Slider -->
+        <div class="relative w-full h-[280px] bg-black">
+          <img src="${plot.images[0]}" class="w-full h-full object-cover opacity-95" alt="Agricultural Land">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+          
+          <button onclick="history.back()" class="absolute top-4 left-4 w-9 h-9 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center text-on-surface shadow-md">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+          </button>
+          
+          <button onclick="toggleFav('${plot.id}')" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-surface/80 backdrop-blur-md flex items-center justify-center text-primary shadow-md">
+            <span class="material-symbols-outlined text-lg">${window.PlotShareApp.savedFavorites.includes(plot.id) ? 'favorite' : 'favorite_border'}</span>
+          </button>
+
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="bg-primary px-2.5 py-0.5 rounded-full text-xs font-bold">${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_shotok) : plot.area_shotok} ${isBn ? 'শতক' : 'Shotok'} (${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_bigha) : plot.area_bigha} ${isBn ? 'বিঘা' : 'Bigha'})</span>
+              <span class="bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full text-xs font-bold">${isBn ? plot.terms_type_bn : plot.terms_type_en}</span>
+            </div>
+            <h2 class="text-xl font-bold leading-tight">${isBn ? plot.title_bn : plot.title_en}</h2>
+            <p class="text-xs text-white/90 mt-0.5 flex items-center gap-1">
+              <span class="material-symbols-outlined text-sm">location_on</span>
+              <span>${isBn ? plot.village_bn : plot.village_en}, ${isBn ? plot.location_label_bn : plot.location_label_en}</span>
+            </p>
+          </div>
+        </div>
+
+        <div class="p-4 flex flex-col gap-5">
+          
+          <!-- Key Agricultural Attributes Grid -->
+          <div class="grid grid-cols-2 gap-2.5">
+            <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-xl">water_drop</span>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[11px] text-on-surface-variant font-medium">${isBn ? 'সেচ সুবিধা' : 'Irrigation'}</p>
+                <p class="text-xs font-bold text-on-surface truncate">${isBn ? plot.irrigation_bn.split('(')[0] : plot.irrigation_en.split('(')[0]}</p>
+              </div>
+            </div>
+
+            <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-xl">grass</span>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[11px] text-on-surface-variant font-medium">${isBn ? 'মাটির ধরন' : 'Soil Type'}</p>
+                <p class="text-xs font-bold text-on-surface truncate">${isBn ? plot.soil_type_bn.split('(')[0] : plot.soil_type_en.split('(')[0]}</p>
+              </div>
+            </div>
+
+            <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-tertiary-container text-white flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-xl">terrain</span>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[11px] text-on-surface-variant font-medium">${isBn ? 'জমির উচ্চতা' : 'Elevation'}</p>
+                <p class="text-xs font-bold text-on-surface truncate">${isBn ? plot.elevation_bn.split('(')[0] : plot.elevation_en.split('(')[0]}</p>
+              </div>
+            </div>
+
+            <div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant/40 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-success-leaf text-white flex items-center justify-center shrink-0">
+                <span class="material-symbols-outlined text-xl">local_shipping</span>
+              </div>
+              <div class="min-w-0">
+                <p class="text-[11px] text-on-surface-variant font-medium">${isBn ? 'রাস্তা সংযোগ' : 'Road Access'}</p>
+                <p class="text-xs font-bold text-on-surface truncate">${isBn ? 'পাকা/ট্রাক্টর উপযোগী' : 'Tractor Accessible'}</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <h3 class="font-bold text-sm text-on-surface mb-1.5">${isBn ? 'জমির বিবরণ ও চাষের অবস্থা' : 'Land Description & Cultivation Readiness'}</h3>
+            <p class="text-xs text-on-surface-variant leading-relaxed">${isBn ? plot.description_bn : plot.description_en}</p>
+          </div>
+
+          <!-- Suitable Crops -->
+          <div>
+            <h3 class="font-bold text-sm text-on-surface mb-2">${isBn ? 'উপযুক্ত ফসলসমূহ' : 'Recommended Suitable Crops'}</h3>
+            <div class="flex flex-wrap gap-2">
+              ${(isBn ? plot.suitable_crops_bn : plot.suitable_crops_en).map(c => `
+                <span class="px-3 py-1 bg-secondary-container/20 text-on-secondary-container rounded-full text-xs font-bold border border-secondary/30 flex items-center gap-1">
+                  <span>🌾</span>
+                  <span>${c}</span>
+                </span>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- Verified Landowner Card -->
+          <div class="bg-surface-container p-4 rounded-2xl border border-outline-variant/40 flex items-center justify-between shadow-sm">
+            <div class="flex items-center gap-3">
+              <img src="${plot.owner.avatar}" class="w-12 h-12 rounded-full object-cover border-2 border-primary" alt="Owner">
+              <div>
+                <div class="flex items-center gap-1">
+                  <h4 class="font-bold text-sm text-on-surface">${isBn ? plot.owner.name_bn : plot.owner.name_en}</h4>
+                  <span class="material-symbols-outlined text-secondary text-sm">verified</span>
+                </div>
+                <p class="text-[11px] text-on-surface-variant">${isBn ? 'যাচাইকৃত জমির মালিক • ৬টি সফল চুক্তি' : 'Verified Landowner • 6 Completed Deals'}</p>
+              </div>
+            </div>
+            <button onclick="showToast('${isBn ? 'মালিকের সাথে চ্যাট চালু করা হচ্ছে...' : 'Opening direct landowner chat...'}', 'info')" class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center shadow-md">
+              <span class="material-symbols-outlined text-lg">chat</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Fixed Bottom Action Bar -->
+        <div class="fixed bottom-0 left-0 right-0 max-w-[440px] mx-auto bg-surface/95 backdrop-blur-xl border-t border-outline-variant/40 p-4 flex items-center justify-between z-40 shadow-lg">
+          <div>
+            <span class="text-[11px] text-on-surface-variant font-medium">${isBn ? 'লিজ / বর্গা ফি' : 'Lease / Barga Terms'}</span>
+            <div class="text-lg font-bold text-primary">
+              ৳${isBn ? AREA_CONVERTER.toBanglaNum(plot.price_bdt.toLocaleString('en-IN')) : plot.price_bdt.toLocaleString('en-IN')}
+              <span class="text-xs text-on-surface-variant font-normal">${isBn ? plot.price_unit_bn : plot.price_unit_en}</span>
+            </div>
+          </div>
+
+          <a href="#book-plot/${plot.id}" class="px-6 py-3.5 bg-primary text-white rounded-xl text-sm font-bold shadow-md hover:bg-primary-container active:scale-95 transition-all flex items-center gap-2">
+            <span>${isBn ? 'এই জমি চাষের জন্য চান' : 'Request Farmland'}</span>
+            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+          </a>
+        </div>
+
+      </div>
+    `;
+  }
+
+  // 4. BOOK PLOT / LEASE & SHARECROPPING AGREEMENT SCREEN
+  function renderBookPlotScreen(isBn) {
+    const plot = window.PlotShareApp.selectedPlot || window.PlotShareApp.plots[0];
+    return `
+      <div class="px-4 py-4 flex flex-col gap-5 pb-20">
+        
+        <div class="flex items-center gap-3">
+          <button onclick="history.back()" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+          </button>
+          <div>
+            <h2 class="text-lg font-bold text-on-surface">${isBn ? 'লিজ ও বর্গা চুক্তির আবেদন' : 'Lease & Sharecropping Request'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'জমি চাষের জন্য মালিকের সাথে চুক্তি সম্পাদন করুন' : 'Submit your cultivation agreement terms to the landowner'}</p>
+          </div>
+        </div>
+
+        <!-- Selected Plot Summary -->
+        <div class="bg-surface-container-low p-3.5 rounded-2xl border border-outline-variant/40 flex items-center gap-3">
+          <img src="${plot.images[0]}" class="w-16 h-16 rounded-xl object-cover" alt="Plot">
+          <div class="flex-1 min-w-0">
+            <h3 class="font-bold text-sm text-on-surface truncate">${isBn ? plot.title_bn : plot.title_en}</h3>
+            <p class="text-xs text-on-surface-variant">📍 ${isBn ? plot.location_label_bn : plot.location_label_en} • ${isBn ? AREA_CONVERTER.toBanglaNum(plot.area_shotok) : plot.area_shotok} ${isBn ? 'শতক' : 'Shotok'}</p>
+            <p class="text-xs font-bold text-primary mt-1">মালিক: ${isBn ? plot.owner.name_bn : plot.owner.name_en}</p>
+          </div>
+        </div>
+
+        <!-- Agreement Terms Form -->
+        <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+          
+          <!-- 1. Agreement Type Selection -->
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-2">${isBn ? '১. চুক্তির ধরন নির্বাচন করুন' : '1. Select Agreement Type'}</label>
+            <div class="grid grid-cols-2 gap-2">
+              <label class="border-2 border-primary bg-primary/5 p-3 rounded-xl flex flex-col cursor-pointer">
+                <input type="radio" name="agreement_type" value="barga" checked class="text-primary focus:ring-0">
+                <span class="font-bold text-xs text-primary mt-1">${isBn ? 'বর্গা চাষ (৫০:৫০)' : 'Sharecropping (50:50)'}</span>
+                <span class="text-[10px] text-on-surface-variant">${isBn ? 'ফসল ও খরচের সমান অংশীদারিত্ব' : 'Shared harvest & input costs'}</span>
+              </label>
+
+              <label class="border border-outline-variant/60 p-3 rounded-xl flex flex-col cursor-pointer hover:border-primary">
+                <input type="radio" name="agreement_type" value="lease" class="text-primary focus:ring-0">
+                <span class="font-bold text-xs text-on-surface mt-1">${isBn ? 'মৌসুমি নগদ লিজ' : 'Seasonal Cash Lease'}</span>
+                <span class="text-[10px] text-on-surface-variant">${isBn ? 'নির্দিষ্ট মেয়াদের এককালীন ফি' : 'Fixed seasonal payment'}</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- 2. Target Season & Crop -->
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">${isBn ? '২. লক্ষ্য মৌসুম' : '2. Target Season'}</label>
+              <select class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-medium focus:ring-2 focus:ring-primary">
+                <option>${isBn ? 'রবি মৌসুম (বোরো/আলু)' : 'Rabi Season'}</option>
+                <option>${isBn ? 'খরিপ-১ (আউশ/সবজি)' : 'Kharif-1 Season'}</option>
+                <option>${isBn ? 'খরিপ-২ (আমন ধান)' : 'Kharif-2 Season'}</option>
+                <option>${isBn ? 'পূর্ণ ১ বছর (৩ মৌসুম)' : 'Full 1 Year'}</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">${isBn ? '৩. উদ্দিষ্ট ফসল' : '3. Intended Crop'}</label>
+              <select class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-medium focus:ring-2 focus:ring-primary">
+                <option>${isBn ? 'বোরো ধান (ব্রি-২৮)' : 'Boro Rice'}</option>
+                <option>${isBn ? 'আলু (ডায়মন্ড)' : 'Potato'}</option>
+                <option>${isBn ? 'সরিষা (বারি-১৪)' : 'Mustard'}</option>
+                <option>${isBn ? 'শীতকালীন সবজি' : 'Vegetables'}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- 3. Cost Sharing Terms -->
+          <div class="bg-surface-container-high/40 p-3 rounded-xl text-xs space-y-2">
+            <h4 class="font-bold text-on-surface">${isBn ? 'খরচ ও সেচ সংক্রান্ত নীতিমালা:' : 'Cost & Irrigation Terms:'}</h4>
+            <div class="flex items-center gap-2 text-on-surface-variant">
+              <span class="material-symbols-outlined text-sm text-success-leaf">check_circle</span>
+              <span>${isBn ? 'সেচের বিদ্যুৎ/ডিজেল খরচ: ৫০% চাষী, ৫০% মালিক' : 'Irrigation fuel/electric cost: 50% Farmer, 50% Owner'}</span>
+            </div>
+            <div class="flex items-center gap-2 text-on-surface-variant">
+              <span class="material-symbols-outlined text-sm text-success-leaf">check_circle</span>
+              <span>${isBn ? 'সার ও কীটনাশক: চাষী ক্রয় করবেন, ফসল থেকে সমন্বয়' : 'Fertilizers: Farmer provides, adjusted at harvest'}</span>
+            </div>
+          </div>
+
+          <!-- 4. Submit CTA -->
+          <button onclick="submitAgreementRequest()" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm shadow-md hover:bg-primary-container active:scale-98 transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-lg">send</span>
+            <span>${isBn ? 'চুক্তির প্রস্তাব জমা দিন (মালিককে বার্তা পাঠান)' : 'Submit Agreement Proposal to Landowner'}</span>
+          </button>
+
+        </div>
+
+      </div>
+    `;
+  }
+
+  // 5. LIST PLOT SCREEN (12-Step Landowner Wizard)
+  function renderListPlotScreen(isBn) {
+    return `
+      <div class="px-4 py-4 flex flex-col gap-5 pb-20">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-on-surface">${isBn ? 'আপনার কৃষি জমি তালিকাভুক্ত করুন' : 'List Your Agricultural Land'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'চাষীদের সাথে সরাসরি লিজ বা বর্গা চুক্তিতে জমি দিন' : 'Connect with verified farmers for lease or sharecropping'}</p>
+          </div>
+          <span class="text-xs font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full">${isBn ? 'ধাপ ১/৩' : 'Step 1/3'}</span>
+        </div>
+
+        <form id="list-plot-form" onsubmit="handlePlotPublish(event)" class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+          
+          <!-- Step 1: Location -->
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">📍 ${isBn ? 'জমির অবস্থান (বিভাগ, জেলা ও উপজেলা)' : 'Land Location (Division & District)'}</label>
+            <div class="grid grid-cols-2 gap-2">
+              <select class="bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-medium focus:ring-2 focus:ring-primary" required>
+                <option value="rangpur">${isBn ? 'রংপুর বিভাগ' : 'Rangpur Division'}</option>
+                <option value="rajshahi">${isBn ? 'রাজশাহী বিভাগ' : 'Rajshahi Division'}</option>
+                <option value="mymensingh">${isBn ? 'ময়মনসিংহ বিভাগ' : 'Mymensingh Division'}</option>
+                <option value="dhaka">${isBn ? 'ঢাকা বিভাগ' : 'Dhaka Division'}</option>
+              </select>
+              <select class="bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-medium focus:ring-2 focus:ring-primary" required>
+                <option value="dinajpur">${isBn ? 'দিনাজপুর জেলা' : 'Dinajpur District'}</option>
+                <option value="bogura">${isBn ? 'বগুড়া জেলা' : 'Bogura District'}</option>
+                <option value="chapainawabganj">${isBn ? 'চাঁপাইনবাবগঞ্জ জেলা' : 'Chapainawabganj District'}</option>
+                <option value="mymensingh_sadar">${isBn ? 'ময়মনসিংহ জেলা' : 'Mymensingh District'}</option>
+              </select>
+            </div>
+            <input type="text" placeholder="${isBn ? 'উপজেলা, ইউনিয়ন ও মৌজা/গ্রামের নাম লিখুন...' : 'Upazila, Union and Village name...'}" class="w-full mt-2 bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs focus:ring-2 focus:ring-primary" required>
+          </div>
+
+          <!-- Step 2: Area with Normalized Units -->
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">📐 ${isBn ? 'জমির পরিমাণ ও একক' : 'Total Area & Unit'}</label>
+            <div class="grid grid-cols-2 gap-2">
+              <input type="number" id="list-area-val" placeholder="যেমন: ৫০" class="bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs focus:ring-2 focus:ring-primary" required>
+              <select id="list-area-unit" class="bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-bold text-primary focus:ring-2 focus:ring-primary">
+                <option value="shotok">${isBn ? 'শতক (Shotok)' : 'Shotok'}</option>
+                <option value="bigha">${isBn ? 'বিঘা (Bigha)' : 'Bigha'}</option>
+                <option value="acre">${isBn ? 'একর (Acre)' : 'Acre'}</option>
+                <option value="katha">${isBn ? 'কাঠা (Katha)' : 'Katha'}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 3: Irrigation & Soil -->
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">💧 ${isBn ? 'সেচ ব্যবস্থা' : 'Irrigation'}</label>
+              <select class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs focus:ring-2 focus:ring-primary">
+                <option>${isBn ? 'গভীর নলকূপ (ডিপ)' : 'Deep Tube Well'}</option>
+                <option>${isBn ? 'অগভীর নলকূপ (শ্যালো)' : 'Shallow Tube Well'}</option>
+                <option>${isBn ? 'খাল/পুকুর পাম্প' : 'Canal/Pond Pump'}</option>
+                <option>${isBn ? 'বৃষ্টি নির্ভর' : 'Rainfed'}</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">🌱 ${isBn ? 'মাটির ধরন' : 'Soil Type'}</label>
+              <select class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs focus:ring-2 focus:ring-primary">
+                <option>${isBn ? 'দোআঁশ মাটি' : 'Loamy Soil'}</option>
+                <option>${isBn ? 'বেলে দোআঁশ' : 'Sandy Loam'}</option>
+                <option>${isBn ? 'এঁটেল মাটি' : 'Clay Soil'}</option>
+                <option>${isBn ? 'পলি মাটি' : 'Silty Alluvial'}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 4: Terms & Expected Price -->
+          <div>
+            <label class="block text-xs font-bold text-on-surface mb-1">৳ ${isBn ? 'প্রত্যাশিত ফি / বর্গা শর্ত' : 'Expected Fee / Barga Terms'}</label>
+            <div class="grid grid-cols-2 gap-2">
+              <input type="number" placeholder="${isBn ? 'যেমন: ২৫০০০' : 'e.g. 25000'}" class="bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs focus:ring-2 focus:ring-primary" required>
+              <select class="bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-medium focus:ring-2 focus:ring-primary">
+                <option>${isBn ? 'মৌসুম প্রতি লিজ' : 'Per Season'}</option>
+                <option>${isBn ? 'বর্গা চাষ (৫০:৫০)' : 'Barga 50:50'}</option>
+                <option>${isBn ? 'বার্ষিক চুক্তি' : 'Per Year'}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Step 5: Photos Mock Upload -->
+          <div class="border-2 border-dashed border-outline-variant rounded-xl p-4 text-center cursor-pointer hover:bg-surface-container-high transition-colors">
+            <span class="material-symbols-outlined text-3xl text-primary">add_photo_alternate</span>
+            <p class="text-xs font-bold text-on-surface mt-1">${isBn ? 'জমির ছবি যুক্ত করুন' : 'Upload Farmland Photos'}</p>
+            <p class="text-[10px] text-on-surface-variant">${isBn ? 'জমির ফসল ও সেচের অবস্থা স্পষ্ট দেখা যায় এমন ছবি' : 'Clear photos showing soil and irrigation'}</p>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="w-full bg-primary text-white py-3.5 rounded-xl font-bold text-sm shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-lg">check_circle</span>
+            <span>${isBn ? 'জমি প্রকাশ করুন' : 'Publish Farmland Listing'}</span>
+          </button>
+
+        </form>
+
+      </div>
+    `;
+  }
+
+  // 6. MY FARM SCREEN (আমার খামার)
+  function renderMyFarmScreen(isBn) {
+    const farm = window.PlotShareApp.farmData;
+    return `
+      <div class="px-4 py-4 flex flex-col gap-5 pb-20">
+        
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-xl font-bold text-on-surface">${isBn ? 'আমার খামার ড্যাশবোর্ড' : 'My Farm Management'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'চলতি ফসলের অগ্রগতি, কাজের তালিকা ও লাভ-লোকসান ট্র্যাকার' : 'Active crop stages, daily farming tasks & profit tracking'}</p>
+          </div>
+          <a href="#farm-planner" class="px-3 py-1.5 bg-secondary text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-sm">
+            <span class="material-symbols-outlined text-sm">add_task</span>
+            <span>${isBn ? '+ পরিকল্পনা' : '+ New Plan'}</span>
+          </a>
+        </div>
+
+        <!-- Financial Summary Banner -->
+        <div class="bg-gradient-to-br from-surface-container-highest to-surface-container p-4 rounded-2xl border border-outline-variant/40 shadow-sm">
+          <span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-wider">${isBn ? 'চলতি মৌসুমের আনুমানিক হিসাব (রবি ২০২৬)' : 'Current Season Financial Forecast (Rabi 2026)'}</span>
+          
+          <div class="grid grid-cols-3 gap-2 mt-2 pt-2 border-t border-outline-variant/30">
+            <div>
+              <span class="text-[10px] text-on-surface-variant">${isBn ? 'মোট খরচ' : 'Expenses'}</span>
+              <p class="text-sm font-bold text-primary">৳${isBn ? AREA_CONVERTER.toBanglaNum('42,500') : '42,500'}</p>
+            </div>
+            <div>
+              <span class="text-[10px] text-on-surface-variant">${isBn ? 'সম্ভাব্য আয়' : 'Est. Revenue'}</span>
+              <p class="text-sm font-bold text-success-leaf">৳${isBn ? AREA_CONVERTER.toBanglaNum('90,000') : '90,000'}</p>
+            </div>
+            <div>
+              <span class="text-[10px] text-on-surface-variant">${isBn ? 'সম্ভাব্য নিট লাভ' : 'Est. Profit'}</span>
+              <p class="text-sm font-bold text-secondary">৳${isBn ? AREA_CONVERTER.toBanglaNum('47,500') : '47,500'}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Crops List -->
+        <div class="flex flex-col gap-3">
+          <h3 class="font-bold text-sm text-on-surface">${isBn ? 'চাষাধীন ফসলসমূহ' : 'Active Cultivations'}</h3>
+          
+          ${farm.active_crops.map(crop => `
+            <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-3">
+              <div class="flex items-start justify-between">
+                <div>
+                  <div class="flex items-center gap-2">
+                    <h4 class="font-bold text-base text-on-surface">${isBn ? crop.crop_name_bn : crop.crop_name_en}</h4>
+                    <span class="text-xs bg-primary/10 text-primary font-bold px-2 py-0.5 rounded-md">${isBn ? AREA_CONVERTER.toBanglaNum(crop.area_shotok) : crop.area_shotok} ${isBn ? 'শতক' : 'Shotok'}</span>
+                  </div>
+                  <p class="text-xs text-on-surface-variant mt-0.5">📍 ${isBn ? crop.plot_name_bn : crop.plot_name_en}</p>
+                </div>
+                <span class="text-xs font-bold text-secondary bg-secondary/10 px-2.5 py-1 rounded-full">
+                  ${isBn ? AREA_CONVERTER.toBanglaNum(crop.current_day) : crop.current_day}/${isBn ? AREA_CONVERTER.toBanglaNum(crop.total_days) : crop.total_days} ${isBn ? 'তম দিন' : 'Days'}
+                </span>
+              </div>
+
+              <!-- Stage & Progress Bar -->
+              <div>
+                <div class="flex justify-between text-xs font-medium text-on-surface mb-1">
+                  <span>${isBn ? crop.stage_bn : crop.stage_en}</span>
+                  <span class="font-bold text-primary">${isBn ? AREA_CONVERTER.toBanglaNum(crop.progress_pct) : crop.progress_pct}%</span>
+                </div>
+                <div class="w-full h-2.5 bg-surface-container-highest rounded-full overflow-hidden">
+                  <div class="h-full bg-primary rounded-full" style="width: ${crop.progress_pct}%"></div>
+                </div>
+              </div>
+
+              <!-- Next Task Alert Box -->
+              <div class="bg-secondary-container/15 p-3 rounded-xl border border-secondary/20 flex items-start gap-2 text-xs">
+                <span class="material-symbols-outlined text-base text-secondary shrink-0">task_alt</span>
+                <div>
+                  <span class="font-bold text-on-secondary-container">${isBn ? 'পরবর্তী জরুরি কাজ:' : 'Next Task:'}</span>
+                  <p class="text-on-surface-variant mt-0.5">${isBn ? crop.next_task_bn : crop.next_task_en}</p>
+                </div>
+              </div>
+
+              <div class="flex gap-2 pt-1">
+                <button onclick="openAddExpenseModal()" class="flex-1 py-2 bg-surface-container-high rounded-xl text-xs font-bold text-on-surface hover:bg-surface-container-highest transition-colors flex items-center justify-center gap-1">
+                  <span class="material-symbols-outlined text-sm">receipt_long</span>
+                  <span>${isBn ? 'খরচ লিখুন' : 'Log Expense'}</span>
+                </button>
+                <a href="#harvest-tracker" class="flex-1 py-2 bg-primary text-white rounded-xl text-xs font-bold text-center hover:bg-primary-container transition-colors flex items-center justify-center gap-1">
+                  <span class="material-symbols-outlined text-sm">inventory_2</span>
+                  <span>${isBn ? 'ফলন ট্র্যাকার' : 'Harvest Tracker'}</span>
+                </a>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Today's Tasks Checklist -->
+        <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm">
+          <h3 class="font-bold text-sm text-on-surface mb-3 flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-lg">checklist</span>
+            <span>${isBn ? 'আজকের খামার কর্মসূচি' : "Today's Field Tasks"}</span>
+          </h3>
+
+          <div class="flex flex-col gap-2.5">
+            ${farm.tasks_today.map(task => `
+              <label class="flex items-start gap-3 p-2.5 rounded-xl ${task.done ? 'bg-surface-container-low opacity-60' : 'bg-surface-container-high/60'} cursor-pointer">
+                <input type="checkbox" ${task.done ? 'checked' : ''} onchange="toggleTask('${task.id}')" class="mt-0.5 rounded text-primary focus:ring-0">
+                <div class="flex-1 text-xs">
+                  <p class="font-bold text-on-surface ${task.done ? 'line-through' : ''}">${isBn ? task.title_bn : task.title_en}</p>
+                  <span class="text-[10px] text-on-surface-variant">ফসল: ${task.crop}</span>
+                </div>
+              </label>
+            `).join('')}
+          </div>
+        </div>
+
+      </div>
+    `;
+  }
+
+  // 7. AI GROW ASSISTANT SCREEN (কৃষি সহায়ক)
+  function renderGrowAssistantScreen(isBn) {
+    const messages = window.PlotShareApp.chatMessages;
+    return `
+      <div class="px-4 py-4 flex flex-col h-[calc(100vh-140px)] justify-between pb-4">
+        
+        <!-- Header -->
+        <div class="flex items-center gap-3 pb-3 border-b border-outline-variant/30">
+          <div class="w-11 h-11 rounded-2xl bg-secondary flex items-center justify-center text-white shadow-md">
+            <span class="material-symbols-outlined text-2xl">psychology</span>
+          </div>
+          <div>
+            <h2 class="text-base font-bold text-on-surface">${isBn ? 'প্লটশেয়ার এআই কৃষি সহায়ক' : 'PlotShare AI Farm Assistant'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'বাংলাদেশি ফসলের রোগ, সার ও মৌসুম বিষয়ক স্মার্ট পরামর্শক' : 'Smart advisor for Bangladesh crops, fertilizers & disease control'}</p>
+          </div>
+        </div>
+
+        <!-- Chat History Scroll View -->
+        <div id="ai-chat-box" class="flex-1 overflow-y-auto hide-scrollbar py-4 flex flex-col gap-3">
+          ${messages.map(msg => `
+            <div class="flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}">
+              <div class="max-w-[85%] p-3.5 rounded-2xl text-xs leading-relaxed shadow-sm ${msg.sender === 'user' ? 'bg-primary text-white rounded-br-none' : 'bg-surface-container-lowest text-on-surface border border-outline-variant/40 rounded-bl-none'}">
+                ${msg.sender === 'ai' ? (isBn ? msg.text_bn : msg.text_en) : msg.text}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Preset Prompt Chips -->
+        <div class="flex gap-2 overflow-x-auto hide-scrollbar py-2">
+          <button onclick="askAIQuery('৫০ শতক জমিতে বোরো ধানের জন্য কতটুকু সার লাগবে?')" class="flex-shrink-0 px-3 py-1.5 bg-surface-container rounded-full text-xs font-medium text-on-surface hover:bg-primary hover:text-white transition-colors">
+            🌾 ${isBn ? 'বোরো ধানের সারের পরিমাণ?' : 'Boro Rice fertilizer quantity?'}
+          </button>
+          <button onclick="askAIQuery('টমেটো গাছের পাতা হলুদ হয়ে যাচ্ছে, কি প্রতিকার?')" class="flex-shrink-0 px-3 py-1.5 bg-surface-container rounded-full text-xs font-medium text-on-surface hover:bg-primary hover:text-white transition-colors">
+            🍅 ${isBn ? 'টমেটোর পাতা হলুদ কেন?' : 'Why are tomato leaves turning yellow?'}
+          </button>
+          <button onclick="askAIQuery('আগামী ৩ দিনের আবহাওয়া অনুযায়ী কি সেচ দেওয়া যাবে?')" class="flex-shrink-0 px-3 py-1.5 bg-surface-container rounded-full text-xs font-medium text-on-surface hover:bg-primary hover:text-white transition-colors">
+            💧 ${isBn ? 'সেচ ও আবহাওয়া পরামর্শ?' : 'Irrigation & weather tips?'}
+          </button>
+        </div>
+
+        <!-- Input Box -->
+        <form onsubmit="handleAIChatSubmit(event)" class="relative mt-1">
+          <input id="ai-user-input" type="text" placeholder="${isBn ? 'আপনার জমি বা ফসল সম্পর্কে প্রশ্ন লিখুন...' : 'Ask anything about your crops or land...'}" class="w-full bg-surface-container-lowest h-13 pl-4 pr-14 rounded-2xl border border-outline-variant/50 text-xs focus:ring-2 focus:ring-primary shadow-sm" required>
+          <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-xl bg-primary text-white flex items-center justify-center shadow-md">
+            <span class="material-symbols-outlined text-lg">send</span>
+          </button>
+        </form>
+
+      </div>
+    `;
+  }
+
+  // 8. FARM PLANNER SCREEN (খামার পরিকল্পনা)
+  function renderFarmPlannerScreen(isBn) {
+    return `
+      <div class="px-4 py-4 flex flex-col gap-5 pb-20">
+        
+        <div class="flex items-center gap-3">
+          <button onclick="history.back()" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface">
+            <span class="material-symbols-outlined text-lg">arrow_back</span>
+          </button>
+          <div>
+            <h2 class="text-lg font-bold text-on-surface">${isBn ? 'এআই খামার পরিকল্পনা ও বাজেট' : 'AI Farm Planner & Cost Estimator'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'জমির পরিমাপ ও ফসলের ভিত্তিতে সার, খরচ ও লাভের পূর্ণাঙ্গ হিসাব' : 'Generate timeline, input requirements & profit projection'}</p>
+          </div>
+        </div>
+
+        <form id="farm-planner-form" onsubmit="generateFarmPlan(event)" class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-4">
+          
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">🌾 ${isBn ? 'ফসল নির্বাচন করুন' : 'Select Crop'}</label>
+              <select id="plan-crop" class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-bold text-primary">
+                <option value="boro_rice">${isBn ? 'বোরো ধান (Boro Rice)' : 'Boro Rice'}</option>
+                <option value="potato">${isBn ? 'আলু (Potato)' : 'Potato'}</option>
+                <option value="mustard">${isBn ? 'সরিষা (Mustard)' : 'Mustard'}</option>
+                <option value="onion">${isBn ? 'পেঁয়াজ (Onion)' : 'Onion'}</option>
+                <option value="tomato">${isBn ? 'টমেটো (Tomato)' : 'Tomato'}</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">📐 ${isBn ? 'জমির পরিমাণ (শতক)' : 'Area (Shotok)'}</label>
+              <input type="number" id="plan-area" value="50" class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs font-bold" required>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">📍 ${isBn ? 'জেলা' : 'District'}</label>
+              <select class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs">
+                <option>${isBn ? 'দিনাজপুর' : 'Dinajpur'}</option>
+                <option>${isBn ? 'বগুড়া' : 'Bogura'}</option>
+                <option>${isBn ? 'ময়মনসিংহ' : 'Mymensingh'}</option>
+                <option>${isBn ? 'রংপুর' : 'Rangpur'}</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface mb-1">💧 ${isBn ? 'সেচের উৎস' : 'Irrigation'}</label>
+              <select class="w-full bg-surface-container-low h-10 px-3 rounded-xl border border-outline-variant/50 text-xs">
+                <option>${isBn ? 'গভীর নলকূপ' : 'Deep Tube Well'}</option>
+                <option>${isBn ? 'শ্যালো নলকূপ' : 'Shallow Tube Well'}</option>
+                <option>${isBn ? 'পুকুর/খাল পাম্প' : 'Canal Pump'}</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full bg-primary text-white py-3 rounded-xl font-bold text-xs shadow-md hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-base">auto_fix_high</span>
+            <span>${isBn ? 'পরিকল্পনা তৈরি করুন' : 'Generate Farm Plan'}</span>
+          </button>
+        </form>
+
+        <!-- Plan Result Output Card -->
+        <div id="plan-output-container" class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-3">
+          <div class="flex items-center justify-between pb-2 border-b border-outline-variant/30">
+            <h3 class="font-bold text-sm text-on-surface flex items-center gap-1.5">
+              <span>🌾</span>
+              <span id="plan-res-title">${isBn ? '৫০ শতক বোরো ধান চাষের পূর্ণাঙ্গ রূপরেখা' : '50 Shotok Boro Rice Cultivation Blueprint'}</span>
+            </h3>
+            <span class="text-[10px] bg-secondary/15 text-secondary font-bold px-2 py-0.5 rounded-full">${isBn ? '১৪০ দিন মেয়াদ' : '140 Days'}</span>
+          </div>
+
+          <!-- Estimated Financials -->
+          <div class="grid grid-cols-3 gap-2 bg-surface-container p-3 rounded-xl text-center">
+            <div>
+              <span class="text-[10px] text-on-surface-variant">${isBn ? 'মোট সম্ভাব্য খরচ' : 'Est. Total Cost'}</span>
+              <p class="text-xs font-bold text-primary">৳৩২,৫০০</p>
+            </div>
+            <div>
+              <span class="text-[10px] text-on-surface-variant">${isBn ? 'সম্ভাব্য ফলন ও আয়' : 'Est. Yield & Rev'}</span>
+              <p class="text-xs font-bold text-success-leaf">৳৫৫,০০০</p>
+            </div>
+            <div>
+              <span class="text-[10px] text-on-surface-variant">${isBn ? 'সম্ভাব্য নিট লাভ' : 'Est. Net Profit'}</span>
+              <p class="text-xs font-bold text-secondary">৳২২,৫০০</p>
+            </div>
+          </div>
+
+          <!-- Fertilizer Requirements -->
+          <div>
+            <h4 class="font-bold text-xs text-on-surface mb-1.5">${isBn ? 'প্রয়োজনীয় সারের পরিমাণ (৫০ শতকের জন্য):' : 'Fertilizer Requirements (for 50 Shotok):'}</h4>
+            <div class="grid grid-cols-2 gap-2 text-xs text-on-surface-variant">
+              <div class="bg-surface-container-low p-2 rounded-lg">🌱 ইউরিয়া (Urea): <strong>৬০ কেজি</strong></div>
+              <div class="bg-surface-container-low p-2 rounded-lg">🌱 টিএসপি/ডিএপি: <strong>৩০ কেজি</strong></div>
+              <div class="bg-surface-container-low p-2 rounded-lg">🌱 এমওপি (পটাশ): <strong>৩৫ কেজি</strong></div>
+              <div class="bg-surface-container-low p-2 rounded-lg">🌱 জিংক সালফেট: <strong>৫ কেজি</strong></div>
+            </div>
+          </div>
+
+          <p class="text-[10px] text-on-surface-variant/80 italic mt-1">${isBn ? '* দ্রষ্টব্য: আবহাওয়া, রোগবালাই ও স্থানীয় বাজারদরের ওপর ভিত্তি করে খরচ ও আয়ের তারতম্য হতে পারে।' : '* Note: Actual yield and profit may vary based on weather conditions and local market rates.'}</p>
+        </div>
+
+      </div>
+    `;
+  }
+
+  // 9. CROP PLANNER / AGRICULTURAL CALENDAR
+  function renderCropPlannerScreen(isBn) {
+    const seasons = window.PlotShareApp.seasons;
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-on-surface">${isBn ? 'বাংলাদেশ কৃষি মৌসুম ও ক্যালেন্ডার' : 'Bangladesh Agricultural Calendar'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'রবি, খরিপ-১ ও খরিপ-২ মৌসুমের রোপণ ও কর্তন সময়সূচি' : 'Planting and harvest seasons across Bangladesh'}</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          ${seasons.map(s => `
+            <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <h3 class="font-bold text-sm text-primary">${isBn ? s.name_bn : s.name_en}</h3>
+                <span class="text-[11px] bg-secondary-container/20 text-on-secondary-container px-2 py-0.5 rounded-md font-bold">${isBn ? s.period_bn : s.period_en}</span>
+              </div>
+              <p class="text-xs text-on-surface-variant mt-1">
+                <strong>${isBn ? 'প্রধান ফসলসমূহ:' : 'Key Crops:'}</strong> ${s.typical_crops.join(', ')}
+              </p>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  // 10. HARVEST TRACKER
+  function renderHarvestTrackerScreen(isBn) {
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-lg font-bold text-on-surface">${isBn ? 'ফলন ও বিক্রি ট্র্যাকার' : 'Harvest & Sales Tracker'}</h2>
+            <p class="text-xs text-on-surface-variant">${isBn ? 'উত্তোলিত ফসলের পরিমাণ, বাজারদর ও বিক্রির হিসাব' : 'Record harvested crop yields and market revenues'}</p>
+          </div>
+          <button onclick="openLogHarvestModal()" class="px-3 py-1.5 bg-primary text-white rounded-xl text-xs font-bold shadow-sm">
+            ${isBn ? '+ ফলন যোগ করুন' : '+ Log Harvest'}
+          </button>
+        </div>
+
+        <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm">
+          <h3 class="font-bold text-sm text-on-surface mb-2">${isBn ? 'বিগত মৌসুমের সফল ফসল উত্তোলন' : 'Recent Harvest Records'}</h3>
+          
+          <div class="flex flex-col gap-2.5">
+            <div class="p-3 bg-surface-container-low rounded-xl border border-outline-variant/30 flex justify-between items-center">
+              <div>
+                <h4 class="font-bold text-xs text-on-surface">রোপা আমন ধান (ব্রি-৪৯)</h4>
+                <p class="text-[11px] text-on-surface-variant">বীরগঞ্জ পূর্ব খেত • ২৫ নভেম্বর ২০২৫</p>
+                <p class="text-[11px] text-success-leaf font-bold mt-0.5">ফলন: ৩৮ মণ (১৫২০ কেজি)</p>
+              </div>
+              <div class="text-right">
+                <span class="text-xs font-bold text-primary">৳৪১,৮০০</span>
+                <p class="text-[10px] text-on-surface-variant">দর: ৳১,১০০/মণ</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 11. COMMUNITY & MARKETPLACE
+  function renderCommunityScreen(isBn) {
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div>
+          <h2 class="text-lg font-bold text-on-surface">${isBn ? 'কৃষক কমিউনিটি ও নেটওয়ার্ক' : 'Farmer Community Network'}</h2>
+          <p class="text-xs text-on-surface-variant">${isBn ? 'অভিজ্ঞ চাষীদের সাথে তথ্য ও কৃষি সরঞ্জাম বিনিময়' : 'Share farming updates, machinery & advice'}</p>
+        </div>
+
+        <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADqkEMmuCMfXI2UfVnf8ee82dhRgbSPU1VWy4cQtfif-kuqQDD1meM6Id9oUv9haklLjD2PNhnaUmeLP1vh9aZ4_WW4_7M8E32mA_zilyf11LTcbDSIcfKje06-3Yg0hGyfcWOCtdUIzyUlp3NSYNQZh91BXdIdSEQaqdplbEI2XceBOB2n5PiXbNwfyFwrN_30i4TK04T41hQ9e41Cz2uMCubtEyXdtq8pTf6ATJlfhYQGVqp-fmZ_w" class="w-10 h-10 rounded-full object-cover" alt="Farmer">
+            <div>
+              <h4 class="font-bold text-xs text-on-surface">মো: শফিকুল ইসলাম (দিনাজপুর)</h4>
+              <p class="text-[10px] text-on-surface-variant">২ ঘন্টা আগে • বোরো ধান চাষ</p>
+            </div>
+          </div>
+          <p class="text-xs text-on-surface-variant leading-relaxed">
+            ${isBn ? 'আলহামদুলিল্লাহ, বীরগঞ্জে এ বছর ব্রি-২৮ এর চারা বেশ সুস্থ। জমিতে মাজরা পোকার কোনো আক্রমণ দেখা দিলে দ্রুত নিম তেল স্প্রে করার পরামর্শ দিচ্ছি।' : 'Alhamdulillah, Boro rice seedlings are very healthy in Birganj this season. If anyone spots stem borers, recommend spraying neem extract immediately.'}
+          </p>
+          <div class="flex items-center gap-4 text-xs text-on-surface-variant pt-2 border-t border-outline-variant/30">
+            <button class="flex items-center gap-1 hover:text-primary"><span class="material-symbols-outlined text-sm">thumb_up</span> ২৪ পছন্দ</button>
+            <button class="flex items-center gap-1 hover:text-primary"><span class="material-symbols-outlined text-sm">chat_bubble</span> ৮ মন্তব্য</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderMarketplaceScreen(isBn) {
+    return `
+      <div class="px-4 py-4 flex flex-col gap-4 pb-20">
+        <div>
+          <h2 class="text-lg font-bold text-on-surface">${isBn ? 'ফসল বেচাকেনা ও বাজারদর' : 'Produce Marketplace & Prices'}</h2>
+          <p class="text-xs text-on-surface-variant">${isBn ? 'চাষীদের উৎপাদিত ফসল সরাসরি পাইকারি ক্রেতার কাছে বিক্রয়' : 'Direct trading of harvested crops'}</p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div class="bg-surface-container-lowest p-3 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] bg-secondary-container/20 text-on-secondary-container px-2 py-0.5 rounded font-bold">দিনাজপুর</span>
+              <h4 class="font-bold text-xs text-on-surface mt-1">৫০ মণ আমন ধান (ব্রি-৪৯)</h4>
+              <p class="text-xs font-bold text-primary mt-1">৳১,১৫০ / মণ</p>
+            </div>
+            <button onclick="showToast('${isBn ? 'বিক্রেতার সাথে যোগাযোগ করা হচ্ছে...' : 'Contacting seller...'}', 'info')" class="mt-2 w-full py-1.5 bg-primary text-white rounded-lg text-xs font-bold">যোগাযোগ</button>
+          </div>
+
+          <div class="bg-surface-container-lowest p-3 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] bg-secondary-container/20 text-on-secondary-container px-2 py-0.5 rounded font-bold">বগুড়া</span>
+              <h4 class="font-bold text-xs text-on-surface mt-1">৮০ মণ ডায়মন্ড আলু</h4>
+              <p class="text-xs font-bold text-primary mt-1">৳৯৫০ / মণ</p>
+            </div>
+            <button onclick="showToast('${isBn ? 'বিক্রেতার সাথে যোগাযোগ করা হচ্ছে...' : 'Contacting seller...'}', 'info')" class="mt-2 w-full py-1.5 bg-primary text-white rounded-lg text-xs font-bold">যোগাযোগ</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // 12. NOTIFICATIONS & PROFILE
+  function renderNotificationsScreen(isBn) {
+    return `
+      <div class="px-4 py-4 flex flex-col gap-3 pb-20">
+        <h2 class="text-lg font-bold text-on-surface">${isBn ? 'নোটিফিকেশন ও বার্তা' : 'Notifications'}</h2>
+        
+        <div class="bg-surface-container-lowest p-3.5 rounded-2xl border border-outline-variant/40 shadow-sm flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center text-white shrink-0">
+            <span class="material-symbols-outlined text-lg">cloudy_snowing</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs text-on-surface">${isBn ? 'আবহাওয়া সতর্কতা' : 'Weather Alert'}</h4>
+            <p class="text-xs text-on-surface-variant mt-0.5">${isBn ? 'আগামীকাল দিনাজপুরে বৃষ্টির সম্ভাবনা। জমিতে সেচ স্থগিত রাখুন।' : 'Rain forecasted tomorrow. Suspend irrigation.'}</p>
+            <span class="text-[10px] text-on-surface-variant/70 mt-1 block">১০ মিনিট আগে</span>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-3.5 rounded-2xl border border-outline-variant/40 shadow-sm flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-success-leaf flex items-center justify-center text-white shrink-0">
+            <span class="material-symbols-outlined text-lg">verified</span>
+          </div>
+          <div>
+            <h4 class="font-bold text-xs text-on-surface">${isBn ? 'চুক্তি অনুমোদন বার্তা' : 'Agreement Approved'}</h4>
+            <p class="text-xs text-on-surface-variant mt-0.5">${isBn ? 'আলহাজ্ব রফিকুল ইসলাম আপনার ৫০ শতক বোরো ধানের বর্গা প্রস্তাব গ্রহণ করেছেন।' : 'Alhaj Rafiqul Islam accepted your sharecropping request.'}</p>
+            <span class="text-[10px] text-on-surface-variant/70 mt-1 block">২ ঘন্টা আগে</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderProfileScreen(isBn) {
+    const farm = window.PlotShareApp.farmData;
+    return `
+      <div class="px-4 py-4 flex flex-col gap-5 pb-20">
+        
+        <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex items-center gap-4">
+          <div class="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center font-bold text-xl shadow-md">
+            🌾
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h3 class="font-bold text-base text-on-surface">${isBn ? farm.farmer_name_bn : farm.farmer_name_en}</h3>
+              <span class="material-symbols-outlined text-secondary text-sm">verified</span>
+            </div>
+            <p class="text-xs text-on-surface-variant">${isBn ? farm.farmer_type_bn : farm.farmer_type_en}</p>
+            <p class="text-[11px] text-primary font-semibold mt-0.5">কৃষি কার্ড নং: ${farm.krishi_card_no}</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/40 shadow-sm overflow-hidden text-xs">
+          <button onclick="toggleLanguage()" class="w-full px-4 py-3.5 flex items-center justify-between hover:bg-surface-container-high border-b border-outline-variant/30">
+            <span class="font-medium text-on-surface">🌐 ${isBn ? 'ভাষা পরিবর্তন (Language)' : 'Switch Language'}</span>
+            <span class="font-bold text-primary">${isBn ? 'বাংলা (Bangla)' : 'English'}</span>
+          </button>
+          
+          <button onclick="showToast('${isBn ? 'কৃষি কার্ড যাচাইকরণ সম্পন্ন' : 'Krishi Card verified'}', 'success')" class="w-full px-4 py-3.5 flex items-center justify-between hover:bg-surface-container-high border-b border-outline-variant/30">
+            <span class="font-medium text-on-surface">📜 ${isBn ? 'কৃষি কার্ড ও জাতীয় পরিচয়পত্র' : 'Krishi Card & NID'}</span>
+            <span class="font-bold text-success-leaf">${isBn ? 'যাচাইকৃত' : 'Verified'}</span>
+          </button>
+
+          <a href="#my-farm" class="w-full px-4 py-3.5 flex items-center justify-between hover:bg-surface-container-high border-b border-outline-variant/30">
+            <span class="font-medium text-on-surface">🚜 ${isBn ? 'আমার চাষকৃত জমির তালিকা' : 'My Active Farmlands'}</span>
+            <span class="font-bold text-primary">২টি জমি</span>
+          </a>
+        </div>
+
+      </div>
+    `;
+  }
+
+  // ACTION HANDLERS
+  window.toggleFav = function(plotId) {
+    const favs = window.PlotShareApp.savedFavorites;
+    const idx = favs.indexOf(plotId);
+    if (idx > -1) {
+      favs.splice(idx, 1);
+      showToast(window.PlotShareApp.lang === 'bn' ? 'পছন্দের তালিকা থেকে সরানো হয়েছে' : 'Removed from favorites', 'info');
+    } else {
+      favs.push(plotId);
+      showToast(window.PlotShareApp.lang === 'bn' ? 'পছন্দের তালিকায় যুক্ত হয়েছে' : 'Added to favorites', 'success');
+    }
+    localStorage.setItem('plotshare_favs', JSON.stringify(favs));
+    renderCurrentRoute();
+  };
+
+  window.executeSearch = function() {
+    const input = document.getElementById('home-search-input');
+    const q = input ? input.value.trim().toLowerCase() : '';
+    if (q) {
+      window.location.hash = '#explore';
+      showToast(window.PlotShareApp.lang === 'bn' ? `"${q}" এর জন্য কৃষি জমি ফিল্টার করা হয়েছে` : `Filtered lands for "${q}"`, 'info');
+    }
+  };
+
+  window.quickFilterDistrict = function(dist) {
+    window.location.hash = '#explore';
+    showToast(window.PlotShareApp.lang === 'bn' ? `দিনাজপুর ও সংশ্লিষ্ট জেলার জমি প্রদর্শিত হচ্ছে` : `Displaying lands in selected district`, 'info');
+  };
+
+  window.submitAgreementRequest = function() {
+    showToast(window.PlotShareApp.lang === 'bn' ? 'বর্গা ও লিজের আবেদন সফলভাবে মালিকের কাছে পাঠানো হয়েছে!' : 'Agreement request successfully submitted to landowner!', 'success');
+    setTimeout(() => {
+      window.location.hash = '#my-farm';
+    }, 1200);
+  };
+
+  window.handlePlotPublish = function(e) {
+    e.preventDefault();
+    showToast(window.PlotShareApp.lang === 'bn' ? 'আপনার কৃষি জমি সফলভাবে তালিকাভুক্ত হয়েছে!' : 'Your farmland has been published successfully!', 'success');
+    setTimeout(() => {
+      window.location.hash = '#explore';
+    }, 1200);
+  };
+
+  window.toggleTask = function(taskId) {
+    const task = window.PlotShareApp.farmData.tasks_today.find(t => t.id === taskId);
+    if (task) {
+      task.done = !task.done;
+      localStorage.setItem('plotshare_farm', JSON.stringify(window.PlotShareApp.farmData));
+      renderCurrentRoute();
+      showToast(task.done ? (window.PlotShareApp.lang === 'bn' ? 'কাজটি সম্পন্ন চিহ্নিত হয়েছে' : 'Task marked complete') : (window.PlotShareApp.lang === 'bn' ? 'কাজটি আবার সক্রিয় করা হয়েছে' : 'Task reactivated'), 'success');
+    }
+  };
+
+  window.askAIQuery = function(q) {
+    const input = document.getElementById('ai-user-input');
+    if (input) input.value = q;
+    handleAIChatSubmit(new Event('submit'));
+  };
+
+  window.handleAIChatSubmit = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const input = document.getElementById('ai-user-input');
+    if (!input || !input.value.trim()) return;
+
+    const userText = input.value.trim();
+    input.value = '';
+
+    window.PlotShareApp.chatMessages.push({ sender: 'user', text: userText });
+    renderCurrentRoute();
+
+    // AI Response Simulator
+    setTimeout(() => {
+      let respBn = 'আপনার প্রশ্নের জন্য ধন্যবাদ। মাটির আর্দ্রতা পরীক্ষা করে প্রতি শতকে ১.২ কেজি ইউরিয়া ও ০.৬ কেজি টিএসপি সার প্রয়োগের পরামর্শ দেওয়া হচ্ছে। অতিরিক্ত বৃষ্টির আগে সেচ বন্ধ রাখুন।';
+      let respEn = 'Thank you for your question. Based on current soil conditions, recommend applying 1.2 kg Urea and 0.6 kg TSP per shotok. Hold off on heavy irrigation before expected rainfall.';
+
+      if (userText.includes('পাতা হলুদ') || userText.includes('yellow')) {
+        respBn = 'টমেটো বা ফসলের পাতা হলুদ হওয়ার প্রধান কারণ নাইট্রোজেনের ঘাটতি বা অতিরিক্ত জলাবদ্ধতা। ইউরিয়া ও জিংক স্প্রে করুন এবং পানি নিষ্কাশন নিশ্চিত করুন।';
+        respEn = 'Yellowing leaves usually indicate Nitrogen deficiency or waterlogging. Apply light Urea solution and ensure proper drainage.';
+      } else if (userText.includes('সার') || userText.includes('fertilizer')) {
+        respBn = '৫০ শতক বোরো ধানের জন্য মোট ৬০ কেজি ইউরিয়া, ৩০ কেজি টিএসপি, ৩৫ কেজি এমওপি এবং ৫ কেজি জিংক সালফেট ৩ কিস্তিতে প্রয়োগ করুন।';
+        respEn = 'For 50 Shotok Boro rice, use 60 kg Urea, 30 kg TSP, 35 kg MoP, and 5 kg Zinc Sulfate split across 3 phases.';
+      }
+
+      window.PlotShareApp.chatMessages.push({ sender: 'ai', text_bn: respBn, text_en: respEn });
+      renderCurrentRoute();
+      
+      const box = document.getElementById('ai-chat-box');
+      if (box) box.scrollTop = box.scrollHeight;
+    }, 600);
+  };
+
+  window.generateFarmPlan = function(e) {
+    e.preventDefault();
+    showToast(window.PlotShareApp.lang === 'bn' ? 'নতুন খামার পরিকল্পনা প্রস্তুত করা হয়েছে!' : 'Farm plan generated successfully!', 'success');
+  };
+
+  window.openAddExpenseModal = function() {
+    showToast(window.PlotShareApp.lang === 'bn' ? 'খরচের ভাউচার যোগ করার উইন্ডো চালু হচ্ছে...' : 'Opening expense voucher logger...', 'info');
+  };
+
+  window.openLogHarvestModal = function() {
+    showToast(window.PlotShareApp.lang === 'bn' ? 'ফলন উত্তোলনের তথ্য যুক্ত করার ফর্ম খোলা হচ্ছে...' : 'Opening harvest logging form...', 'info');
+  };
+
+  function attachScreenEventHandlers() {
+    // Scroll AI chat to bottom if open
+    const box = document.getElementById('ai-chat-box');
+    if (box) box.scrollTop = box.scrollHeight;
+  }
+
+  // INITIALIZE
+  document.addEventListener('DOMContentLoaded', () => {
+    updateGlobalUI();
+    handleRoute();
+  });
+</script>
+</body>
+</html>

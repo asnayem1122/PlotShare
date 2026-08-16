@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface-variant": "#5a4138",
+          "outline": "#8f7066",
+          "surface-container": "#f1ede8",
+          "on-surface": "#1c1c19",
+          "primary": "#a43700",
+          "secondary": "#7e5700",
+          "surface": "#fdf9f4",
+          "surface-container-lowest": "#ffffff"
+        },
+        fontFamily: {
+          sans: ["'Hind Siliguri'", "'Hanken Grotesk'", "sans-serif"]
+        }
+      }
+    }
+  }
+</script><style>@layer base { body { -webkit-tap-highlight-color: transparent; font-family: 'Hind Siliguri', sans-serif; } .pb-safe { padding-bottom: env(safe-area-inset-bottom); } .pt-safe { padding-top: env(safe-area-inset-top); } }</style>
+</head><body class="bg-surface font-sans text-on-surface">
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe border-b border-outline-variant/30">
+  <div class="h-16 px-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <a href="../home_dashboard/code.html" class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center text-on-surface"><span class="material-symbols-outlined text-lg">arrow_back</span></a>
+      <h1 class="font-bold text-base text-primary">কৃষক কমিউনিটি ও নেটওয়ার্ক</h1>
+    </div>
+  </div>
+</header>
+<main class="pt-16 pb-20 bg-surface min-h-screen">
+  <div class="p-4 flex flex-col gap-4">
+    <div class="bg-surface-container-lowest p-4 rounded-2xl border border-outline-variant/40 shadow-sm flex flex-col gap-3">
+      <div class="flex items-center gap-3">
+        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuADqkEMmuCMfXI2UfVnf8ee82dhRgbSPU1VWy4cQtfif-kuqQDD1meM6Id9oUv9haklLjD2PNhnaUmeLP1vh9aZ4_WW4_7M8E32mA_zilyf11LTcbDSIcfKje06-3Yg0hGyfcWOCtdUIzyUlp3NSYNQZh91BXdIdSEQaqdplbEI2XceBOB2n5PiXbNwfyFwrN_30i4TK04T41hQ9e41Cz2uMCubtEyXdtq8pTf6ATJlfhYQGVqp-fmZ_w" class="w-10 h-10 rounded-full object-cover">
+        <div>
+          <h4 class="font-bold text-xs">মো: শফিকুল ইসলাম (দিনাজপুর)</h4>
+          <p class="text-[10px] text-on-surface-variant">২ ঘন্টা আগে • বোরো ধান পরামর্শ</p>
+        </div>
+      </div>
+      <p class="text-xs text-on-surface-variant leading-relaxed">
+        বীরগঞ্জে এ বছর ব্রি-২৮ এর ফলন ভালো রাখতে সময়মতো সুষম মাত্রায় ইউরিয়া ও পটাশ সার প্রয়োগ করুন। মাজরা পোকার আক্রমণ প্রতিরোধে নিয়মিত ক্ষেত পর্যবেক্ষণ করুন।
+      </p>
+    </div>
+
+    <a href="../index.html#community" class="w-full text-center py-3 bg-primary text-white rounded-xl text-xs font-bold shadow-md">
+      কমিউনিটি পোস্টে যোগ দিন →
+    </a>
+  </div>
+</main>
+</body></html>
