@@ -3,6 +3,12 @@ node_modules/
 .pnp
 .pnp.js
 
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
 # Testing & Coverage
 coverage/
 .nyc_output/
