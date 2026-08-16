@@ -57,17 +57,19 @@ Seamless mathematical conversion across all regional land measurement units:
 | Module | Route | Highlights |
 | :--- | :--- | :--- |
 | **Home Dashboard** | `#home` | District search, AI weather/rain advisory, nearby farmland carousel, active crop progress ring, and market prices. |
-| **Explore Farmland** | `#explore` | Map & List view toggle, filters for area (শতক/বিঘা), irrigation, soil type, agreement terms (লিজ/বর্গা), and district markers. |
+| **Explore Farmland** | `#explore` | Interactive **Leaflet.js GPS Map** with district pins, filters for area (শতক/বিঘা), irrigation, soil type, and agreement terms (লিজ/বর্গা). |
+| **AI Disease Scanner** | `#disease-scanner` | Instant **AI Crop Disease Diagnostic Scanner** with photo uploads, symptom analysis, and organic/chemical prescriptions. |
 | **Farmland Details** | `#plot-details` | High-res photos, 4-grid stats (Area, Soil, Irrigation, Elevation, Road Access), verified landowner badge, and Request Land CTA. |
-| **Agreement Generator** | `#book-plot` | Custom agreement builder for seasonal lease vs 50:50 sharecropping, input cost sharing, and digital submission. |
+| **Agreement Generator** | `#book-plot` | Custom agreement builder with **Digital Signature Canvas**, 50:50 sharecropping terms, and print/export deed option. |
 | **12-Step Listing Wizard** | `#list-plot` | Guided farmland listing wizard with live area unit conversion, photo upload, draft saving, and instant publishing. |
-| **My Farm (আমার খামার)** | `#my-farm` | Active crop growth stage tracker (e.g. *Boro Rice 38th Day, 42% complete*), daily task checklist, expense log, and financial profit ledger. |
+| **My Farm (আমার খামার)** | `#my-farm` | Active crop growth tracker, interactive **Expense Logger by Category**, daily task checklist, and live profit ledger. |
 | **PlotShare AI Assistant** | `#grow-assistant` | Natural Bangla & English AI agronomy assistant for fertilizer dosages (Urea, TSP, MoP, Zinc), pest control, and weather advice. |
-| **AI Farm Planner** | `#farm-planner` | Complete cultivation blueprints based on land area (শতক), location, budget, and soil conditions. |
+| **AI Farm Planner** | `#farm-planner` | Complete cultivation blueprints with 1-click **Export to My Farm** functionality. |
 | **Crop Calendar** | `#crop-planner` | Sowing, weeding, and harvesting timelines across Rabi, Kharif-1, and Kharif-2. |
 | **Harvest Tracker** | `#harvest-tracker` | Historical yield records in মণ/কেজি, selling price calculations, and net profit ledger. |
+| **Machinery Sharing** | `#machinery` | Tractor, power-tiller, combine harvester, and drone spraying rental marketplace. |
 | **Farmer Community** | `#community` | Local farming updates, tractor/harvester sharing, seed exchange, and mentor Q&A. |
-| **Produce Marketplace** | `#marketplace` | Direct farmer-to-buyer wholesale produce marketplace (ধান, আলু, পেঁয়াজ, সরিষা). |
+| **Produce Marketplace** | `#marketplace` | Direct farmer-to-buyer wholesale produce marketplace (ধান, আলু, পেঁয়াজ, সরিষা) with live market tickers. |
 | **Notifications** | `#notifications` | Real-time weather warnings, agreement approvals, and irrigation reminders. |
 | **User Profile** | `#profile` | Krishi Card (কৃষি কার্ড) verification status, farming history, language & measurement unit preferences. |
 

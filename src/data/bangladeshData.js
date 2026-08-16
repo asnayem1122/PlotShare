@@ -1,5 +1,5 @@
 // PlotShare — Bangladesh Agricultural Land & Farming Platform
-// Core Data Layer: Locations, Units, Crops, Seasons, and Translations
+// Comprehensive Agricultural Data Layer: Geography, Area Math, Crops, Disease Knowledge, Machinery, Markets, and Translations
 
 export const BANGLADESH_LOCATIONS = {
   divisions: [
@@ -13,23 +13,22 @@ export const BANGLADESH_LOCATIONS = {
     { id: 'barishal', name_en: 'Barishal', name_bn: 'বরিশাল' }
   ],
   districts: [
-    { id: 'dinajpur', division: 'rangpur', name_en: 'Dinajpur', name_bn: 'দিনাজপুর', upazilas: ['Birganj', 'Kaharole', 'Sadar', 'Birol', 'Fulbari', 'Nawabganj', 'Parbatipur'] },
-    { id: 'rangpur_sadar', division: 'rangpur', name_en: 'Rangpur', name_bn: 'রংপুর', upazilas: ['Sadar', 'Mithapukur', 'Pirganj', 'Badarganj', 'Gangachara'] },
-    { id: 'bogura', division: 'rajshahi', name_en: 'Bogura', name_bn: 'বগুড়া', upazilas: ['Sadar', 'Shibganj', 'Gabtali', 'Sherpur', 'Dhunat', 'Kahaloo'] },
-    { id: 'rajshahi_sadar', division: 'rajshahi', name_en: 'Rajshahi', name_bn: 'রাজশাহী', upazilas: ['Paba', 'Godagari', 'Tanore', 'Bagha', 'Charghat', 'Durgapur'] },
-    { id: 'chapainawabganj', division: 'rajshahi', name_en: 'Chapainawabganj', name_bn: 'চাঁপাইনবাবগঞ্জ', upazilas: ['Sadar', 'Shibganj', 'Gomostapur', 'Nachole', 'Bholahat'] },
-    { id: 'mymensingh_sadar', division: 'mymensingh', name_en: 'Mymensingh', name_bn: 'ময়মনসিংহ', upazilas: ['Sadar', 'Trishal', 'Muktagachha', 'Fulbaria', 'Gaffargaon', 'Bhaluka'] },
-    { id: 'cumilla', division: 'chittagong', name_en: 'Cumilla', name_bn: 'কুমিল্লা', upazilas: ['Adarsha Sadar', 'Chandina', 'Debidwar', 'Burichang', 'Daudkandi', 'Laksam'] },
-    { id: 'jashore', division: 'khulna', name_en: 'Jashore', name_bn: 'যশোর', upazilas: ['Sadar', 'Jhikargachha', 'Manirampur', 'Sharsha', 'Keshabpur', 'Bagherpara'] },
-    { id: 'tangail', division: 'dhaka', name_en: 'Tangail', name_bn: 'টাঙ্গাইল', upazilas: ['Sadar', 'Madhupur', 'Ghatail', 'Kalihati', 'Sakhipur', 'Dhanbari'] },
-    { id: 'natore', division: 'rajshahi', name_en: 'Natore', name_bn: 'নাটোর', upazilas: ['Sadar', 'Singra', 'Gurudaspur', 'Baraigram', 'Lalpur', 'Bagatipara'] },
-    { id: 'pabna', division: 'rajshahi', name_en: 'Pabna', name_bn: 'পাবনা', upazilas: ['Sadar', 'Ishwardi', 'Chatmohar', 'Santhia', 'Bera', 'Sujanagar'] },
-    { id: 'kushtia', division: 'khulna', name_en: 'Kushtia', name_bn: 'কুষ্টিয়া', upazilas: ['Sadar', 'Kumarkhali', 'Daulatpur', 'Mirpur', 'Bheramara', 'Khoksa'] }
+    { id: 'dinajpur', division: 'rangpur', name_en: 'Dinajpur', name_bn: 'দিনাজপুর', lat: 25.6279, lng: 88.6332, upazilas: ['Birganj', 'Kaharole', 'Sadar', 'Birol', 'Fulbari', 'Nawabganj', 'Parbatipur', 'Bochaganj'] },
+    { id: 'rangpur_sadar', division: 'rangpur', name_en: 'Rangpur', name_bn: 'রংপুর', lat: 25.7439, lng: 89.2752, upazilas: ['Sadar', 'Mithapukur', 'Pirganj', 'Badarganj', 'Gangachara', 'Kaunia', 'Taraganj'] },
+    { id: 'bogura', division: 'rajshahi', name_en: 'Bogura', name_bn: 'বগুড়া', lat: 24.8465, lng: 89.3777, upazilas: ['Sadar', 'Shibganj', 'Gabtali', 'Sherpur', 'Dhunat', 'Kahaloo', 'Sonatala', 'Nandigram'] },
+    { id: 'rajshahi_sadar', division: 'rajshahi', name_en: 'Rajshahi', name_bn: 'রাজশাহী', lat: 24.3745, lng: 88.6042, upazilas: ['Paba', 'Godagari', 'Tanore', 'Bagha', 'Charghat', 'Durgapur', 'Puthia', 'Bagmara'] },
+    { id: 'chapainawabganj', division: 'rajshahi', name_en: 'Chapainawabganj', name_bn: 'চাঁপাইনবাবগঞ্জ', lat: 24.5965, lng: 88.2775, upazilas: ['Sadar', 'Shibganj', 'Gomostapur', 'Nachole', 'Bholahat'] },
+    { id: 'mymensingh_sadar', division: 'mymensingh', name_en: 'Mymensingh', name_bn: 'ময়মনসিংহ', lat: 24.7471, lng: 90.4203, upazilas: ['Sadar', 'Trishal', 'Muktagachha', 'Fulbaria', 'Gaffargaon', 'Bhaluka', 'Haluaghat', 'Ishwarganj'] },
+    { id: 'cumilla', division: 'chittagong', name_en: 'Cumilla', name_bn: 'কুমিল্লা', lat: 23.4607, lng: 91.1809, upazilas: ['Adarsha Sadar', 'Chandina', 'Debidwar', 'Burichang', 'Daudkandi', 'Laksam', 'Muradnagar', 'Barura'] },
+    { id: 'jashore', division: 'khulna', name_en: 'Jashore', name_bn: 'যশোর', lat: 23.1664, lng: 89.2081, upazilas: ['Sadar', 'Jhikargachha', 'Manirampur', 'Sharsha', 'Keshabpur', 'Bagherpara', 'Chaugachha'] },
+    { id: 'tangail', division: 'dhaka', name_en: 'Tangail', name_bn: 'টাঙ্গাইল', lat: 24.2513, lng: 89.9167, upazilas: ['Sadar', 'Madhupur', 'Ghatail', 'Kalihati', 'Sakhipur', 'Dhanbari', 'Mirzapur', 'Gopalpur'] },
+    { id: 'natore', division: 'rajshahi', name_en: 'Natore', name_bn: 'নাটোর', lat: 24.4206, lng: 89.0003, upazilas: ['Sadar', 'Singra', 'Gurudaspur', 'Baraigram', 'Lalpur', 'Bagatipara', 'Naldanga'] },
+    { id: 'pabna', division: 'rajshahi', name_en: 'Pabna', name_bn: 'পাবনা', lat: 24.0064, lng: 89.2483, upazilas: ['Sadar', 'Ishwardi', 'Chatmohar', 'Santhia', 'Bera', 'Sujanagar', 'Faridpur', 'Atgharia'] },
+    { id: 'kushtia', division: 'khulna', name_en: 'Kushtia', name_bn: 'কুষ্টিয়া', lat: 23.9013, lng: 89.1205, upazilas: ['Sadar', 'Kumarkhali', 'Daulatpur', 'Mirpur', 'Bheramara', 'Khoksa'] }
   ]
 };
 
-// Normalized Area Units (Standard base: Square Meters)
-// 1 Decimal / Shotok = 40.4686 m²
+// Normalized Area Units & Mathematical Engine
 export const AREA_CONVERTER = {
   toSquareMeters(value, unit) {
     const val = parseFloat(value) || 0;
@@ -109,7 +108,7 @@ export const SEASONS = [
     name_bn: 'রবি মৌসুম (শীতকালীন)',
     period_en: 'Mid November – Mid March',
     period_bn: 'কার্তিক – ফাল্গুন (নভেম্বর – মার্চ)',
-    typical_crops: ['boro_rice', 'potato', 'mustard', 'wheat', 'tomato', 'onion', 'garlic', 'cauliflower', 'cabbage']
+    typical_crops: ['Boro Rice', 'Potato', 'Mustard', 'Wheat', 'Tomato', 'Onion', 'Garlic', 'Cauliflower', 'Cabbage']
   },
   {
     id: 'kharif_1',
@@ -117,7 +116,7 @@ export const SEASONS = [
     name_bn: 'খরিপ-১ মৌসুম (গ্রীষ্মকালীন)',
     period_en: 'Mid March – Mid July',
     period_bn: 'চৈত্র – আষাঢ় (মার্চ – জুলাই)',
-    typical_crops: ['aus_rice', 'jute', 'cucumber', 'bitter_gourd', 'ridge_gourd', 'okra', 'spinach']
+    typical_crops: ['Aus Rice', 'Jute', 'Cucumber', 'Bitter Gourd', 'Ridge Gourd', 'Okra', 'Spinach']
   },
   {
     id: 'kharif_2',
@@ -125,7 +124,7 @@ export const SEASONS = [
     name_bn: 'খরিপ-২ মৌসুম (বর্ষা / শরৎকালীন)',
     period_en: 'Mid July – Mid November',
     period_bn: 'শ্রাবণ – কার্তিক (জুলাই – নভেম্বর)',
-    typical_crops: ['aman_rice', 'brinjal', 'papaya', 'radish', 'bottle_gourd']
+    typical_crops: ['Aman Rice', 'Brinjal', 'Papaya', 'Radish', 'Bottle Gourd']
   }
 ];
 
@@ -133,23 +132,23 @@ export const SEASONS = [
 export const CROPS = [
   {
     id: 'boro_rice',
-    name_en: 'Boro Rice',
-    name_bn: 'বোরো ধান',
+    name_en: 'Boro Rice (BRRI dhan-28 / 29 / 89)',
+    name_bn: 'বোরো ধান (ব্রি ধান-২৮ / ২৯ / ৮৯)',
     category: 'grain',
     season: 'rabi',
     duration_days: 140,
     ideal_soil: ['loamy', 'clay'],
     water_req_en: 'High (Irrigation mandatory via Deep/Shallow tube well)',
     water_req_bn: 'উচ্চ (গভীর/অগভীর নলকূপের সেচ আবশ্যক)',
-    fertilizer_per_shotok: { urea: '1.2 kg', tsp: '0.6 kg', mop: '0.7 kg', zinc: '0.1 kg' },
+    fertilizer_per_shotok: { urea: '1.2 kg', tsp: '0.6 kg', mop: '0.7 kg', zinc: '0.1 kg', gypsum: '0.3 kg' },
     est_yield_per_shotok: '25-30 kg (প্রায় ২৫-৩০ কেজি/শতক)',
     est_cost_per_shotok: 650,
     est_revenue_per_shotok: 1100
   },
   {
     id: 'aman_rice',
-    name_en: 'Aman Rice',
-    name_bn: 'আমন ধান',
+    name_en: 'Aman Rice (BRRI dhan-49 / 87)',
+    name_bn: 'আমন ধান (ব্রি ধান-৪৯ / ৮৭)',
     category: 'grain',
     season: 'kharif_2',
     duration_days: 125,
@@ -163,8 +162,8 @@ export const CROPS = [
   },
   {
     id: 'potato',
-    name_en: 'Potato (Diamond / Granola)',
-    name_bn: 'আলু (ডায়মন্ড / কার্ডিনাল)',
+    name_en: 'Potato (Diamond / Cardinal / Granola)',
+    name_bn: 'আলু (ডায়মন্ড / কার্ডিনাল / গ্রানোলা)',
     category: 'vegetable',
     season: 'rabi',
     duration_days: 90,
@@ -178,8 +177,8 @@ export const CROPS = [
   },
   {
     id: 'mustard',
-    name_en: 'Mustard (Tori-7 / BARI-14)',
-    name_bn: 'সরিষা (বারি-১৪ / টোরি-৭)',
+    name_en: 'Mustard (BARI-14 / BARI-17 / Tori-7)',
+    name_bn: 'সরিষা (বারি-১৪ / বারি-১৭ / টোরি-৭)',
     category: 'oilseed',
     season: 'rabi',
     duration_days: 75,
@@ -193,8 +192,8 @@ export const CROPS = [
   },
   {
     id: 'onion',
-    name_en: 'Winter Onion / Summer Onion',
-    name_bn: 'পেঁয়াজ (তাহেরপুরী / বারি-৪)',
+    name_en: 'Winter Onion / Summer Onion (Taherpuri)',
+    name_bn: 'পেঁয়াজ (তাহেরপুরী / বারি পেঁয়াজ-৪)',
     category: 'spice',
     season: 'rabi',
     duration_days: 100,
@@ -208,8 +207,8 @@ export const CROPS = [
   },
   {
     id: 'tomato',
-    name_en: 'Tomato (BARI Hybrid)',
-    name_bn: 'টমেটো (বারি হাইব্রিড)',
+    name_en: 'Tomato (BARI Hybrid / Bahar)',
+    name_bn: 'টমেটো (বারি হাইব্রিড / বাহার)',
     category: 'vegetable',
     season: 'rabi',
     duration_days: 110,
@@ -223,8 +222,8 @@ export const CROPS = [
   },
   {
     id: 'brinjal',
-    name_en: 'Brinjal / Eggplant (Kajla / Islampuri)',
-    name_bn: 'বেগুন (কাজলা / ইসলামপুরী)',
+    name_en: 'Brinjal / Eggplant (Kajla / Islampuri / Singnath)',
+    name_bn: 'বেগুন (কাজলা / ইসলামপুরী / শিংনাথ)',
     category: 'vegetable',
     season: 'kharif_1',
     duration_days: 130,
@@ -238,8 +237,8 @@ export const CROPS = [
   },
   {
     id: 'mango',
-    name_en: 'Mango Orchard (Amrapali / Haribhanga)',
-    name_bn: 'আম বাগান (আম্রপালি / হাঁড়িভাঙ্গা)',
+    name_en: 'Mango Orchard (Amrapali / Haribhanga / Fazli)',
+    name_bn: 'আম বাগান (আম্রপালি / হাঁড়িভাঙ্গা / ফজলি)',
     category: 'fruit',
     season: 'kharif_1',
     duration_days: 365,
@@ -253,8 +252,8 @@ export const CROPS = [
   },
   {
     id: 'jute',
-    name_en: 'Tossa Jute (Golden Fibre)',
-    name_bn: 'তোষা পাট (সোনালী আঁশ)',
+    name_en: 'Tossa Jute (O-9897 / Golden Fibre)',
+    name_bn: 'তোষা পাট (ও-৯৮৯৭ / সোনালী আঁশ)',
     category: 'cash_crop',
     season: 'kharif_1',
     duration_days: 120,
@@ -268,7 +267,71 @@ export const CROPS = [
   }
 ];
 
-// Initial Farmland Listings
+// Plant Disease Diagnostic Knowledge Base (AI Scanner)
+export const PLANT_DISEASES = [
+  {
+    id: 'rice_blast',
+    crop_id: 'boro_rice',
+    name_en: 'Rice Blast (Magnaporthe oryzae)',
+    name_bn: 'ধানের ব্লাস্ট রোগ (পাতা ও নেক ব্লাস্ট)',
+    symptoms_en: 'Spindle-shaped or eye-shaped brown lesions on leaves with gray centers, rotting of neck node before grain filling.',
+    symptoms_bn: 'পাতায় চোখ বা মাকু আকৃতির বাদামী দাগ যার কেন্দ্র ধূসর, শীষের গোড়ায় পচন ধরে এবং ধান চিটা হয়ে যায়।',
+    causes_en: 'High nitrogen fertilizer overdose, continuous cloudy weather, night dew with 25-28°C temperature.',
+    causes_bn: 'অতিরিক্ত ইউরিয়া সারের ব্যবহার, একটানা মেঘলা আবহাওয়া ও কুয়াশাচ্ছন্ন রাত।',
+    organic_remedy_en: 'Spray 5% neem seed oil extract or trichoderma bio-fungicide.',
+    organic_remedy_bn: '৫% নিম তেলের নির্যাস অথবা ট্রাইকোডার্মা বায়ো-ফাংগিসাইড স্প্রে করুন।',
+    chemical_remedy_en: 'Apply Trooper (Tricyclazole 75 WP) @ 0.8g/L or Nativo 75 WG @ 0.6g/L twice at 7-day intervals.',
+    chemical_remedy_bn: 'ট্রুপার (ট্রাইসাইক্লাজল ৭৫ ডব্লিউপি) ০.৮ গ্রাম/লিটার অথবা নাটিভো ৭৫ ডব্লিউজি ০.৬ গ্রাম/লিটার পানিতে মিশিয়ে ৭ দিন পর পর ২ বার স্প্রে করুন।',
+    severity: 'High (উচ্চ ঝুঁকি)'
+  },
+  {
+    id: 'potato_late_blight',
+    crop_id: 'potato',
+    name_en: 'Potato Late Blight (Phytophthora infestans)',
+    name_bn: 'আলুর নাবি ধসা / লেট ব্লাইট রোগ',
+    symptoms_en: 'Water-soaked blackish-brown spots on leaf tips, white cottony mold under leaves in morning dew, rapid foliage destruction within 48h.',
+    symptoms_bn: 'পাতার ডগায় ভেজা কালচে বাদামী দাগ, ভোরের কুয়াশায় পাতার নিচে সাদা পাউডারের মতো ছত্রাক, দ্রুত গাছ মরে যায়।',
+    causes_en: 'Dense fog, high humidity (>90%) and temperature between 12-18°C.',
+    causes_bn: 'ঘন কুয়াশা, গুঁড়ি গুঁড়ি বৃষ্টি এবং অতিরিক্ত আর্দ্রতা।',
+    organic_remedy_en: 'Ensure wide plant spacing, remove infected plants, spray copper oxychloride bio-spray.',
+    organic_remedy_bn: 'আক্রান্ত গাছ পুড়িয়ে ফেলুন, অতিরিক্ত সেচ বন্ধ রাখুন, বায়ো-কপার স্প্রে করুন।',
+    chemical_remedy_en: 'Preventive: Dithane M-45 (Mancozeb) @ 2g/L. Curative: Ridomil Gold MZ @ 2g/L or Acrobat MZ @ 2g/L immediately.',
+    chemical_remedy_bn: 'প্রতিষেধক হিসেবে ডায়থেন এম-৪৫ (ম্যানকোজেব) ২ গ্রাম/লিটার। রোগ দেখা দিলে রিডোমিল গোল্ড এমজেড ২ গ্রাম/লিটার হারে ৫ দিন পর পর স্প্রে করুন।',
+    severity: 'Critical (মারাত্মক ঝুঁকি)'
+  },
+  {
+    id: 'tomato_leaf_curl',
+    crop_id: 'tomato',
+    name_en: 'Tomato Leaf Curl Virus (TLCV)',
+    name_bn: 'টমেটোর পাতা কোঁকড়ানো ভাইরাস রোগ',
+    symptoms_en: 'Upward curling and puckering of leaves, yellowing of veins, stunted bushy plant growth, flowers drop off.',
+    symptoms_bn: 'পাতা ওপরের দিকে কুঁকড়ে বাটি বা নৌকার মতো হয়, শিরা হলুদ হয়, গাছের বৃদ্ধি থেমে যায় ও ফুল ঝরে পড়ে।',
+    causes_en: 'Transmitted by Whitefly (সাদা মাছি) insect vector in warm dry weather.',
+    causes_bn: 'সাদা মাছি (Whitefly) দ্বারা এই ভাইরাস ছড়ায়।',
+    organic_remedy_en: 'Install yellow sticky traps (হলুদ আঠালো ফাঁদ) @ 1 trap per 5 shotok, spray soap water with neem oil.',
+    organic_remedy_bn: 'জমিতে প্রতি ৫ শতকে একটি করে হলুদ আঠালো ফাঁদ স্থাপন করুন এবং নিম তেল স্প্রে করুন।',
+    chemical_remedy_en: 'Control whitefly vector with Admire 20 SL (Imidacloprid) @ 0.5ml/L or Pegasus 50 SC @ 1ml/L.',
+    chemical_remedy_bn: 'সাদা মাছি দমনে এডমায়ার ২০ এসএল (ইমিডাক্লোপ্রিড) ০.৫ মিলি/লিটার পানিতে মিশিয়ে বিকেলে স্প্রে করুন।',
+    severity: 'Medium-High (মাঝারি-উচ্চ ঝুঁকি)'
+  },
+  {
+    id: 'brinjal_fruit_borer',
+    crop_id: 'brinjal',
+    name_en: 'Brinjal Shoot & Fruit Borer (Leucinodes orbonalis)',
+    name_bn: 'বেগুনের ডগা ও ফল ছিদ্রকারী পোকা',
+    symptoms_en: 'Wilting and drooping of young shoots, holes in growing eggplants with larval excreta inside.',
+    symptoms_bn: 'কচি ডগা শুকিয়ে হেলে পড়ে, বেগুনের গায়ে ছোট ছিদ্র দেখা যায় এবং ভেতরে পোকার মল থাকে।',
+    causes_en: 'Moth lays eggs on young leaves and fruit calyx; larvae bore inside.',
+    causes_bn: 'মাজরা পোকার মথ কচি পাতা ও ফলের বোঁটায় ডিম পাড়ে।',
+    organic_remedy_en: 'Clip and destroy wilted shoots weekly. Install Pheromone Traps (লিউর ফাঁদ) @ 2 traps/10 shotok.',
+    organic_remedy_bn: 'আক্রান্ত ডগা কেটে ধ্বংস করুন। প্রতি ১০ শতকে ২টি সেক্স ফেরোমোন ফাঁদ ব্যবহার করুন।',
+    chemical_remedy_en: 'Apply Proclaim 5 SG (Emamectin Benzoate) @ 1g/L or Voliam Flexi @ 0.5ml/L.',
+    chemical_remedy_bn: 'প্রোক্লেইম ৫ এসজি (এমামেকটিন বেনজোয়েট) ১ গ্রাম/লিটার অথবা কোরোজেন ০.৪ মিলি/লিটার স্প্রে করুন।',
+    severity: 'High (উচ্চ ঝুঁকি)'
+  }
+];
+
+// Agricultural Farmland Listings with GPS Coordinates & Complete Specifications
 export const INITIAL_PLOTS = [
   {
     id: 'plot-101',
@@ -277,6 +340,8 @@ export const INITIAL_PLOTS = [
     division: 'rangpur',
     district: 'dinajpur',
     upazila: 'Birganj',
+    lat: 25.8564,
+    lng: 88.6657,
     village_en: 'Mohonpur, Birganj',
     village_bn: 'মোহনপুর, বীরগঞ্জ',
     location_label_en: 'Birganj, Dinajpur',
@@ -313,7 +378,7 @@ export const INITIAL_PLOTS = [
     owner: {
       name_en: 'Alhaj Rafiqul Islam',
       name_bn: 'আলহাজ্ব রফিকুল ইসলাম',
-      phone: '01712-XXXXXX',
+      phone: '01712-489210',
       verified: true,
       rating: 4.9,
       completed_deals: 6,
@@ -329,6 +394,8 @@ export const INITIAL_PLOTS = [
     division: 'rajshahi',
     district: 'bogura',
     upazila: 'Shibganj',
+    lat: 24.9821,
+    lng: 89.3142,
     village_en: 'Mokarimpur, Shibganj',
     village_bn: 'মোকামপাড়া, শিবগঞ্জ',
     location_label_en: 'Shibganj, Bogura',
@@ -365,7 +432,7 @@ export const INITIAL_PLOTS = [
     owner: {
       name_en: 'Md. Tariqul Hasan',
       name_bn: 'মো: তারিকুল হাসান',
-      phone: '01819-XXXXXX',
+      phone: '01819-320491',
       verified: true,
       rating: 4.8,
       completed_deals: 4,
@@ -381,6 +448,8 @@ export const INITIAL_PLOTS = [
     division: 'rajshahi',
     district: 'chapainawabganj',
     upazila: 'Shibganj',
+    lat: 24.6852,
+    lng: 88.1633,
     village_en: 'Kansat, Shibganj',
     village_bn: 'কানসাট, শিবগঞ্জ',
     location_label_en: 'Kansat, Chapainawabganj',
@@ -417,7 +486,7 @@ export const INITIAL_PLOTS = [
     owner: {
       name_en: 'Dr. Shahriar Alam',
       name_bn: 'ডা: শাহরিয়ার আলম',
-      phone: '01911-XXXXXX',
+      phone: '01911-748921',
       verified: true,
       rating: 5.0,
       completed_deals: 8,
@@ -433,6 +502,8 @@ export const INITIAL_PLOTS = [
     division: 'mymensingh',
     district: 'mymensingh_sadar',
     upazila: 'Trishal',
+    lat: 24.5821,
+    lng: 90.3951,
     village_en: 'Dhanikhola, Trishal',
     village_bn: 'ধানীখোলা, ত্রিশাল',
     location_label_en: 'Trishal, Mymensingh',
@@ -469,7 +540,7 @@ export const INITIAL_PLOTS = [
     owner: {
       name_en: 'Anisur Rahman',
       name_bn: 'আনিসুর রহমান',
-      phone: '01733-XXXXXX',
+      phone: '01733-518290',
       verified: true,
       rating: 4.7,
       completed_deals: 3,
@@ -480,11 +551,125 @@ export const INITIAL_PLOTS = [
   }
 ];
 
+// Agricultural Machinery Sharing (কৃষি যন্ত্রপাতি ভাড়া)
+export const AGRICULTURAL_MACHINERY = [
+  {
+    id: 'mach-1',
+    title_en: 'Sonalika 4x4 Tractor for Deep Tillage',
+    title_bn: 'সোনালিকা ৪x৪ ট্রাক্টর (গভীর জমি চাষ ও মই)',
+    type: 'tractor',
+    owner_en: 'Hafizur Rahman (Farmer Cooperative)',
+    owner_bn: 'হাফিজুর রহমান (চাষী সমবায় সমিতি)',
+    location_en: 'Birganj, Dinajpur',
+    location_bn: 'বীরগঞ্জ, দিনাজপুর',
+    rate_bdt: 450,
+    rate_unit_en: '/ Bigha (বিঘা)',
+    rate_unit_bn: '/ বিঘা',
+    driver_included: true,
+    phone: '01719-823410',
+    available: true,
+    icon: 'agriculture'
+  },
+  {
+    id: 'mach-2',
+    title_en: 'Kubota Combine Harvester (Rice & Wheat Cutting & Threshing)',
+    title_bn: 'কুবোটা কম্বাইন হার্ভেস্টার (ধান ও গম একযোগে কর্তন ও মাড়াই)',
+    type: 'harvester',
+    owner_en: 'Dinajpur Agri Hub',
+    owner_bn: 'দিনাজপুর এগ্রি হাব',
+    location_en: 'Birol, Dinajpur',
+    location_bn: 'বিরল, দিনাজপুর',
+    rate_bdt: 1200,
+    rate_unit_en: '/ Bigha (বিঘা)',
+    rate_unit_bn: '/ বিঘা',
+    driver_included: true,
+    phone: '01812-901423',
+    available: true,
+    icon: 'precision_manufacturing'
+  },
+  {
+    id: 'mach-3',
+    title_en: 'Agricultural Drone Spraying Service (Pesticide & Foliar Fertilizer)',
+    title_bn: 'এগ্রিকালচারাল ড্রোন স্প্রে সেবা (কীটনাশক ও তরল সার স্প্রে)',
+    type: 'drone',
+    owner_en: 'Smart Krishi Tech Ltd.',
+    owner_bn: 'স্মার্ট কৃষি টেক',
+    location_en: 'Shibganj, Bogura',
+    location_bn: 'শিবগঞ্জ, বগুড়া',
+    rate_bdt: 250,
+    rate_unit_en: '/ Bigha (বিঘা)',
+    rate_unit_bn: '/ বিঘা',
+    driver_included: true,
+    phone: '01914-772819',
+    available: true,
+    icon: 'flight'
+  }
+];
+
+// Wholesale Market Rates (পাইকারি বাজারদর)
+export const WHOLESALE_MARKET_RATES = [
+  {
+    crop_en: 'Boro Rice (BRRI-28)',
+    crop_bn: 'বোরো ধান (ব্রি-২৮)',
+    market_en: 'Dinajpur Grains Wholesale Market',
+    market_bn: 'দিনাজপুর ধানের মোকাম',
+    price_bdt: 1240,
+    unit_en: 'per Maund (৪০ কেজি / মণ)',
+    unit_bn: 'প্রতি মণ (৪০ কেজি)',
+    change: '+3.2%',
+    trend: 'up'
+  },
+  {
+    crop_en: 'Aman Rice (BRRI-49)',
+    crop_bn: 'রোপা আমন ধান (ব্রি-৪৯)',
+    market_en: 'Naogaon Mokam',
+    market_bn: 'নওগাঁ ধানের মোকাম',
+    price_bdt: 1180,
+    unit_en: 'per Maund (৪০ কেজি)',
+    unit_bn: 'প্রতি মণ',
+    change: '+1.5%',
+    trend: 'up'
+  },
+  {
+    crop_en: 'Diamond Potato (New Crop)',
+    crop_bn: 'ডায়মন্ড গোল আলু (নতুন)',
+    market_en: 'Mahasthangarh Wholesale Market, Bogura',
+    market_bn: 'মহাস্থানগড় পাইকারি কাঁচাবাজার, বগুড়া',
+    price_bdt: 920,
+    unit_en: 'per Maund (৪০ কেজি)',
+    unit_bn: 'প্রতি মণ',
+    change: '-2.1%',
+    trend: 'down'
+  },
+  {
+    crop_en: 'Mustard (BARI-14)',
+    crop_bn: 'দেশি সরিষা (বারি-১৪)',
+    market_en: 'Pabna Ishwardi Mokam',
+    market_bn: 'ঈশ্বরদী আড়ত, পাবনা',
+    price_bdt: 3400,
+    unit_en: 'per Maund (৪০ কেজি)',
+    unit_bn: 'প্রতি মণ',
+    change: '+4.5%',
+    trend: 'up'
+  },
+  {
+    crop_en: 'Winter Onion (Taherpuri)',
+    crop_bn: 'তাহেরপুরী পেঁয়াজ',
+    market_en: 'Karwan Bazar, Dhaka',
+    market_bn: 'কাওরান বাজার, ঢাকা',
+    price_bdt: 2100,
+    unit_en: 'per Maund (৪০ কেজি)',
+    unit_bn: 'প্রতি মণ',
+    change: '-5.0%',
+    trend: 'down'
+  }
+];
+
 // Active Farm Mock Data for Current User (Farmer Persona)
 export const CURRENT_FARM_DATA = {
   farmer_name_en: 'Rahim Uddin',
   farmer_name_bn: 'রহিম উদ্দিন',
-  farmer_type_en: 'Seasonal Commercial Grower & Farmer',
+  farmer_type_en: 'Commercial Farmer & Grower',
   farmer_type_bn: 'বাণিজ্যিক চাষী ও উদ্যোক্তা',
   location_en: 'Birganj, Dinajpur',
   location_bn: 'বীরগঞ্জ, দিনাজপুর',
@@ -510,7 +695,13 @@ export const CURRENT_FARM_DATA = {
       irrigation_status_bn: 'পানির স্তর সঠিক আছে (২-৩ ইঞ্চি)',
       expenses_bdt: 14500,
       est_revenue_bdt: 32000,
-      est_profit_bdt: 17500
+      est_profit_bdt: 17500,
+      expenses_log: [
+        { id: 'exp-1', category: 'সার ও পুষ্টি', title: 'টিএসপি ও পটাশ সার ক্রয় (জমি প্রস্তুত)', amount: 4800, date: '2026-01-07' },
+        { id: 'exp-2', category: 'বীজ ও চারা', title: 'ব্রি-২৮ ধানের সুস্থ চারা ক্রয়', amount: 3200, date: '2026-01-08' },
+        { id: 'exp-3', category: 'শ্রমিক ও রোয়ায়', title: 'চারা রোপণে ৫ জন শ্রমিকের মজুরি', amount: 3500, date: '2026-01-09' },
+        { id: 'exp-4', category: 'সেচ ও বিদ্যুৎ', title: 'গভীর নলকূপ সেচ ১ম কিস্তি', amount: 3000, date: '2026-01-20' }
+      ]
     },
     {
       id: 'crop-active-2',
@@ -531,7 +722,12 @@ export const CURRENT_FARM_DATA = {
       irrigation_status_bn: 'উত্তোলনের জন্য সেচ বন্ধ',
       expenses_bdt: 28000,
       est_revenue_bdt: 58000,
-      est_profit_bdt: 30000
+      est_profit_bdt: 30000,
+      expenses_log: [
+        { id: 'exp-5', category: 'বীজ আলু', title: 'বিএডিসি ডায়মন্ড বীজ আলু ক্রয়', amount: 14000, date: '2025-11-18' },
+        { id: 'exp-6', category: 'সার ও বালাইনাশক', title: 'গোবর সার ও ডায়থেন এম-৪৫ স্প্রে', amount: 6500, date: '2025-12-05' },
+        { id: 'exp-7', category: 'সেচ ও নিড়ানি', title: '২ বার সেচ ও ভেলি তৈরির শ্রমিক', amount: 7500, date: '2025-12-25' }
+      ]
     }
   ],
   tasks_today: [
@@ -575,6 +771,8 @@ export const DICTIONARY = {
     ai_assistant: 'কৃষি সহায়ক',
     community: 'কমিউনিটি',
     marketplace: 'বাজারদর / ফসল',
+    machinery: 'যন্ত্রপাতি ভাড়া',
+    disease_scanner: 'রোগ স্ক্যানার',
     notifications: 'বার্তা',
     profile: 'প্রোফাইল',
     greeting: 'আসসালামু আলাইকুম, রহিম উদ্দিন 👋',
@@ -617,6 +815,8 @@ export const DICTIONARY = {
     ai_assistant: 'AI Assistant',
     community: 'Community',
     marketplace: 'Marketplace',
+    machinery: 'Machinery',
+    disease_scanner: 'Disease Scanner',
     notifications: 'Alerts',
     profile: 'Profile',
     greeting: 'Welcome, Rahim Uddin 👋',
