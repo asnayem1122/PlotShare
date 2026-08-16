@@ -75,16 +75,17 @@ Seamless mathematical conversion across all regional land measurement units:
 
 ---
 
-## 🎨 Golden Harvest Design System
+## 🎨 Horizon UI + Harvest Design System
 
-Built adhering to the **Golden Harvest** design specifications:
+Built with the **Horizon UI** dashboard design architecture paired with authentic **Bangladesh Agricultural Harvest** accents:
 
-- **Rice Cream (`#fdf9f4` / `#F9F5F0`)**: Warm, sun-drenched surface base.
-- **Harvest Orange (`#a43700` / `#E65100`)**: Deep primary brand color symbolizing golden hour and ripening crops.
-- **Golden Amber (`#feb300` / `#FFB300`)**: Energetic highlight for seasonal tags and badges.
-- **Success Leaf (`#2D5A27`)**: Forest green reserved for verified badges, crop health, and growth indicators.
-- **Terracotta (`#914723` / `#A0522D`)**: Earthy structural accents and warm ambient depth.
-- **Typography**: Google Fonts (*Hanken Grotesk* for numerals/modern tech contrast + *Hind Siliguri* for first-class Bangla typography).
+- **Horizon Soft Background (`#F4F7FE`)**: Clean, modern, distraction-free backdrop.
+- **Horizon Elevated Surfaces (`#FFFFFF`)**: Pure white cards with `rounded-[20px]`, crisp borders (`#E0E5F2`), and soft diffused elevation shadows `shadow-[0px_18px_40px_rgba(112,144,176,0.12)]`.
+- **Harvest Orange (`#A43700` / `#E65100`)**: Deep primary brand color for CTAs, active indicators, and badges.
+- **Golden Amber (`#FEB300` / `#FFB300`)**: Energetic highlight for seasonal tags, weather alerts, and crop banners.
+- **Success Leaf (`#2D5A27` / `#05CD99`)**: Crisp emerald green for verified farmer/landowner badges and crop progress.
+- **Horizon Navy Typography (`#2B3674` / `#1B254B`)**: High-contrast, crystal-clear headings paired with muted slate subtitles (`#A3AED0`).
+- **Typography**: Google Fonts (*Plus Jakarta Sans* for modern numbers & metrics + *Hind Siliguri* for Bangla).
 
 ---
 
